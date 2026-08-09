@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fashion tips, style guides and the latest trends from the Clothing. editorial team." />
+  <meta name="theme-color" content="#2b1f15" />
+  <title>Journal — Clothing. | Style Guides & Fashion Notes</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="blog">
+  <div id="siteTop"></div>
+
+  <section class="page-head">
+    <div class="container">
+      <h1 class="page-head__title">The Journal</h1>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> <span aria-current="page">Blog</span></nav>
+    </div>
+  </section>
+
+  <main class="blog">
+    <div class="container">
+      <!-- FEATURED -->
+      <a class="blog-feat reveal" href="blog-details.html?t=Fall%20Fashion%20Frenzy%3A%20The%20Ultimate%20Style%20Guide">
+        <div class="blog-feat__media"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Featured blog post" /></div>
+        <div class="blog-feat__body">
+          <div class="blog-tags"><span>Women</span><span>Fashion</span><span>Sale</span></div>
+          <h2><span>Fall Fashion Frenzy: The Ultimate Style Guide</span></h2>
+          <div class="blog-feat__meta"><strong>Jenny Alexander</strong> <span>·</span> <span>26 March 2026</span> <span>·</span> <span>5 min read</span></div>
+          <p class="blog-feat__excerpt">Discover the must-have pieces, layering tricks and seasonal palettes that will keep you ahead of every trend this fall — from caramel knits to structured outerwear.</p>
+          <span class="link-arrow">Read More <span>→</span></span>
+        </div>
+      </a>
+
+      <!-- GRID -->
+      <div class="blog__grid" id="blogGrid"></div>
+
+      <nav class="pagination" aria-label="Pagination">
+        <button class="pagination__btn is-active">1</button>
+        <button class="pagination__btn">2</button>
+        <button class="pagination__btn">3</button>
+        <button class="pagination__btn pagination__next">Next →</button>
+      </nav>
+    </div>
+  </main>
+
+  <div id="siteBottom"></div>
+  <script src="script.js"></script>
+  <script>
+    /* Blog posts (page-local) */
+    const POSTS = [
+      { t: 'Top 10 Casual Looks to Dress Up Your Kids', img: 'https://images.unsplash.com/photo-1503944168849-8bf86875bbd8?auto=format&fit=crop&w=500&q=80', tag: 'Kids', date: '22 March 2026', excerpt: 'Effortless weekend outfits that photograph beautifully and survive real life.' },
+      { t: 'Latest Trends of Wearing Street Wear Supremely', img: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80', tag: 'Street', date: '25 March 2026', excerpt: 'How to mix technical fabrics and tailoring without losing yourself.' },
+      { t: 'Types of Comfortable Clothes for Women', img: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=500&q=80', tag: 'Women', date: '23 March 2026', excerpt: 'Soft fabrics, considered cuts and the silhouettes worth investing in.' },
+      { t: 'How to Style a Classic Brown Coat', img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80', tag: 'Guide', date: '20 March 2026', excerpt: 'Four ways to wear the most versatile piece in your wardrobe.' },
+      { t: 'Accessories That Elevate Any Outfit', img: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=500&q=80', tag: 'Accessories', date: '18 March 2026', excerpt: 'The small details — bag, belt, watch — that quietly change everything.' },
+      { t: 'Summer Color Palettes You Will Love', img: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=500&q=80', tag: 'Trends', date: '15 March 2026', excerpt: 'From warm sand to soft sage — the colours we are wearing all season.' },
+    ];
+    const grid = document.getElementById('blogGrid');
+    grid.innerHTML = POSTS.map((p) => `
+      <a class="post reveal" href="blog-details.html?t=${encodeURIComponent(p.t)}">
+        <div class="post__media"><img src="${p.img}" alt="${p.t}" loading="lazy"><span class="post__tag">${p.tag}</span></div>
+        <div class="post__body">
+          <span class="post__date">${p.date}</span>
+          <h3 class="post__title">${p.t}</h3>
+          <p class="post__excerpt">${p.excerpt}</p>
+          <span class="link-arrow">Read More <span>→</span></span>
+        </div>
+      </a>`).join('');
+    if (window.revealScan) window.revealScan();
+    else document.querySelectorAll('.post').forEach((e) => e.classList.add('is-visible'));
+  </script>
+</body>
+</html>

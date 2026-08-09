@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse the full Clothing. collection — women, men and accessories. Free shipping over $150, easy 30-day returns." />
+  <meta name="theme-color" content="#2b1f15" />
+  <title>Shop — Clothing. | Timeless Fashion Collection</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="shop">
+  <div id="siteTop"></div>
+
+  <section class="page-head">
+    <div class="container">
+      <h1 class="page-head__title">Shop the Collection</h1>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> <span aria-current="page">Shop</span></nav>
+    </div>
+  </section>
+
+  <main class="shop">
+    <div class="container shop__layout">
+      <!-- SIDEBAR -->
+      <aside class="shop__side">
+        <div class="side-box">
+          <label class="side-search">
+            <span class="side-search__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input id="shopSearch" type="search" placeholder="Search products..." aria-label="Search products" />
+          </label>
+        </div>
+        <div class="side-box">
+          <h3 class="side-box__title">Categories</h3>
+          <ul class="filter-list">
+            <li><button data-filter-cat="All" class="filter-list__btn is-active">All</button></li>
+            <li><button data-filter-cat="Women" class="filter-list__btn">Women</button></li>
+            <li><button data-filter-cat="Men" class="filter-list__btn">Men</button></li>
+            <li><button data-filter-cat="Kids" class="filter-list__btn">Kids</button></li>
+            <li><button data-filter-cat="Sportswear" class="filter-list__btn">Sportswear</button></li>
+            <li><button data-filter-cat="Accessories" class="filter-list__btn">Accessories</button></li>
+          </ul>
+        </div>
+        <div class="side-box">
+          <h3 class="side-box__title">Color</h3>
+          <div class="swatches">
+            <button data-filter-color="All" class="swatch is-active" style="--sw:linear-gradient(135deg,#a6783f,#3a2a1c)" aria-label="All colors"></button>
+            <button data-filter-color="Black" class="swatch" style="--sw:#222" aria-label="Black"></button>
+            <button data-filter-color="White" class="swatch" style="--sw:#f3f0ea" aria-label="White"></button>
+            <button data-filter-color="Brown" class="swatch" style="--sw:#a6783f" aria-label="Brown"></button>
+            <button data-filter-color="Beige" class="swatch" style="--sw:#d8c3a5" aria-label="Beige"></button>
+            <button data-filter-color="Grey" class="swatch" style="--sw:#9b9b9b" aria-label="Grey"></button>
+            <button data-filter-color="Blue" class="swatch" style="--sw:#6c8ab0" aria-label="Blue"></button>
+            <button data-filter-color="Navy" class="swatch" style="--sw:#2b3a55" aria-label="Navy"></button>
+            <button data-filter-color="Olive" class="swatch" style="--sw:#6b6e3e" aria-label="Olive"></button>
+            <button data-filter-color="Pink" class="swatch" style="--sw:#e8a8b8" aria-label="Pink"></button>
+            <button data-filter-color="Burgundy" class="swatch" style="--sw:#7a2438" aria-label="Burgundy"></button>
+            <button data-filter-color="Tan" class="swatch" style="--sw:#c8a878" aria-label="Tan"></button>
+          </div>
+        </div>
+        <div class="side-box">
+          <h3 class="side-box__title">Price Range</h3>
+          <ul class="filter-list">
+            <li><button class="filter-list__btn">Under $50</button></li>
+            <li><button class="filter-list__btn">$50 — $100</button></li>
+            <li><button class="filter-list__btn">$100 — $200</button></li>
+            <li><button class="filter-list__btn">Over $200</button></li>
+          </ul>
+        </div>
+        <div class="side-promo" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=500&q=80')">
+          <div class="side-promo__body">
+            <span>Hot Sale</span>
+            <h4>Up To<br>50% OFF</h4>
+            <a href="shop.html" class="link-arrow">Shop Now <span>→</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- GRID -->
+      <div class="shop__main">
+        <div class="shop__bar">
+          <span class="shop__count" id="shopCount">Showing products</span>
+          <label class="shop__sort">Sort by
+            <select id="shopSort" aria-label="Sort products">
+              <option value="default">Default sorting</option>
+              <option value="low">Price: Low to High</option>
+              <option value="high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </label>
+        </div>
+        <div class="products__grid shop__grid" id="shopGrid"></div>
+        <nav class="pagination" aria-label="Pagination">
+          <button class="pagination__btn is-active">1</button>
+          <button class="pagination__btn">2</button>
+          <button class="pagination__btn">3</button>
+          <button class="pagination__btn pagination__next">Next →</button>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <div id="siteBottom"></div>
+  <script src="script.js"></script>
+</body>
+</html>
