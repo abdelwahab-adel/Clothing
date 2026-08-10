@@ -65,7 +65,14 @@ function buildTop() {
         <span class="logo__mark" aria-hidden="true">C</span>
         <span class="logo__text">Clothing<span class="logo__dot">.</span></span>
       </a>
-      <nav class="nav" id="primaryNav" aria-label="Primary"><ul class="nav__list">${links}</ul></nav>
+      <nav class="nav" id="primaryNav" aria-label="Primary">
+        <div class="nav__head">
+          <span class="nav__head-label">Menu</span>
+          <button class="nav__close" id="navClose" aria-label="Close menu">&times;</button>
+        </div>
+        <ul class="nav__list">${links}</ul>
+      </nav>
+      <div class="nav-backdrop" id="navBackdrop"></div>
       <div class="header__actions">
         <button class="icon-btn" id="searchTrigger" aria-label="Search">${ICON.search}</button>
         <a class="icon-btn" href="#" aria-label="Wishlist">${ICON.heart}</a>
@@ -595,20 +602,35 @@ if (cd) {
    ========================================================= */
 const navToggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
-navToggle?.addEventListener('click', () => {
-  const open = nav.classList.toggle('is-open');
+const navBackdrop = document.getElementById('navBackdrop');
+function setNavOpen(open) {
+  if (open) syncHeaderStackHeight();
+  nav.classList.toggle('is-open', open);
+  navBackdrop?.classList.toggle('is-open', open);
   navToggle.classList.toggle('is-open', open);
   navToggle.setAttribute('aria-expanded', String(open));
-});
+  document.documentElement.classList.toggle('nav-open', open);
+}
+navToggle?.addEventListener('click', () => setNavOpen(!nav.classList.contains('is-open')));
+document.getElementById('navClose')?.addEventListener('click', () => setNavOpen(false));
+navBackdrop?.addEventListener('click', () => setNavOpen(false));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNavOpen(false); });
 nav?.querySelectorAll('.nav__link').forEach((l) =>
-  l.addEventListener('click', () => {
-    nav.classList.remove('is-open'); navToggle.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  })
+  l.addEventListener('click', () => setNavOpen(false))
 );
 
 const header = document.getElementById('header');
 const toTop = document.getElementById('toTop');
+
+function syncHeaderStackHeight() {
+  const promo = document.getElementById('promoBar');
+  const promoH = (promo && !promo.classList.contains('is-hidden')) ? promo.offsetHeight : 0;
+  const headerH = header ? header.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-stack-h', (promoH + headerH) + 'px');
+}
+window.addEventListener('resize', syncHeaderStackHeight, { passive: true });
+syncHeaderStackHeight();
+
 const onScroll = () => {
   const y = window.scrollY;
   header?.classList.toggle('is-scrolled', y > 10);
@@ -618,9 +640,10 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-document.getElementById('promoClose')?.addEventListener('click', () =>
-  document.getElementById('promoBar')?.classList.add('is-hidden')
-);
+document.getElementById('promoClose')?.addEventListener('click', () => {
+  document.getElementById('promoBar')?.classList.add('is-hidden');
+  syncHeaderStackHeight();
+});
 
 document.querySelectorAll('.js-fakeform').forEach((form) =>
   form.addEventListener('submit', (e) => {
