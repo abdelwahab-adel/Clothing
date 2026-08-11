@@ -120,7 +120,7 @@ function buildBottom() {
 /* ---------- Inject chrome ---------- */
 const topSlot = document.getElementById('siteTop');
 const bottomSlot = document.getElementById('siteBottom');
-if (topSlot) topSlot.innerHTML = buildTop();
+if (topSlot) topSlot.outerHTML = buildTop();
 if (bottomSlot) bottomSlot.innerHTML = buildBottom();
 
 /* =========================================================

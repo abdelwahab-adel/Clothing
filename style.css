@@ -73,7 +73,7 @@
 
 /* ---------- Reset / base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 body {
   max-width: 100%;
   font-family: var(--font-body);
@@ -268,6 +268,16 @@ p { text-wrap: pretty; }
 }
 .promo-bar__close:hover { color: #fff; background: rgba(255,255,255,.06); }
 .promo-bar.is-hidden { display: none; }
+
+/* #siteTop is just an empty injection target for the promo-bar + header.
+   Left as a normal block box, its height would only ever equal
+   promo-bar + header (~120-160px) — and position:sticky can never
+   stick further than its own containing block extends. Past that
+   small height, the header's parent scrolls off-screen and drags the
+   "stuck" header away with it. display:contents removes #siteTop as a
+   box entirely, so the header's containing block becomes <body> (as
+   tall as the whole page), letting it stay stuck for the full scroll. */
+#siteTop { display: contents; }
 
 /* =========================================================
    HEADER
@@ -1214,7 +1224,6 @@ p { text-wrap: pretty; }
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
     left: auto;
     height: 100vh;
     width: min(82vw, 340px);
@@ -1224,6 +1233,7 @@ p { text-wrap: pretty; }
     box-shadow: -20px 0 60px rgba(0,0,0,.16);
     transform: translateX(100%);
     transition: transform var(--t);
+    will-change: transform;
     z-index: 99;
     overflow-y: auto;
   }
