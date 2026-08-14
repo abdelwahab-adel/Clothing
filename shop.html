@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Browse the full Clothing. collection — women, men and accessories. Free shipping over $150, easy 30-day returns." />
+  <meta name="description" content="Browse the full Clothing. collection — women, men and accessories. Free shipping over EGP 1,000, easy 30-day returns." />
   <meta name="theme-color" content="#2b1f15" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shop the Collection — Clothing." />
+  <meta property="og:description" content="Browse 47 pieces across Women, Men, Kids, Sportswear and Accessories — filter by category, color and price." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=80" />
   <title>Shop — Clothing. | Timeless Fashion Collection</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,29 +51,12 @@
         </div>
         <div class="side-box">
           <h3 class="side-box__title">Color</h3>
-          <div class="swatches">
-            <button data-filter-color="All" class="swatch is-active" style="--sw:linear-gradient(135deg,#a6783f,#3a2a1c)" aria-label="All colors"></button>
-            <button data-filter-color="Black" class="swatch" style="--sw:#222" aria-label="Black"></button>
-            <button data-filter-color="White" class="swatch" style="--sw:#f3f0ea" aria-label="White"></button>
-            <button data-filter-color="Brown" class="swatch" style="--sw:#a6783f" aria-label="Brown"></button>
-            <button data-filter-color="Beige" class="swatch" style="--sw:#d8c3a5" aria-label="Beige"></button>
-            <button data-filter-color="Grey" class="swatch" style="--sw:#9b9b9b" aria-label="Grey"></button>
-            <button data-filter-color="Blue" class="swatch" style="--sw:#6c8ab0" aria-label="Blue"></button>
-            <button data-filter-color="Navy" class="swatch" style="--sw:#2b3a55" aria-label="Navy"></button>
-            <button data-filter-color="Olive" class="swatch" style="--sw:#6b6e3e" aria-label="Olive"></button>
-            <button data-filter-color="Pink" class="swatch" style="--sw:#e8a8b8" aria-label="Pink"></button>
-            <button data-filter-color="Burgundy" class="swatch" style="--sw:#7a2438" aria-label="Burgundy"></button>
-            <button data-filter-color="Tan" class="swatch" style="--sw:#c8a878" aria-label="Tan"></button>
-          </div>
+          <div class="swatches" id="shopSwatches"></div>
         </div>
         <div class="side-box">
           <h3 class="side-box__title">Price Range</h3>
-          <ul class="filter-list">
-            <li><button class="filter-list__btn">Under $50</button></li>
-            <li><button class="filter-list__btn">$50 — $100</button></li>
-            <li><button class="filter-list__btn">$100 — $200</button></li>
-            <li><button class="filter-list__btn">Over $200</button></li>
-          </ul>
+          <p class="side-box__hint">Tap a range again to clear it.</p>
+          <ul class="filter-list" id="shopPriceList"></ul>
         </div>
         <div class="side-promo" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=500&q=80')">
           <div class="side-promo__body">
@@ -87,6 +74,7 @@
           <label class="shop__sort">Sort by
             <select id="shopSort" aria-label="Sort products">
               <option value="default">Default sorting</option>
+              <option value="newest">Newest First</option>
               <option value="low">Price: Low to High</option>
               <option value="high">Price: High to Low</option>
               <option value="rating">Top Rated</option>
@@ -94,12 +82,7 @@
           </label>
         </div>
         <div class="products__grid shop__grid" id="shopGrid"></div>
-        <nav class="pagination" aria-label="Pagination">
-          <button class="pagination__btn is-active">1</button>
-          <button class="pagination__btn">2</button>
-          <button class="pagination__btn">3</button>
-          <button class="pagination__btn pagination__next">Next →</button>
-        </nav>
+        <nav class="pagination" id="shopPagination" aria-label="Pagination"></nav>
       </div>
     </div>
   </main>

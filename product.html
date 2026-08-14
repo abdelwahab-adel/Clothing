@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Product details — Clothing. Premium quality, free shipping, 30-day returns." />
   <meta name="theme-color" content="#2b1f15" />
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="Product Details — Clothing." />
+  <meta property="og:description" content="Premium quality, ethically sourced, free shipping over EGP 1,000." />
+  <meta property="og:image" content="" />
   <title>Product Details — Clothing.</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,7 +40,7 @@
         <div class="pd__rating" id="pdStars"></div>
         <h2 class="pd__name" id="pdName"></h2>
         <div class="pd__price" id="pdPrice"></div>
-        <p class="pd__desc">Crafted from premium materials for everyday comfort and timeless style. Each piece is finished by hand at our atelier and inspected before shipping — designed to be worn for years, not seasons.</p>
+        <p class="pd__desc" id="pdDesc">Crafted from premium materials for everyday comfort and timeless style. Each piece is finished by hand at our atelier and inspected before shipping — designed to be worn for years, not seasons.</p>
 
         <div class="pd__opt">
           <span class="pd__opt-label">Size<span class="pd__opt-value">: S</span></span>
@@ -54,7 +58,7 @@
         </div>
 
         <div class="pd__buy">
-          <div class="qty"><button class="qty__minus" aria-label="Decrease quantity">−</button><input id="pdQty" type="number" value="1" min="1" aria-label="Quantity" /><button class="qty__plus" aria-label="Increase quantity">+</button></div>
+          <div class="qty"><button class="qty__minus" aria-label="Decrease quantity">−</button><input id="pdQty" type="number" value="1" min="1" max="99" aria-label="Quantity" /><button class="qty__plus" aria-label="Increase quantity">+</button></div>
           <button id="pdAdd" class="btn btn--primary pd__addbtn">Add To Cart <span class="btn__arrow">→</span></button>
           <button class="pd__wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
         </div>
@@ -65,10 +69,10 @@
           <li><span>Tags:</span> Fashion, Trend, Summer</li>
           <li><span>Share:</span>
             <span class="pd__share-inline">
-              <a href="#" aria-label="Share on Facebook">f</a>
-              <a href="#" aria-label="Share on Twitter">t</a>
-              <a href="#" aria-label="Share on Instagram">@</a>
-              <a href="#" aria-label="Share on YouTube">▶</a>
+              <a href="https://www.facebook.com/sharer/sharer.php" data-share="facebook" aria-label="Share on Facebook">f</a>
+              <a href="https://twitter.com/intent/tweet" data-share="twitter" aria-label="Share on Twitter">t</a>
+              <a href="https://www.instagram.com/" data-share="instagram" aria-label="Share on Instagram">@</a>
+              <a href="https://www.youtube.com/" data-share="youtube" aria-label="Share on YouTube">▶</a>
             </span>
           </li>
         </ul>
@@ -84,17 +88,17 @@
       </div>
       <div class="tabs__panels">
         <div class="tabs__panel is-active" id="tabDesc">
-          <p>Crafted from premium materials for everyday comfort and timeless style. Each piece in our collection is finished by hand at our atelier and inspected before shipping — designed to be worn for years, not seasons.</p>
+          <p id="pdDescLong">Crafted from premium materials for everyday comfort and timeless style. Each piece in our collection is finished by hand at our atelier and inspected before shipping — designed to be worn for years, not seasons.</p>
           <p>Our design philosophy blends modern silhouettes with classic construction. The result: pieces that feel as good as they look, season after season.</p>
           <ul class="ticks"><li>100% premium quality fabric</li><li>Breathable and skin-friendly</li><li>Easy machine wash</li><li>Available in multiple sizes</li><li>Ethically sourced and produced</li></ul>
         </div>
         <div class="tabs__panel" id="tabInfo">
           <table class="spec"><tbody>
-            <tr><th>Material</th><td>Cotton blend</td></tr>
-            <tr><th>Sizes</th><td>S, M, L, XL</td></tr>
-            <tr><th>Colors</th><td>Caramel, Black, Beige</td></tr>
-            <tr><th>Care</th><td>Machine wash cold, tumble dry low</td></tr>
-            <tr><th>Origin</th><td>Designed in New York · Made in Portugal</td></tr>
+            <tr><th>Material</th><td id="specMaterial">Cotton blend</td></tr>
+            <tr><th>Sizes</th><td id="specSizes">S, M, L, XL</td></tr>
+            <tr><th>Color</th><td id="specColors">Caramel</td></tr>
+            <tr><th>Care</th><td id="specCare">Machine wash cold, tumble dry low</td></tr>
+            <tr><th>Origin</th><td>Designed in Cairo · Made in Egypt</td></tr>
           </tbody></table>
         </div>
         <div class="tabs__panel" id="tabRev">
@@ -102,7 +106,7 @@
             <div class="review__avatar" aria-hidden="true">SB</div>
             <div class="review__body">
               <div class="review__head">
-                <span class="review__name">Sophia Bennett</span>
+                <span class="review__name">Salma Barakat</span>
                 <span class="card__stars">★★★★★</span>
                 <span class="review__date">2 weeks ago</span>
               </div>
@@ -110,10 +114,10 @@
             </div>
           </div>
           <div class="review">
-            <div class="review__avatar" aria-hidden="true">JA</div>
+            <div class="review__avatar" aria-hidden="true">AN</div>
             <div class="review__body">
               <div class="review__head">
-                <span class="review__name">James Anderson</span>
+                <span class="review__name">Ahmed Nabil</span>
                 <span class="card__stars">★★★★★</span>
                 <span class="review__date">1 month ago</span>
               </div>
@@ -121,10 +125,10 @@
             </div>
           </div>
           <div class="review">
-            <div class="review__avatar" aria-hidden="true">EC</div>
+            <div class="review__avatar" aria-hidden="true">MK</div>
             <div class="review__body">
               <div class="review__head">
-                <span class="review__name">Emily Carter</span>
+                <span class="review__name">Mona Khalil</span>
                 <span class="card__stars">★★★★☆</span>
                 <span class="review__date">1 month ago</span>
               </div>
