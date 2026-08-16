@@ -1,5 +1,5 @@
 /* =========================================================
-   Clothing. — shared chrome + interactions (Vanilla ES6+)
+   Zay. — shared chrome + interactions (Vanilla ES6+)
    Works across all pages. Header/footer injected once.
    ========================================================= */
 'use strict';
@@ -90,9 +90,9 @@ function buildTop() {
 
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="index.html" class="logo" aria-label="Clothing home">
-        <span class="logo__mark" aria-hidden="true">C</span>
-        <span class="logo__text">Clothing<span class="logo__dot">.</span></span>
+      <a href="index.html" class="logo" aria-label="Zay home">
+        <span class="logo__mark" aria-hidden="true">Z</span>
+        <span class="logo__text">Zay<span class="logo__dot">.</span></span>
       </a>
       <nav class="nav" id="primaryNav" aria-label="Primary">
         <div class="nav__head">
@@ -119,7 +119,7 @@ function buildBottom() {
   <footer class="footer" id="footer">
     <div class="container footer__grid">
       <div class="footer__col footer__brand">
-        <a href="index.html" class="logo logo--light"><span class="logo__mark" aria-hidden="true">C</span><span class="logo__text">Clothing<span class="logo__dot">.</span></span></a>
+        <a href="index.html" class="logo logo--light"><span class="logo__mark" aria-hidden="true">Z</span><span class="logo__text">Zay<span class="logo__dot">.</span></span></a>
         <p>A curated edit of modern fashion essentials — designed in our atelier, crafted for everyday confidence, delivered to your door.</p>
         <div class="footer__social">
           <a href="${SOCIAL.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICON.fb}</a>
@@ -131,11 +131,11 @@ function buildBottom() {
       <div class="footer__col"><h4>Information</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="policies.html#terms">Terms &amp; Conditions</a></li><li><a href="policies.html#privacy">Privacy Policy</a></li></ul></div>
       <div class="footer__col"><h4>Quick Links</h4><ul><li><a href="shop.html?cat=Women">Women</a></li><li><a href="shop.html?cat=Men">Men</a></li><li><a href="shop.html?cat=Accessories">Accessories</a></li><li><a href="shop.html?sort=newest">New Arrivals</a></li></ul></div>
       <div class="footer__col"><h4>Customer Service</h4><ul><li><a href="account.html">My Account</a></li><li><a href="account.html#orders">Track Order</a></li><li><a href="policies.html#returns">Returns</a></li><li><a href="policies.html#shipping">Shipping Info</a></li></ul></div>
-      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:+20221234567">+20 2 2123 4567</a></li><li>${ICON.mail} <a href="mailto:hello@clothing.eg">hello@clothing.eg</a></li></ul></div>
+      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:+20221234567">+20 2 2123 4567</a></li><li>${ICON.mail} <a href="mailto:hello@zay.eg">hello@zay.eg</a></li></ul></div>
     </div>
     <div class="footer__bar">
       <div class="container footer__bar-inner">
-        <p>&copy; 2026 Clothing. — Crafted with care.</p>
+        <p>&copy; 2026 Zay. — Crafted with care.</p>
         <div class="footer__pay">
           <span>VISA</span><span>MC</span><span>Fawry</span><span>Vodafone Cash</span><span>Cash on Delivery</span>
         </div>
@@ -182,67 +182,72 @@ const STARS = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
 // Unsplash images are remote (kept from original), local sportswear uses img dir
 const CATALOG = [
   /* === Original 17 === */
-  { id: 'brown-coat',     name: 'Brown Wool Coat',         cat: 'Women', color: 'Brown', desc: 'A rich chestnut-brown wool coat cut for Cairo\'s cooler winter evenings — structured enough for the office, warm enough for a Sinai weekend getaway.', material: 'Wool blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80', now: 1600,  old: 2200, rating: 5, badge: '-27%' },
-  { id: 'classy-coat',    name: 'Classy Light Coat',       cat: 'Women', color: 'Beige', desc: 'A lightweight beige coat that layers easily over an evening dress, perfect for the mild months between Cairo\'s long summer and short winter.', material: 'Cotton-poly blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=500&q=80', now: 1680,  old: 2200, rating: 4, badge: '-24%' },
-  { id: 'brown-dress',    name: 'Modern Brown Dress',      cat: 'Women', color: 'Brown', desc: 'A relaxed brown dress in breathable fabric, easy to dress up for a family gathering or down for a day at the office.', material: 'Viscose blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=500&q=80', now: 900,  old: 1300, rating: 5, badge: 'New' },
-  { id: 'white-shirt',    name: 'Classic White Shirt',     cat: 'Women', color: 'White', desc: 'A crisp white cotton shirt that stays cool through a Cairo afternoon and pairs effortlessly with everything from tailored trousers to a midi skirt.', material: '100% Cotton', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=500&q=80', now: 750,  old: 1100, rating: 4, badge: '-32%' },
-  { id: 'black-dress',    name: 'Black Evening Dress',     cat: 'Women', color: 'Black', desc: 'An elegant black evening dress designed for engagement parties and weddings, with a flattering silhouette that photographs beautifully under any kosha lighting.', material: 'Satin blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=500&q=80', now: 1200,  old: 1600, rating: 5, badge: 'Hot' },
-  { id: 'brown-sweater',  name: 'Light Brown Sweater',     cat: 'Women', color: 'Brown', desc: 'A soft, lightweight knit in warm brown — just enough coverage for Cairo\'s brief winter chill without ever feeling heavy.', material: 'Cotton-wool blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80', now: 630,  old: 900,  rating: 4, badge: '-30%' },
-  { id: 'white-skirt',    name: 'Classic White Skirt',     cat: 'Women', color: 'White', desc: 'A clean white midi skirt that works from a Friday brunch downtown to a summer evening on the North Coast.', material: '100% Cotton', sizes: 'XS, S, M, L', img: 'https://images.unsplash.com/photo-1551163943-3f6a855d1153?auto=format&fit=crop&w=500&q=80', now: 450,  old: 700,  rating: 5, badge: 'New' },
-  { id: 'beige-dress',    name: 'Beige Party Dress',       cat: 'Women', color: 'Beige', desc: 'A beige party dress with just the right amount of shimmer for Eid celebrations and evening gatherings.', material: 'Chiffon blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=500&q=80', now: 900,  old: 1300, rating: 4, badge: '-31%' },
-  { id: 'denim-jacket',   name: 'Denim Jacket',            cat: 'Men',   color: 'Blue',  desc: 'A classic denim jacket, light enough to wear over a tee through Cairo\'s mild winter without ever feeling bulky.', material: '100% Cotton denim', sizes: 'S, M, L, XL, XXL', img: 'https://images.unsplash.com/photo-1551537482-f2075a1d41f2?auto=format&fit=crop&w=500&q=80', now: 1100,  old: 1500, rating: 5, badge: '-26%' },
-  { id: 'grey-blazer',    name: 'Grey Wool Blazer',        cat: 'Men',   color: 'Grey',  desc: 'A tailored grey wool blazer built for the office or a formal evening — sharp enough for a boardroom, comfortable enough for a long day.', material: 'Wool blend', sizes: '48, 50, 52, 54', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80', now: 1400,  old: 1900, rating: 5, badge: 'Hot' },
-  { id: 'leather-bag',    name: 'Leather Handbag',         cat: 'Accessories', color: 'Brown', desc: 'A structured leather handbag roomy enough for the everyday essentials, from a day at work to an evening out.', material: 'Genuine leather', sizes: 'One Size', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80', now: 850,  old: 1200, rating: 5, badge: '-29%' },
-  { id: 'sunglasses',     name: 'Retro Sunglasses',        cat: 'Accessories', color: 'Black', desc: 'Retro-inspired sunglasses with real UV protection — an essential for Cairo\'s near year-round sunshine.', material: 'Acetate frame, UV400 lenses', sizes: 'One Size', img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=500&q=80', now: 400,  old: 650, rating: 4, badge: 'New' },
+  { id: 'brown-coat',     name: 'Brown Wool Coat',         nameAr: 'كوت صوف بني', cat: 'Women', color: 'Brown', desc: 'A rich chestnut-brown wool coat cut for Cairo\'s cooler winter evenings — structured enough for the office, warm enough for a Sinai weekend getaway.', material: 'Wool blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80', now: 1600,  old: 2200, rating: 5, badge: '-27%' },
+  { id: 'classy-coat',    name: 'Lightweight Beige Coat',       nameAr: 'كوت بيج خفيف', cat: 'Women', color: 'Beige', desc: 'A lightweight beige coat that layers easily over an evening dress, perfect for the mild months between Cairo\'s long summer and short winter.', material: 'Cotton-poly blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=500&q=80', now: 1680,  old: 2200, rating: 4, badge: '-24%' },
+  { id: 'brown-dress',    name: 'Relaxed Fit Brown Dress',      nameAr: 'فستان بني كاجوال', cat: 'Women', color: 'Brown', desc: 'A relaxed brown dress in breathable fabric, easy to dress up for a family gathering or down for a day at the office.', material: 'Viscose blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=500&q=80', now: 900,  old: 1300, rating: 5, badge: 'New' },
+  { id: 'white-shirt',    name: 'Classic White Shirt',     nameAr: 'قميص أبيض كلاسيك', cat: 'Women', color: 'White', desc: 'A crisp white cotton shirt that stays cool through a Cairo afternoon and pairs effortlessly with everything from tailored trousers to a midi skirt.', material: '100% Cotton', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=500&q=80', now: 750,  old: 1100, rating: 4, badge: '-32%' },
+  { id: 'black-dress',    name: 'Black Evening Dress',     nameAr: 'فستان سواريه أسود', cat: 'Women', color: 'Black', desc: 'An elegant black evening dress designed for engagement parties and weddings, with a flattering silhouette that photographs beautifully under any kosha lighting.', material: 'Satin blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=500&q=80', now: 1200,  old: 1600, rating: 5, badge: 'Hot' },
+  { id: 'brown-sweater',  name: 'Lightweight Brown Sweater',     nameAr: 'سويتر بني خفيف', cat: 'Women', color: 'Brown', desc: 'A soft, lightweight knit in warm brown — just enough coverage for Cairo\'s brief winter chill without ever feeling heavy.', material: 'Cotton-wool blend', sizes: 'S, M, L, XL', img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80', now: 630,  old: 900,  rating: 4, badge: '-30%' },
+  { id: 'white-skirt',    name: 'White Midi Skirt',     nameAr: 'جيبة ميدي بيضاء', cat: 'Women', color: 'White', desc: 'A clean white midi skirt that works from a Friday brunch downtown to a summer evening on the North Coast.', material: '100% Cotton', sizes: 'XS, S, M, L', img: 'https://images.unsplash.com/photo-1551163943-3f6a855d1153?auto=format&fit=crop&w=500&q=80', now: 450,  old: 700,  rating: 5, badge: 'New' },
+  { id: 'beige-dress',    name: 'Beige Party Dress',       nameAr: 'فستان سهرة بيج', cat: 'Women', color: 'Beige', desc: 'A beige party dress with just the right amount of shimmer for Eid celebrations and evening gatherings.', material: 'Chiffon blend', sizes: 'XS, S, M, L, XL', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=500&q=80', now: 900,  old: 1300, rating: 4, badge: '-31%' },
+  { id: 'denim-jacket',   name: 'Blue Denim Jacket',            nameAr: 'جاكيت جينز أزرق', cat: 'Men',   color: 'Blue',  desc: 'A classic denim jacket, light enough to wear over a tee through Cairo\'s mild winter without ever feeling bulky.', material: '100% Cotton denim', sizes: 'S, M, L, XL, XXL', img: 'https://images.unsplash.com/photo-1551537482-f2075a1d41f2?auto=format&fit=crop&w=500&q=80', now: 1100,  old: 1500, rating: 5, badge: '-26%' },
+  { id: 'grey-blazer',    name: 'Grey Wool Blazer',        nameAr: 'بليزر صوف رمادي', cat: 'Men',   color: 'Grey',  desc: 'A tailored grey wool blazer built for the office or a formal evening — sharp enough for a boardroom, comfortable enough for a long day.', material: 'Wool blend', sizes: '48, 50, 52, 54', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80', now: 1400,  old: 1900, rating: 5, badge: 'Hot' },
+  { id: 'leather-bag',    name: 'Leather Handbag',         nameAr: 'شنطة يد جلد', cat: 'Accessories', color: 'Brown', desc: 'A structured leather handbag roomy enough for the everyday essentials, from a day at work to an evening out.', material: 'Genuine leather', sizes: 'One Size', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80', now: 850,  old: 1200, rating: 5, badge: '-29%' },
+  { id: 'sunglasses',     name: 'Retro Sunglasses',        nameAr: 'نظارة شمس ريترو', cat: 'Accessories', color: 'Black', desc: 'Retro-inspired sunglasses with real UV protection — an essential for Cairo\'s near year-round sunshine.', material: 'Acetate frame, UV400 lenses', sizes: 'One Size', img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=500&q=80', now: 400,  old: 650, rating: 4, badge: 'New' },
 
   /* Sportswear line */
-  { id: 'jacket-black',   name: 'Black Sport Jacket',      cat: 'Men', color: 'Black', desc: 'A lightweight black training jacket built for early morning runs along the Nile Corniche before the day heats up.', material: 'Polyester, moisture-wicking', sizes: 'S, M, L, XL', img: 'assets/img/product1.webp', now: 990,  old: 1400, rating: 5, badge: '-29%', tag: 'sportswear' },
-  { id: 'jacket-red',     name: 'Red Hooded Jacket',       cat: 'Men', color: 'Red',   desc: 'A bold red hooded jacket with just enough warmth for a cool evening jog or a weekend at the gym.', material: 'Polyester-cotton blend', sizes: 'S, M, L, XL', img: 'assets/img/product2.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot',  tag: 'sportswear' },
-  { id: 'jacket-navy',    name: 'Navy Performance Jacket', cat: 'Men', color: 'Navy',  desc: 'A breathable navy performance jacket designed to move with you, whether it\'s a 6am workout or a weekend match.', material: 'Polyester, breathable mesh lining', sizes: 'S, M, L, XL', img: 'assets/img/product3.webp', now: 1200,  old: 1650, rating: 5, badge: 'New',  tag: 'sportswear' },
-  { id: 'jacket-camo',    name: 'Camo Puffer Jacket',      cat: 'Men', color: 'Grey',  desc: 'An insulated camo puffer built for genuinely cold days — ideal for a winter trip to Sinai\'s mountains or St. Catherine.', material: 'Polyester shell, synthetic fill', sizes: 'S, M, L, XL, XXL', img: 'assets/img/product4.webp', now: 1300,  old: 1800, rating: 4, badge: '-28%', tag: 'sportswear' },
-  { id: 'tee-black',      name: 'Classic Black Tee',       cat: 'Men', color: 'Black', desc: 'A soft, breathable cotton tee built to handle Cairo\'s heat — the everyday essential every wardrobe needs.', material: '100% Cotton', sizes: 'S, M, L, XL, XXL', img: 'assets/img/product5.webp', now: 280,  old: 450,  rating: 5, badge: '-38%', tag: 'sportswear' },
+  { id: 'jacket-black',   name: 'Black Training Jacket',      nameAr: 'جاكيت رياضي أسود', cat: 'Men', color: 'Black', desc: 'A lightweight black training jacket built for early morning runs along the Nile Corniche before the day heats up.', material: 'Polyester, moisture-wicking', sizes: 'S, M, L, XL', img: 'assets/img/product1.webp', now: 990,  old: 1400, rating: 5, badge: '-29%', tag: 'sportswear' },
+  { id: 'jacket-red',     name: 'Red Hooded Jacket',       nameAr: 'جاكيت أحمر بغطاء راس', cat: 'Men', color: 'Red',   desc: 'A bold red hooded jacket with just enough warmth for a cool evening jog or a weekend at the gym.', material: 'Polyester-cotton blend', sizes: 'S, M, L, XL', img: 'assets/img/product2.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot',  tag: 'sportswear' },
+  { id: 'jacket-navy',    name: 'Navy Training Jacket', nameAr: 'جاكيت رياضي كحلي', cat: 'Men', color: 'Navy',  desc: 'A breathable navy performance jacket designed to move with you, whether it\'s a 6am workout or a weekend match.', material: 'Polyester, breathable mesh lining', sizes: 'S, M, L, XL', img: 'assets/img/product3.webp', now: 1200,  old: 1650, rating: 5, badge: 'New',  tag: 'sportswear' },
+  { id: 'jacket-camo',    name: 'Camo Puffer Jacket',      nameAr: 'جاكيت بافر كامو', cat: 'Men', color: 'Grey',  desc: 'An insulated camo puffer built for genuinely cold days — ideal for a winter trip to Sinai\'s mountains or St. Catherine.', material: 'Polyester shell, synthetic fill', sizes: 'S, M, L, XL, XXL', img: 'assets/img/product4.webp', now: 1300,  old: 1800, rating: 4, badge: '-28%', tag: 'sportswear' },
+  { id: 'tee-black',      name: 'Classic Black T-Shirt',       nameAr: 'تي شيرت أسود كلاسيك', cat: 'Men', color: 'Black', desc: 'A soft, breathable cotton tee built to handle Cairo\'s heat — the everyday essential every wardrobe needs.', material: '100% Cotton', sizes: 'S, M, L, XL, XXL', img: 'assets/img/product5.webp', now: 280,  old: 450,  rating: 5, badge: '-38%', tag: 'sportswear' },
 
   /* === 30 NEW DIVERSE PRODUCTS === */
 
   /* Women's (10) */
-  { id: 'silk-wrap-dress',   name: 'Silk Wrap Midi Dress',     cat: 'Women', color: 'Black', desc: 'A silky, wrap-front midi dress that drapes beautifully — a go-to for engagement parties, henna nights, or a polished dinner out.', material: '100% Silk', sizes: 'XS, S, M, L', img: 'assets/img/products/silk-wrap-dress.webp', now: 1450,  old: 1950, rating: 5, badge: 'Hot' },
-  { id: 'cashmere-crew',     name: 'Cashmere Crew Sweater',    cat: 'Women', color: 'Beige', desc: 'A soft cashmere crewneck built for Cairo\'s short but genuinely chilly winter nights — light enough to layer under a coat, warm enough to wear alone.', material: '100% Cashmere', sizes: 'S, M, L, XL', img: 'assets/img/products/cashmere-crew.webp', now: 1850,  old: 2400, rating: 5, badge: '-23%' },
-  { id: 'mom-jeans',         name: 'High-Waist Mom Jeans',     cat: 'Women', color: 'Blue',  desc: 'Relaxed, high-waisted denim with a flattering straight leg — comfortable enough for a full day out at the mall or a weekend at the souk.', material: '98% Cotton, 2% Elastane', sizes: '24, 26, 28, 30, 32 (waist)', img: 'assets/img/products/mom-jeans.webp', now: 780,  old: 1100, rating: 4, badge: '-29%' },
-  { id: 'linen-blazer',      name: 'Relaxed Linen Blazer',     cat: 'Women', color: 'White', desc: 'An unlined linen blazer that breathes through Cairo\'s heat while still looking sharp enough for a business meeting or a summer wedding.', material: '100% Linen', sizes: 'S, M, L, XL', img: 'assets/img/products/linen-blazer.webp', now: 1650,  old: 2200, rating: 5, badge: 'New' },
-  { id: 'pleated-midi',      name: 'Pleated Midi Skirt',       cat: 'Women', color: 'Camel', desc: 'A flowing pleated midi skirt in warm camel — a comfortable length with easy movement and enough versatility to dress up or down.', material: 'Polyester blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/pleated-midi.webp', now: 950,  old: 1300, rating: 4, badge: '-27%' },
-  { id: 'oversized-shirt',   name: 'Oversized Cotton Shirt',   cat: 'Women', color: 'White', desc: 'A breathable, oversized cotton shirt made for hot Cairo afternoons — wear it open over a tank or buttoned up on its own.', material: '100% Cotton', sizes: 'S, M, L (oversized fit)', img: 'assets/img/products/oversized-shirt.webp', now: 580,  old: 850,  rating: 5, badge: '-32%' },
-  { id: 'leather-leggings',  name: 'Faux Leather Leggings',    cat: 'Women', color: 'Black', desc: 'Stretch faux-leather leggings that layer easily under a long tunic or oversized sweater on cooler evenings.', material: 'Faux leather, cotton lining', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leather-leggings.webp', now: 680,  old: 950,  rating: 4, badge: '-28%' },
-  { id: 'floral-maxi',       name: 'Floral Print Maxi Dress',  cat: 'Women', color: 'Multi', desc: 'A breezy floor-length floral dress, lightweight enough for a Sahel summer evening and easy to style modestly for any family occasion.', material: 'Rayon blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/floral-maxi.webp', now: 1180,  old: 1600, rating: 5, badge: 'Hot' },
-  { id: 'knit-cardigan',     name: 'Chunky Knit Cardigan',     cat: 'Women', color: 'Cream', desc: 'An oversized cream cardigan — the easiest way to add warmth on Cairo\'s cooler winter mornings without giving up comfort.', material: 'Acrylic-wool blend', sizes: 'S, M, L, XL', img: 'assets/img/products/knit-cardigan.webp', now: 980,  old: 1400, rating: 4, badge: '-30%' },
-  { id: 'tailored-trousers', name: 'Tailored Wool Trousers',   cat: 'Women', color: 'Grey',  desc: 'Sharp, straight-leg wool trousers for the office or an evening out, tailored to sit comfortably at the waist.', material: 'Wool blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/tailored-trousers.webp', now: 1050,  old: 1450, rating: 5, badge: '-28%' },
+  { id: 'silk-wrap-dress',   name: 'Silk Wrap Midi Dress',     nameAr: 'فستان حرير ميدي', cat: 'Women', color: 'Black', desc: 'A silky, wrap-front midi dress that drapes beautifully — a go-to for engagement parties, henna nights, or a polished dinner out.', material: '100% Silk', sizes: 'XS, S, M, L', img: 'assets/img/products/silk-wrap-dress.webp', now: 1450,  old: 1950, rating: 5, badge: 'Hot' },
+  { id: 'cashmere-crew',     name: 'Cashmere Crew Sweater',    nameAr: 'سويتر كشمير', cat: 'Women', color: 'Beige', desc: 'A soft cashmere crewneck built for Cairo\'s short but genuinely chilly winter nights — light enough to layer under a coat, warm enough to wear alone.', material: '100% Cashmere', sizes: 'S, M, L, XL', img: 'assets/img/products/cashmere-crew.webp', now: 1850,  old: 2400, rating: 5, badge: '-23%' },
+  { id: 'mom-jeans',         name: 'Blue High-Waist Jeans',     nameAr: 'بنطلون جينز أزرق هاي ويست', cat: 'Women', color: 'Blue',  desc: 'Relaxed, high-waisted denim with a flattering straight leg — comfortable enough for a full day out at the mall or a weekend at the souk.', material: '98% Cotton, 2% Elastane', sizes: '24, 26, 28, 30, 32 (waist)', img: 'assets/img/products/mom-jeans.webp', now: 780,  old: 1100, rating: 4, badge: '-29%' },
+  { id: 'linen-blazer',      name: 'Relaxed Linen Blazer',     nameAr: 'بليزر كتان كاجوال', cat: 'Women', color: 'White', desc: 'An unlined linen blazer that breathes through Cairo\'s heat while still looking sharp enough for a business meeting or a summer wedding.', material: '100% Linen', sizes: 'S, M, L, XL', img: 'assets/img/products/linen-blazer.webp', now: 1650,  old: 2200, rating: 5, badge: 'New' },
+  { id: 'pleated-midi',      name: 'Pleated Midi Skirt',       nameAr: 'جيبة ميدي بليسيه', cat: 'Women', color: 'Camel', desc: 'A flowing pleated midi skirt in warm camel — a comfortable length with easy movement and enough versatility to dress up or down.', material: 'Polyester blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/pleated-midi.webp', now: 950,  old: 1300, rating: 4, badge: '-27%' },
+  { id: 'oversized-shirt',   name: 'Oversized Cotton Shirt',   nameAr: 'قميص قطن أوفرسايز', cat: 'Women', color: 'White', desc: 'A breathable, oversized cotton shirt made for hot Cairo afternoons — wear it open over a tank or buttoned up on its own.', material: '100% Cotton', sizes: 'S, M, L (oversized fit)', img: 'assets/img/products/oversized-shirt.webp', now: 580,  old: 850,  rating: 5, badge: '-32%' },
+  { id: 'leather-leggings',  name: 'Faux Leather Leggings',    nameAr: 'ليجن جلد صناعي', cat: 'Women', color: 'Black', desc: 'Stretch faux-leather leggings that layer easily under a long tunic or oversized sweater on cooler evenings.', material: 'Faux leather, cotton lining', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leather-leggings.webp', now: 680,  old: 950,  rating: 4, badge: '-28%' },
+  { id: 'floral-maxi',       name: 'Floral Print Maxi Dress',  nameAr: 'فستان ماكسي ورد', cat: 'Women', color: 'Multi', desc: 'A breezy floor-length floral dress, lightweight enough for a Sahel summer evening and easy to style modestly for any family occasion.', material: 'Rayon blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/floral-maxi.webp', now: 1180,  old: 1600, rating: 5, badge: 'Hot' },
+  { id: 'knit-cardigan',     name: 'Chunky Knit Cardigan',     nameAr: 'كارديجان تريكو', cat: 'Women', color: 'Cream', desc: 'An oversized cream cardigan — the easiest way to add warmth on Cairo\'s cooler winter mornings without giving up comfort.', material: 'Acrylic-wool blend', sizes: 'S, M, L, XL', img: 'assets/img/products/knit-cardigan.webp', now: 980,  old: 1400, rating: 4, badge: '-30%' },
+  { id: 'tailored-trousers', name: 'Tailored Wool Trousers',   nameAr: 'بنطلون صوف كلاسيك', cat: 'Women', color: 'Grey',  desc: 'Sharp, straight-leg wool trousers for the office or an evening out, tailored to sit comfortably at the waist.', material: 'Wool blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/tailored-trousers.webp', now: 1050,  old: 1450, rating: 5, badge: '-28%' },
 
   /* Men's (8) */
-  { id: 'oxford-shirt',      name: 'Slim Fit Oxford Shirt',    cat: 'Men', color: 'Blue',      desc: 'A slim-fit Oxford shirt in breathable cotton, sharp enough for the office and cool enough to wear all day.', material: '100% Cotton', sizes: 'S, M, L, XL', img: 'assets/img/products/oxford-shirt.webp', now: 650,  old: 950,  rating: 4, badge: '-32%' },
-  { id: 'merino-sweater',    name: 'Merino Wool Sweater',      cat: 'Men', color: 'Navy',      desc: 'A fine-gauge merino sweater — warm enough for Cairo\'s short winter, light enough to layer under a jacket on cooler trips.', material: '100% Merino Wool', sizes: 'S, M, L, XL', img: 'assets/img/products/merino-sweater.webp', now: 1250,  old: 1700, rating: 5, badge: '-26%' },
-  { id: 'chino-pants',       name: 'Slim Chino Pants',         cat: 'Men', color: 'Khaki',     desc: 'Comfortable slim-fit chinos in khaki, easy to dress up for work or down for a weekend out.', material: '98% Cotton, 2% Elastane', sizes: '30, 32, 34, 36, 38 (waist)', img: 'assets/img/products/chino-pants.webp', now: 720,  old: 1000, rating: 4, badge: '-28%' },
-  { id: 'polo-shirt',        name: 'Classic Pique Polo',       cat: 'Men', color: 'White',     desc: 'A breathable pique polo that keeps its shape through a full day out, from the office to a casual dinner.', material: '100% Pique Cotton', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/polo-shirt.webp', now: 480,  old: 700,  rating: 5, badge: '-31%' },
-  { id: 'bomber-jacket',     name: 'Quilted Bomber Jacket',    cat: 'Men', color: 'Olive',     desc: 'A quilted olive bomber with just enough warmth for Cairo\'s cooler evenings, worn open over a simple tee.', material: 'Polyester shell, quilted lining', sizes: 'S, M, L, XL', img: 'assets/img/products/bomber-jacket.webp', now: 1580,  old: 2100, rating: 5, badge: 'New' },
-  { id: 'suit-blazer',       name: 'Tailored Suit Blazer',     cat: 'Men', color: 'Charcoal',  desc: 'A sharply tailored charcoal blazer built for weddings, engagement parties, and important meetings alike.', material: 'Wool blend', sizes: '48, 50, 52, 54, 56', img: 'assets/img/products/suit-blazer.webp', now: 2200,  old: 2950, rating: 5, badge: '-25%' },
-  { id: 'linen-shorts',      name: 'Linen Summer Shorts',      cat: 'Men', color: 'Sand',      desc: 'Breathable linen shorts made for the hottest Cairo afternoons and long weekends on the North Coast.', material: '100% Linen', sizes: 'S, M, L, XL', img: 'assets/img/products/linen-shorts.webp', now: 550,  old: 800,  rating: 4, badge: '-31%' },
-  { id: 'graphic-hoodie',    name: 'Heavyweight Cotton Hoodie', cat: 'Men', color: 'Grey',      desc: 'A heavyweight cotton hoodie with enough warmth for a cool winter evening, without ever feeling too heavy for Cairo\'s mild season.', material: 'Heavyweight cotton fleece', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/graphic-hoodie.webp', now: 720,  old: 1000, rating: 5, badge: '-28%' },
+  { id: 'oxford-shirt',      name: 'Slim Fit Oxford Shirt',    nameAr: 'قميص أوكسفورد سليم فيت', cat: 'Men', color: 'Blue',      desc: 'A slim-fit Oxford shirt in breathable cotton, sharp enough for the office and cool enough to wear all day.', material: '100% Cotton', sizes: 'S, M, L, XL', img: 'assets/img/products/oxford-shirt.webp', now: 650,  old: 950,  rating: 4, badge: '-32%' },
+  { id: 'merino-sweater',    name: 'Merino Wool Sweater',      nameAr: 'سويتر صوف ميرينو', cat: 'Men', color: 'Navy',      desc: 'A fine-gauge merino sweater — warm enough for Cairo\'s short winter, light enough to layer under a jacket on cooler trips.', material: '100% Merino Wool', sizes: 'S, M, L, XL', img: 'assets/img/products/merino-sweater.webp', now: 1250,  old: 1700, rating: 5, badge: '-26%' },
+  { id: 'chino-pants',       name: 'Slim Fit Chino Pants',         nameAr: 'بنطلون تشينو سليم فيت', cat: 'Men', color: 'Khaki',     desc: 'Comfortable slim-fit chinos in khaki, easy to dress up for work or down for a weekend out.', material: '98% Cotton, 2% Elastane', sizes: '30, 32, 34, 36, 38 (waist)', img: 'assets/img/products/chino-pants.webp', now: 720,  old: 1000, rating: 4, badge: '-28%' },
+  { id: 'polo-shirt',        name: 'Classic Cotton Polo Shirt',       nameAr: 'تي شيرت بولو قطن', cat: 'Men', color: 'White',     desc: 'A breathable pique polo that keeps its shape through a full day out, from the office to a casual dinner.', material: '100% Pique Cotton', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/polo-shirt.webp', now: 480,  old: 700,  rating: 5, badge: '-31%' },
+  { id: 'bomber-jacket',     name: 'Quilted Bomber Jacket',    nameAr: 'جاكيت بمبر مبطن', cat: 'Men', color: 'Olive',     desc: 'A quilted olive bomber with just enough warmth for Cairo\'s cooler evenings, worn open over a simple tee.', material: 'Polyester shell, quilted lining', sizes: 'S, M, L, XL', img: 'assets/img/products/bomber-jacket.webp', now: 1580,  old: 2100, rating: 5, badge: 'New' },
+  { id: 'suit-blazer',       name: 'Tailored Suit Blazer',     nameAr: 'بليزر بدلة كلاسيك', cat: 'Men', color: 'Charcoal',  desc: 'A sharply tailored charcoal blazer built for weddings, engagement parties, and important meetings alike.', material: 'Wool blend', sizes: '48, 50, 52, 54, 56', img: 'assets/img/products/suit-blazer.webp', now: 2200,  old: 2950, rating: 5, badge: '-25%' },
+  { id: 'linen-shorts',      name: 'Linen Summer Shorts',      nameAr: 'شورت كتان صيفي', cat: 'Men', color: 'Sand',      desc: 'Breathable linen shorts made for the hottest Cairo afternoons and long weekends on the North Coast.', material: '100% Linen', sizes: 'S, M, L, XL', img: 'assets/img/products/linen-shorts.webp', now: 550,  old: 800,  rating: 4, badge: '-31%' },
+  { id: 'graphic-hoodie',    name: 'Heavyweight Cotton Hoodie', nameAr: 'هودي قطن تقيل', cat: 'Men', color: 'Grey',      desc: 'A heavyweight cotton hoodie with enough warmth for a cool winter evening, without ever feeling too heavy for Cairo\'s mild season.', material: 'Heavyweight cotton fleece', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/graphic-hoodie.webp', now: 720,  old: 1000, rating: 5, badge: '-28%' },
 
   /* Kids (4) */
-  { id: 'kids-rainbow-tee',  name: 'Kids Rainbow Stripe Tee',  cat: 'Kids', color: 'Multi',  desc: 'A soft, breathable cotton tee in playful stripes — built to survive a full day of school, play and everything in between.', material: '100% Cotton', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-rainbow-tee.webp', now: 240,  old: 380, rating: 5, badge: 'New' },
-  { id: 'kids-overalls',     name: 'Kids Denim Overalls',      cat: 'Kids', color: 'Blue',   desc: 'Durable denim overalls with easy-clip straps, made for a day of play without a single worry about wear and tear.', material: '100% Cotton denim', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-overalls.webp', now: 480,  old: 680, rating: 4, badge: '-29%' },
-  { id: 'kids-puffer',       name: 'Kids Puffer Jacket',       cat: 'Kids', color: 'Pink',   desc: 'A cozy, lightweight puffer for Cairo\'s cooler winter mornings — warm enough for the school run, easy enough to pack away by noon.', material: 'Polyester shell, synthetic fill', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-puffer.webp', now: 680,  old: 950, rating: 5, badge: 'Hot' },
-  { id: 'kids-hoodie',       name: 'Kids Cotton Hoodie',       cat: 'Kids', color: 'Grey',   desc: 'A soft cotton hoodie that\'s just right for cool evenings, easy to layer over any outfit without any fuss.', material: 'Cotton fleece', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-hoodie.webp', now: 360,  old: 520, rating: 4, badge: '-31%' },
+  { id: 'kids-rainbow-tee',  name: 'Kids Rainbow Stripe T-Shirt',  nameAr: 'تي شيرت أطفال مقلم', cat: 'Kids', color: 'Multi',  desc: 'A soft, breathable cotton tee in playful stripes — built to survive a full day of school, play and everything in between.', material: '100% Cotton', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-rainbow-tee.webp', now: 240,  old: 380, rating: 5, badge: 'New' },
+  { id: 'kids-overalls',     name: 'Kids Denim Overalls',      nameAr: 'أوفرول جينز أطفال', cat: 'Kids', color: 'Blue',   desc: 'Durable denim overalls with easy-clip straps, made for a day of play without a single worry about wear and tear.', material: '100% Cotton denim', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-overalls.webp', now: 480,  old: 680, rating: 4, badge: '-29%' },
+  { id: 'kids-puffer',       name: 'Kids Puffer Jacket',       nameAr: 'جاكيت بافر أطفال', cat: 'Kids', color: 'Pink',   desc: 'A cozy, lightweight puffer for Cairo\'s cooler winter mornings — warm enough for the school run, easy enough to pack away by noon.', material: 'Polyester shell, synthetic fill', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-puffer.webp', now: 680,  old: 950, rating: 5, badge: 'Hot' },
+  { id: 'kids-hoodie',       name: 'Kids Cotton Hoodie',       nameAr: 'هودي قطن أطفال', cat: 'Kids', color: 'Grey',   desc: 'A soft cotton hoodie that\'s just right for cool evenings, easy to layer over any outfit without any fuss.', material: 'Cotton fleece', sizes: '2–3Y, 4–5Y, 6–7Y, 8–9Y', img: 'assets/img/products/kids-hoodie.webp', now: 360,  old: 520, rating: 4, badge: '-31%' },
 
   /* Sportswear (4) */
-  { id: 'leggings-black',    name: 'High-Waist Performance Leggings', cat: 'Sportswear', color: 'Black',    desc: 'Squat-proof, high-waist leggings built to move — from a sunrise gym session to a full day of errands.', material: 'Nylon-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leggings-black.webp', now: 480,  old: 720, rating: 5, badge: '-33%' },
-  { id: 'running-sneakers',  name: 'Lightweight Running Sneakers',   cat: 'Sportswear', color: 'White',    desc: 'Lightweight, breathable running sneakers built for Cairo\'s pavements, whether it\'s an early morning Corniche run or a gym session.', material: 'Mesh upper, rubber sole', sizes: '38, 39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/running-sneakers.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot' },
-  { id: 'yoga-tank',         name: 'Stretch Yoga Tank Top',          cat: 'Sportswear', color: 'Purple',   desc: 'A soft, stretchy tank built to move with every pose — breathable enough for a hot studio or an outdoor session.', material: 'Cotton-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/yoga-tank.webp', now: 320,  old: 480, rating: 4, badge: '-33%' },
-  { id: 'track-pants',       name: 'Tapered Track Pants',            cat: 'Sportswear', color: 'Charcoal', desc: 'Tapered track pants that go from the gym to running errands without missing a beat — soft, breathable, and easy to move in.', material: 'Polyester-spandex blend', sizes: 'S, M, L, XL', img: 'assets/img/products/track-pants.webp', now: 580,  old: 850, rating: 5, badge: '-32%' },
+  { id: 'leggings-black',    name: 'Black High-Waist Leggings', nameAr: 'ليجن أسود هاي ويست', cat: 'Sportswear', color: 'Black',    desc: 'Squat-proof, high-waist leggings built to move — from a sunrise gym session to a full day of errands.', material: 'Nylon-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leggings-black.webp', now: 480,  old: 720, rating: 5, badge: '-33%' },
+  { id: 'running-sneakers',  name: 'Lightweight Running Sneakers',   nameAr: 'جزمة جري خفيفة', cat: 'Sportswear', color: 'White',    desc: 'Lightweight, breathable running sneakers built for Cairo\'s pavements, whether it\'s an early morning Corniche run or a gym session.', material: 'Mesh upper, rubber sole', sizes: '38, 39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/running-sneakers.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot' },
+  { id: 'yoga-tank',         name: 'Stretch Yoga Tank Top',          nameAr: 'توب يوجا', cat: 'Sportswear', color: 'Purple',   desc: 'A soft, stretchy tank built to move with every pose — breathable enough for a hot studio or an outdoor session.', material: 'Cotton-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/yoga-tank.webp', now: 320,  old: 480, rating: 4, badge: '-33%' },
+  { id: 'track-pants',       name: 'Tapered Track Pants',            nameAr: 'بنطلون رياضي', cat: 'Sportswear', color: 'Charcoal', desc: 'Tapered track pants that go from the gym to running errands without missing a beat — soft, breathable, and easy to move in.', material: 'Polyester-spandex blend', sizes: 'S, M, L, XL', img: 'assets/img/products/track-pants.webp', now: 580,  old: 850, rating: 5, badge: '-32%' },
 
   /* Accessories (4) */
-  { id: 'crossbody-bag',     name: 'Leather Crossbody Bag',      cat: 'Accessories', color: 'Tan',      desc: 'A compact leather crossbody, hands-free and practical for a busy day moving between work, errands and everything after.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/crossbody-bag.webp', now: 950,  old: 1350, rating: 5, badge: '-30%' },
-  { id: 'aviator-sun',       name: 'Classic Aviator Sunglasses', cat: 'Accessories', color: 'Gold',     desc: 'Timeless gold-framed aviators with full UV protection, built for Egypt\'s sun almost every day of the year.', material: 'Metal frame, UV400 lenses', sizes: 'One Size', img: 'assets/img/products/aviator-sun.webp', now: 780,  old: 1150, rating: 4, badge: '-32%' },
-  { id: 'cashmere-scarf',    name: 'Cashmere Wool Scarf',        cat: 'Accessories', color: 'Burgundy', desc: 'A soft cashmere scarf in deep burgundy — the easiest way to add warmth on a cool Cairo evening without changing the whole outfit.', material: '100% Cashmere', sizes: 'One Size', img: 'assets/img/products/cashmere-scarf.webp', now: 650,  old: 950, rating: 5, badge: '-32%' },
-  { id: 'minimal-watch',     name: 'Minimalist Leather Watch',   cat: 'Accessories', color: 'Silver',   desc: 'A clean, minimalist watch with a leather strap — understated enough for daily wear, polished enough for any occasion.', material: 'Stainless steel case, leather strap', sizes: 'One Size (adjustable strap)', img: 'assets/img/products/minimal-watch.webp', now: 1450,  old: 1950, rating: 5, badge: 'Hot' },
+  { id: 'crossbody-bag',     name: 'Leather Crossbody Bag',      nameAr: 'شنطة كروس جلد', cat: 'Accessories', color: 'Tan',      desc: 'A compact leather crossbody, hands-free and practical for a busy day moving between work, errands and everything after.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/crossbody-bag.webp', now: 950,  old: 1350, rating: 5, badge: '-30%' },
+  { id: 'aviator-sun',       name: 'Classic Aviator Sunglasses', nameAr: 'نظارة شمس افياتور', cat: 'Accessories', color: 'Gold',     desc: 'Timeless gold-framed aviators with full UV protection, built for Egypt\'s sun almost every day of the year.', material: 'Metal frame, UV400 lenses', sizes: 'One Size', img: 'assets/img/products/aviator-sun.webp', now: 780,  old: 1150, rating: 4, badge: '-32%' },
+  { id: 'cashmere-scarf',    name: 'Cashmere Scarf',        nameAr: 'شال كشمير', cat: 'Accessories', color: 'Burgundy', desc: 'A soft cashmere scarf in deep burgundy — the easiest way to add warmth on a cool Cairo evening without changing the whole outfit.', material: '100% Cashmere', sizes: 'One Size', img: 'assets/img/products/cashmere-scarf.webp', now: 650,  old: 950, rating: 5, badge: '-32%' },
+  { id: 'minimal-watch',     name: 'Minimalist Leather Watch',   nameAr: 'ساعة جلد بسيطة', cat: 'Accessories', color: 'Silver',   desc: 'A clean, minimalist watch with a leather strap — understated enough for daily wear, polished enough for any occasion.', material: 'Stainless steel case, leather strap', sizes: 'One Size (adjustable strap)', img: 'assets/img/products/minimal-watch.webp', now: 1450,  old: 1950, rating: 5, badge: 'Hot' },
+  { id: 'oatmeal-hoodie',    name: 'Oversized Cream Hoodie',    nameAr: 'هودي كريمي أوفرسايز', cat: 'Men',        color: 'Cream',    desc: "A relaxed oatmeal hoodie in soft brushed fleece — warm enough for a cool Cairo evening without ever feeling heavy.", material: 'Cotton fleece', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/oatmeal-hoodie.webp', now: 850,  old: 1100, rating: 5, badge: 'New' },
+  { id: 'olive-kimono',      name: 'Olive Overshirt',   nameAr: 'أوفرشيرت زيتي', cat: 'Men',        color: 'Olive',    desc: "An open-front olive overshirt that layers easily over a tee — light enough for Cairo's mild winter, sharp enough to wear over anything.", material: 'Cotton-linen blend', sizes: 'S, M, L, XL', img: 'assets/img/products/olive-kimono.webp', now: 980,  old: 1350, rating: 4, badge: 'New' },
+  { id: 'oversized-black-tee', name: 'Black Oversized Cotton T-Shirt',   nameAr: 'تي شيرت أسود أوفرسايز', cat: 'Men',        color: 'Black',    desc: 'A boxy, oversized black tee in heavyweight cotton — the everyday staple that works as well solo as it does layered under a jacket.', material: '100% Cotton', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/oversized-black-tee.webp', now: 380,  old: 480, rating: 5, badge: 'New' },
+  { id: 'trucker-cap',       name: 'Classic Trucker Cap',        nameAr: 'كاب تراكر كلاسيك', cat: 'Accessories', color: 'Multi',   desc: "A classic black-and-white trucker cap with a breathable mesh back — built for Cairo's sunny afternoons.", material: 'Cotton twill, mesh back', sizes: 'One Size (adjustable)', img: 'assets/img/products/trucker-cap.webp', now: 320,  old: 420, rating: 4, badge: 'New' },
+  { id: 'pink-crop-tee',     name: 'Pink Crop T-Shirt',         nameAr: 'توب كروب وردي', cat: 'Women',      color: 'Pink',     desc: 'A relaxed, cropped pink tee that pairs easily with high-waist denim or a midi skirt for an easy everyday look.', material: '100% Cotton', sizes: 'XS, S, M, L', img: 'assets/img/products/pink-crop-tee.webp', now: 340,  old: 420, rating: 5, badge: 'New' },
 ];
 
 const byId = (id) => CATALOG.find((p) => p.id === id);
@@ -467,6 +472,7 @@ function cardHTML(p) {
     <div class="card__body">
       <span class="card__cat">${p.cat}</span>
       <h3 class="card__name"><a href="product.html?id=${p.id}">${p.name}</a></h3>
+      <span class="card__name-ar" dir="rtl" lang="ar">${p.nameAr}</span>
       <span class="card__rating"><span class="card__stars">${STARS(p.rating)}</span> ${p.rating}.0</span>
       <div class="card__price"><span class="card__price-now">${money(p.now)}</span><span class="card__price-old">${money(p.old)}</span></div>
     </div>
@@ -683,6 +689,7 @@ function openQuickView(id) {
       <div>
         <span class="qv__cat">${p.cat}</span>
         <h3 class="qv__name">${p.name}</h3>
+        <span class="qv__name-ar" dir="rtl" lang="ar">${p.nameAr}</span>
         <div class="qv__price">
           <span class="card__price-now">${money(p.now)}</span>
           <span class="card__price-old">${money(p.old)}</span>
@@ -753,7 +760,7 @@ if (shopGrid) {
     return (state.cat === 'All' || p.cat === state.cat) &&
       (state.color === 'All' || p.color === state.color) &&
       (state.price === 'All' || PRICE_RANGES[state.price]?.test(p)) &&
-      (!state.q || p.name.toLowerCase().includes(state.q) || p.cat.toLowerCase().includes(state.q) || p.color.toLowerCase().includes(state.q));
+      (!state.q || p.name.toLowerCase().includes(state.q) || (p.nameAr && p.nameAr.includes(state.q)) || p.cat.toLowerCase().includes(state.q) || p.color.toLowerCase().includes(state.q));
   }
 
   function apply(resetPage = true) {
@@ -860,6 +867,7 @@ if (pdRoot) {
     pdThumbsEl.hidden = true;
   }
   document.getElementById('pdName').textContent = p.name;
+  document.getElementById('pdNameAr').textContent = p.nameAr;
   document.getElementById('pdDesc').textContent = p.desc;
   document.getElementById('pdDescLong').textContent = p.desc;
   document.getElementById('specMaterial').textContent = p.material;
@@ -931,10 +939,10 @@ if (pdRoot) {
 
   // Wire the wishlist heart into the shared wishlist system + paint its state
   pdRoot.querySelector('.pd__wish')?.setAttribute('data-wish', p.id);
-  document.title = `${p.name} — Clothing.`;
+  document.title = `${p.name} — Zay.`;
   const pdMetaDesc = `${p.desc} ${money(p.now)} · Free shipping over EGP 1,000, easy 30-day returns.`;
   setMeta('meta[name="description"]', pdMetaDesc);
-  setMeta('meta[property="og:title"]', `${p.name} — Clothing.`);
+  setMeta('meta[property="og:title"]', `${p.name} — Zay.`);
   setMeta('meta[property="og:description"]', pdMetaDesc);
   setMeta('meta[property="og:image"]', p.img);
   paintWishlist();
@@ -974,9 +982,9 @@ if (articleRoot) {
   document.getElementById('articleHero').src = post.img;
   document.getElementById('articleHero').alt = post.title;
   document.getElementById('articleBody').innerHTML = blogBodyHTML(post.body);
-  document.title = `${post.title} — Clothing.`;
+  document.title = `${post.title} — Zay.`;
   setMeta('meta[name="description"]', post.excerpt);
-  setMeta('meta[property="og:title"]', `${post.title} — Clothing.`);
+  setMeta('meta[property="og:title"]', `${post.title} — Zay.`);
   setMeta('meta[property="og:description"]', post.excerpt);
   setMeta('meta[property="og:image"]', post.img);
 
@@ -1118,7 +1126,7 @@ function renderSearchResults(raw) {
   const q = raw.trim().toLowerCase();
   if (!q) { box.innerHTML = `<p class="search-panel__hint">Try “dress”, “Men”, “Black”, or a product name.</p>`; return; }
   const matches = CATALOG.filter((p) =>
-    p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.color.toLowerCase().includes(q)
+    p.name.toLowerCase().includes(q) || (p.nameAr && p.nameAr.includes(q)) || p.cat.toLowerCase().includes(q) || p.color.toLowerCase().includes(q)
   ).slice(0, 6);
   if (matches.length === 0) {
     box.innerHTML = `<p class="search-panel__hint">No products found for “${escapeHTML(raw)}”. <a href="shop.html?q=${encodeURIComponent(raw)}">Browse the full shop →</a></p>`;
@@ -1127,7 +1135,7 @@ function renderSearchResults(raw) {
   box.innerHTML = matches.map((p) => `
     <a class="search-result" href="product.html?id=${p.id}">
       <img src="${p.img}" alt="${p.name}" loading="lazy" />
-      <span><strong>${p.name}</strong><em>${p.cat} · ${money(p.now)}</em></span>
+      <span><strong>${p.name}</strong><em dir="rtl" lang="ar">${p.nameAr}</em><em>${p.cat} · ${money(p.now)}</em></span>
     </a>`).join('') + `<a class="search-panel__viewall link-arrow" href="shop.html?q=${encodeURIComponent(raw)}">View all results <span>→</span></a>`;
 }
 let lastFocused = null;
@@ -1266,6 +1274,7 @@ if (cartRoot) {
                 <img class="cart-item__img" src="${l.product.img}" alt="${l.product.name}" loading="lazy" width="72" height="88" />
                 <div>
                   <div class="cart-item__name"><a href="product.html?id=${l.id}">${l.product.name}</a></div>
+                  <div class="cart-item__name-ar" dir="rtl" lang="ar">${l.product.nameAr}</div>
                   <div class="cart-item__meta">${l.product.cat} · ${l.product.color}</div>
                 </div>
               </div>
@@ -1428,7 +1437,7 @@ if (checkoutRoot) {
             ${lines.map((l) => `
               <div class="checkout-summary__line">
                 <img src="${l.product.img}" alt="${l.product.name}" loading="lazy" />
-                <div class="checkout-summary__line-info"><strong>${l.product.name}</strong><span>Qty ${l.qty} · ${l.product.color}</span></div>
+                <div class="checkout-summary__line-info"><strong>${l.product.name}</strong><span dir="rtl" lang="ar">${l.product.nameAr}</span><span>Qty ${l.qty} · ${l.product.color}</span></div>
                 <div class="checkout-summary__line-price">${money((l.product.now * l.qty))}</div>
               </div>`).join('')}
           </div>

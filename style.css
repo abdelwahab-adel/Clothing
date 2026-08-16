@@ -1,5 +1,5 @@
 /* =========================================================
-   Clothing. — Premium Fashion E-commerce
+   Zay. — Premium Fashion E-commerce
    A refined take on the brown/cream theme.
    Tokens, layout, components, sections, responsiveness.
    ========================================================= */
@@ -66,6 +66,7 @@
   --font-serif:   'Fraunces', Georgia, 'Times New Roman', serif;
   --font-display: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic:  'Cairo', 'Segoe UI', Tahoma, sans-serif;
 
   /* Container */
   --container: 1240px;
@@ -435,75 +436,22 @@ p { text-wrap: pretty; }
   overflow: hidden;
   padding-top: 24px;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  right: -10%;
-  width: 60%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(200,149,84,.18), transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
 .hero__inner {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1fr 1.05fr;
   align-items: center;
   gap: 64px;
-  padding: 48px 28px 96px;
+  padding: 64px 28px 96px;
 }
-.hero__content { max-width: 540px; }
-.hero__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  padding: 8px 16px 8px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: var(--font-display);
-  color: var(--secondary);
-  margin-bottom: 28px;
-  box-shadow: var(--shadow-xs);
-}
-.hero__badge .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  position: relative;
-}
-.hero__badge .dot::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: var(--primary);
-  opacity: 0.25;
-  animation: pulse 2.2s ease-in-out infinite;
-}
-@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.6); opacity: 0; } }
+.hero__content { max-width: 480px; }
 .hero__title {
-  margin-bottom: 22px;
-  font-size: clamp(42px, 6.2vw, 78px);
-}
-.hero__title em {
-  font-style: italic;
-  font-family: var(--font-serif);
-  font-weight: 400;
-  color: var(--primary);
-}
-.hero__text {
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.65;
-  margin-bottom: 36px;
-  max-width: 480px;
+  margin-bottom: 32px;
+  font-size: clamp(46px, 6.5vw, 84px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 .hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .hero__ctas .link-arrow { font-size: 14.5px; }
@@ -511,71 +459,12 @@ p { text-wrap: pretty; }
 .hero__media { position: relative; }
 .hero__img {
   width: 100%;
-  border-radius: var(--radius-xl);
-  aspect-ratio: 4/4.6;
-  object-fit: cover;
-  box-shadow: var(--shadow-lg);
-}
-.hero__sticker {
-  position: absolute;
-  top: 28px;
-  right: -10px;
-  background: var(--secondary);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  padding: 12px 18px;
-  border-radius: var(--pill);
-  box-shadow: var(--shadow);
-  animation: floaty 4s ease-in-out infinite;
-}
-.hero__chip {
-  position: absolute;
-  bottom: 28px;
-  left: -16px;
-  background: #fff;
-  padding: 14px 20px;
   border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow: var(--shadow);
-  animation: floaty 4.6s ease-in-out infinite reverse;
-}
-.hero__chip-icon {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: var(--bg-warm);
-  display: grid; place-items: center;
-  color: var(--primary);
-}
-.hero__chip-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.7; }
-.hero__chip-text strong { display: block; font-family: var(--font-display); font-size: 15px; color: var(--ink); }
-.hero__chip-text span { display: block; font-size: 12px; color: var(--muted); }
-@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-.hero__stats {
-  display: flex;
-  gap: 36px;
-  margin-top: 48px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-}
-.hero__stat strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 26px;
-  color: var(--ink);
-  font-weight: 600;
-}
-.hero__stat span {
-  display: block;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+  aspect-ratio: 4/5.2;
+  object-fit: cover;
+  object-position: top center;
+  box-shadow: var(--shadow-lg);
+  filter: grayscale(30%) contrast(1.06);
 }
 
 /* =========================================================
@@ -862,6 +751,42 @@ p { text-wrap: pretty; }
 }
 .card__name a { transition: color var(--t-fast); }
 .card__name a:hover { color: var(--primary); }
+.card__name-ar {
+  display: block;
+  font-family: var(--font-arabic);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.qv__name-ar {
+  display: block;
+  font-family: var(--font-arabic);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: -6px;
+  margin-bottom: 10px;
+}
+.pd__name-ar {
+  font-family: var(--font-arabic);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: -8px;
+  margin-bottom: 6px;
+}
+.cart-item__name-ar,
+.checkout-summary__line-info span[lang="ar"] {
+  display: block;
+  font-family: var(--font-arabic);
+  font-size: 12.5px;
+  color: var(--muted-2);
+  margin-top: 1px;
+}
+.search-result em[lang="ar"] {
+  font-family: var(--font-arabic);
+}
 .card__rating {
   display: inline-flex;
   align-items: center;
@@ -1296,11 +1221,10 @@ p { text-wrap: pretty; }
   .nav__link.is-active { font-weight: 600; border-left-color: var(--primary); background: var(--surface-2); }
   .nav-toggle { display: flex; }
 
-  .hero__inner { grid-template-columns: 1fr; gap: 48px; text-align: center; padding: 32px 28px 64px; }
+  .hero__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 0 20px 64px; }
   .hero__content { max-width: none; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-  .hero__media { max-width: 480px; margin: 0 auto; }
+  .hero__media { max-width: 480px; margin: 0 auto; order: -1; }
   .hero__ctas { justify-content: center; }
-  .hero__stats { justify-content: center; }
 
   .features__grid { grid-template-columns: 1fr; margin-top: 16px; padding: 8px; }
   .feature + .feature { border-left: none; border-top: 1px solid var(--line); }
