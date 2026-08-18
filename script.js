@@ -78,7 +78,7 @@ function buildTop() {
     <li class="nav__util-item"><a href="account.html" class="nav__link${ACTIVE === 'account' ? ' is-active' : ''}">Account</a></li>`;
 
   return `
-  <div class="promo-bar" id="promoBar">
+  <div style="display: none;"  class="promo-bar" id="promoBar">
     <div class="container promo-bar__inner">
       <span class="promo-bar__support">Support <a href="tel:+20221234567">+20 2 2123 4567</a></span>
       <p class="promo-bar__text">Sign up and <strong>GET 25% OFF</strong> for your first order.<a href="account.html" class="promo-bar__link">Sign up now</a></p>
