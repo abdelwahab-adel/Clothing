@@ -61,6 +61,7 @@ const ICON = {
   logout: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
   box:    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><line x1="12" y1="13" x2="12" y2="21"/></svg>',
   alert:  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.7 3.86a2 2 0 0 0-3.4 0z"/></svg>',
+  home:   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1v-9"/></svg>',
 };
 
 const ACTIVE = document.body.dataset.page || 'home';
@@ -70,13 +71,10 @@ function buildTop() {
   const links = NAV.map(
     (n) => `<li><a href="${n.href}" class="nav__link${n.key === ACTIVE ? ' is-active' : ''}">${n.label}</a></li>`
   ).join('');
-  /* Shown only inside the mobile drawer on very small screens, where the
-     header icon row hides the Wishlist/Account buttons for space (see
-     the 480px breakpoint in style.css) — keeps those pages reachable. */
+  /* Account has no slot in the mobile bottom tab bar (home/shop/search/
+     wishlist/cart), so it stays reachable here inside the drawer. */
   const utilityLinks = `
     <li class="nav__util-sep" role="separator" aria-hidden="true"></li>
-    <li class="nav__util-item"><a href="wishlist.html" class="nav__link${ACTIVE === 'wishlist' ? ' is-active' : ''}">Wishlist</a></li>
-    <li class="nav__util-item"><a href="cart.html" class="nav__link${ACTIVE === 'cart' ? ' is-active' : ''}">Cart</a></li>
     <li class="nav__util-item"><a href="account.html" class="nav__link${ACTIVE === 'account' ? ' is-active' : ''}">Account</a></li>`;
 
   return `
@@ -103,14 +101,37 @@ function buildTop() {
       </nav>
       <div class="nav-backdrop" id="navBackdrop"></div>
       <div class="header__actions">
-        <button class="icon-btn" id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
-        <a class="icon-btn" href="wishlist.html" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
-        <a class="icon-btn icon-btn--cart" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
-        <a class="icon-btn" href="account.html" aria-label="Account">${ICON.user}</a>
+        <button class="icon-btn" style="display: none;"  id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
+        <a class="icon-btn" href="wishlist.html" style="display: none;" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
+        <a class="icon-btn icon-btn--cart" style="display: none;" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
+        <a class="icon-btn" href="account.html" style="display: none;" aria-label="Account">${ICON.user}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
-  </header>`;
+  </header>
+
+  <nav class="mobile-tabbar" aria-label="Primary mobile">
+    <a href="index.html" class="mobile-tabbar__item${ACTIVE === 'home' ? ' is-active' : ''}">
+      <span class="mobile-tabbar__icon">${ICON.home}</span>
+      <span>الرئيسية</span>
+    </a>
+    <a href="shop.html" class="mobile-tabbar__item${ACTIVE === 'shop' ? ' is-active' : ''}">
+      <span class="mobile-tabbar__icon">${ICON.bag}</span>
+      <span>المتجر</span>
+    </a>
+    <button type="button" class="mobile-tabbar__item" id="mobileSearchTrigger" aria-haspopup="dialog">
+      <span class="mobile-tabbar__icon">${ICON.search}</span>
+      <span>البحث</span>
+    </button>
+    <a href="wishlist.html" class="mobile-tabbar__item${ACTIVE === 'wishlist' ? ' is-active' : ''}">
+      <span class="mobile-tabbar__icon">${ICON.heart}<span class="cart-badge" id="wishBadgeMobile">0</span></span>
+      <span>المفضلة</span>
+    </a>
+    <a href="cart.html" class="mobile-tabbar__item${ACTIVE === 'cart' ? ' is-active' : ''}">
+      <span class="mobile-tabbar__icon">${ICON.cart}<span class="cart-badge" id="cartBadgeMobile">0</span></span>
+      <span>السلة</span>
+    </a>
+  </nav>`;
 }
 
 /* ---------- Build footer ---------- */
@@ -551,9 +572,10 @@ const cartBadge = () => document.getElementById('cartBadge');
 function getCart() { try { return JSON.parse(localStorage.getItem('cl_cart') || '[]'); } catch { return []; } }
 function setCart(c) { localStorage.setItem('cl_cart', JSON.stringify(c)); paintCart(); }
 function paintCart() {
-  const b = cartBadge(); if (!b) return;
   const n = getCart().reduce((s, i) => s + i.qty, 0);
-  b.textContent = n; b.style.display = n ? 'grid' : 'none';
+  document.querySelectorAll('#cartBadge, #cartBadgeMobile').forEach((b) => {
+    b.textContent = n; b.style.display = n ? 'grid' : 'none';
+  });
 }
 function addToCart(id, qty = 1) {
   // Clamp here too (not just in setCartQty) so a stray/uncapped quantity
@@ -614,9 +636,10 @@ function paintWishlist() {
   paintWishlistBadge();
 }
 function paintWishlistBadge() {
-  const b = document.getElementById('wishBadge'); if (!b) return;
   const n = getWishlist().length;
-  b.textContent = n; b.style.display = n ? 'grid' : 'none';
+  document.querySelectorAll('#wishBadge, #wishBadgeMobile').forEach((b) => {
+    b.textContent = n; b.style.display = n ? 'grid' : 'none';
+  });
 }
 
 /* ---------- Toast ---------- */
@@ -1157,6 +1180,7 @@ function closeSearch() {
   lastFocused?.focus();
 }
 document.getElementById('searchTrigger')?.addEventListener('click', openSearch);
+document.getElementById('mobileSearchTrigger')?.addEventListener('click', openSearch);
 document.addEventListener('click', (e) => {
   if (e.target.id === 'searchOverlay' || e.target.closest('#searchPanelClose')) closeSearch();
 });

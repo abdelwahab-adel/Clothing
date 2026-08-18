@@ -413,7 +413,7 @@ p { text-wrap: pretty; }
 
 .nav-backdrop { display: none; }
 .nav__head { display: none; }
-.nav-toggle {
+.nav-toggle { 
   display: none;
   flex-direction: column;
   gap: 5px;
@@ -421,11 +421,74 @@ p { text-wrap: pretty; }
   height: 42px;
   align-items: center;
   justify-content: center;
+  right: 18%; position: absolute;
 }
 .nav-toggle span { width: 22px; height: 1.8px; background: var(--text); border-radius: 2px; transition: var(--t-fast); }
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
 .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Mobile bottom tab bar ---------- */
+.mobile-tabbar {
+  display: none;
+  position: fixed;
+  left: 14px;
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 95;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 16px 36px rgba(43, 31, 21, .18), 0 2px 8px rgba(43, 31, 21, .06);
+  padding: 8px 6px;
+}
+.mobile-tabbar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 2px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-family: var(--font-arabic);
+  font-size: 10.5px;
+  font-weight: 500;
+  transition: color var(--t-fast);
+}
+.mobile-tabbar__icon {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+}
+.mobile-tabbar__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+.mobile-tabbar__icon .cart-badge {
+  top: -1px;
+  right: -3px;
+  min-width: 16px;
+  height: 16px;
+  font-size: 9px;
+  border-color: var(--surface);
+}
+.mobile-tabbar__item.is-active { color: var(--primary); }
+.mobile-tabbar__item.is-active .mobile-tabbar__icon {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(147, 80, 42, .35);
+}
 
 /* =========================================================
    HERO — more layered, premium feel
@@ -1253,20 +1316,29 @@ p { text-wrap: pretty; }
   .card__cart, .card__wish { transform: none; opacity: 1; }
   .card__quick { display: none; }
   .section-head--row { flex-direction: column; align-items: flex-start; }
+
+  /* Bottom tab bar takes over primary navigation on phones — Home, Shop,
+     Search, Wishlist and Cart are one thumb-reach away instead of being
+     buried in the header or the slide-out drawer. */
+  .mobile-tabbar { display: flex; }
+  body { padding-bottom: 84px; }
+  .to-top { bottom: 96px; }
+  .toast { bottom: 100px; }
+  .header__actions a[aria-label="Wishlist"],
+  .header__actions a[aria-label="Cart"] {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   /* Header icon row was wider than the viewport on real phones, pushing
-     the menu button off-screen. Trim to the two icons people actually
-     tap on mobile; Wishlist/Account stay reachable from the menu. */
+     the menu button off-screen. Search + Account are the only icons left
+     here now (Wishlist/Cart moved to the bottom tab bar above). */
   .header__inner { gap: 14px; }
   .header__actions { gap: 2px; }
-  .icon-btn, .nav-toggle { width: 38px; height: 38px; }
+  .icon-btn, .nav-toggle { width: 38px; height: 38px; right: 18%; position: absolute;
+    } 
   .icon-btn svg { width: 18px; height: 18px; }
-  .header__actions a[aria-label="Wishlist"],
-  .header__actions a[aria-label="Account"] {
-    display: none;
-  }
   .logo__text { font-size: 20px; }
   .logo__mark { width: 34px; height: 34px; font-size: 17px; }
 }
