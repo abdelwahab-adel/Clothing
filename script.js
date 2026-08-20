@@ -106,7 +106,16 @@ function buildTop() {
         <a style="display: none;"  class="icon-btn icon-btn--cart" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
         <a style="display: none;"  class="icon-btn" href="account.html" aria-label="Account">${ICON.user}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      </div>
+     
+         <a href="wishlist.html" class="mobile-tabbar__item${ACTIVE === 'wishlist' ? ' is-active' : ''}">
+      <span class="mm   mobile-tabbar__icon">${ICON.heart}<span class="cart-badge" id="wishBadgeMobile">0</span></span>
+      <span>المفضلة</span>
+    </a>
+    <a href="cart.html" class="mobile-tabbar__item${ACTIVE === 'cart' ? ' is-active' : ''}">
+      <span class="mm  mobile-tabbar__icon">${ICON.cart}<span class="cart-badge" id="cartBadgeMobile">0</span></span>
+      <span>السلة</span>
+    </a>
+        </div>
     </div>
   </header>
 

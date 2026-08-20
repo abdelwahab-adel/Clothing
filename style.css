@@ -1395,6 +1395,10 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   .newsletter__inner { grid-template-columns: 1fr; text-align: center; padding: 40px 32px; }
   .newsletter__form { flex-direction: column; }
   .newsletter__text p { margin-inline: auto; }
+  .mobile-tabbar { display: flex; }
+.mm {
+    display: none !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1426,7 +1430,6 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   /* Bottom tab bar takes over primary navigation on phones — Home, Shop,
      Search, Wishlist and Cart are one thumb-reach away instead of being
      buried in the header or the slide-out drawer. */
-  .mobile-tabbar { display: flex; }
   body { padding-bottom: 84px; }
   .to-top { bottom: 96px; }
   .toast { bottom: 100px; }
