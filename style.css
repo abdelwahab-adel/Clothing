@@ -1292,6 +1292,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 }
 
 @media (max-width: 860px) {
+ 
   .header {
     /* backdrop-filter on an ancestor creates a new containing block for
        position:fixed descendants (the CSS spec's filter/backdrop-filter
@@ -1408,6 +1409,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 }
 
 @media (max-width: 600px) {
+   #pohh{padding-top: 56px;}
   .container { padding: 0 20px; }
   .promo-bar__support { display: none; }
   .products__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
