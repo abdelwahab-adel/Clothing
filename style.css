@@ -440,7 +440,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   height: 42px;
   align-items: center;
   justify-content: center;
-  right: 18%; position: absolute;
+  right: 10%; position: absolute;
 }
 .nav-toggle span { width: 22px; height: 1.8px; background: var(--text); border-radius: 2px; transition: var(--t-fast); }
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
