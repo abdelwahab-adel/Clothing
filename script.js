@@ -109,11 +109,11 @@ function buildTop() {
      
          <a href="wishlist.html" class="mobile-tabbar__item${ACTIVE === 'wishlist' ? ' is-active' : ''}">
       <span class="mm   mobile-tabbar__icon">${ICON.heart}<span class="cart-badge" id="wishBadgeMobile">0</span></span>
-      <span>المفضلة</span>
+      <span class="mm">المفضلة</span>
     </a>
     <a href="cart.html" class="mobile-tabbar__item${ACTIVE === 'cart' ? ' is-active' : ''}">
       <span class="mm  mobile-tabbar__icon">${ICON.cart}<span class="cart-badge" id="cartBadgeMobile">0</span></span>
-      <span>السلة</span>
+      <span class="mm">السلة</span>
     </a>
         </div>
     </div>

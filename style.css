@@ -556,7 +556,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   max-width: 380px;
   margin-bottom: 36px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.3);
+  /* border-top: 1px solid rgba(255,255,255,.3); */
 }
 .hero__sub-label {
   position: relative;
@@ -1441,7 +1441,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   /* The vertical social rail and scroll cue are a desktop/tablet flourish;
      on phones the bottom tab bar already owns that screen real estate,
      so both are dropped to avoid overlapping it. */
-  .hero { min-height: 92svh; }
+  .hero { min-height: 100svh; }
   .hero__social,
   .hero__scroll { display: none; }
 }
