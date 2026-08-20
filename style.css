@@ -291,12 +291,31 @@ p { text-wrap: pretty; }
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid transparent;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  transition: background-color var(--t), border-color var(--t-fast), box-shadow var(--t-fast);
 }
 .header.is-scrolled {
   border-color: var(--line);
   box-shadow: 0 8px 30px rgba(43,31,21,.04);
 }
+
+/* Home hero — header rides transparently over the photo until the page
+   scrolls, then fades to the normal frosted-cream bar. Logo mark, nav
+   links, icon buttons and the hamburger swap to light colors so they
+   stay readable against the image. */
+body[data-page="home"] .header:not(.is-scrolled) {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+body[data-page="home"] .header:not(.is-scrolled) .logo__text { color: #fff; }
+body[data-page="home"] .header:not(.is-scrolled) .nav__link { color: rgba(255,255,255,.9); }
+body[data-page="home"] .header:not(.is-scrolled) .nav__link:hover,
+body[data-page="home"] .header:not(.is-scrolled) .nav__link.is-active { color: var(--accent); }
+body[data-page="home"] .header:not(.is-scrolled) .nav__link::after { background: var(--accent); }
+body[data-page="home"] .header:not(.is-scrolled) .icon-btn { color: #fff; }
+body[data-page="home"] .header:not(.is-scrolled) .icon-btn:hover { background: rgba(255,255,255,.16); color: var(--accent); }
+body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: #fff; }
 .header__inner {
   display: flex;
   align-items: center;
@@ -491,44 +510,118 @@ p { text-wrap: pretty; }
 }
 
 /* =========================================================
-   HERO — more layered, premium feel
+   HERO — full-bleed cinematic cover, header floats on top
    ========================================================= */
 .hero {
-  background: var(--bg);
   position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+  margin-top: calc(-1 * var(--header-stack-h, 78px));
+  background-color: var(--secondary);
+  background-size: cover;
+  background-position: center 22%;
   overflow: hidden;
-  padding-top: 24px;
+}
+/* Pulls the photo up behind the transparent header (see HEADER rules
+   above) so the nav reads as an overlay on the image, like the
+   reference — rather than a bar that sits above it. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(to top, rgba(20,14,9,.94) 0%, rgba(20,14,9,.6) 30%, rgba(20,14,9,.12) 56%, rgba(20,14,9,.4) 100%),
+    linear-gradient(to right, rgba(20,14,9,.6) 0%, rgba(20,14,9,.05) 48%, rgba(20,14,9,.3) 100%);
 }
 .hero__inner {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  align-items: center;
-  gap: 64px;
-  padding: 64px 28px 96px;
+  padding: 200px 28px 100px;
 }
-.hero__content { max-width: 480px; }
+.hero__content { max-width: 600px; }
+.hero .eyebrow { color: var(--accent); margin-bottom: 24px; }
+.hero .eyebrow::before { background: var(--accent); }
 .hero__title {
   margin-bottom: 32px;
-  font-size: clamp(46px, 6.5vw, 84px);
+  font-size: clamp(48px, 7vw, 92px);
   font-weight: 600;
-  line-height: 1.06;
+  line-height: .98;
   letter-spacing: -0.02em;
+  color: #fff;
 }
-.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-.hero__ctas .link-arrow { font-size: 14.5px; }
+.hero__sub {
+  max-width: 380px;
+  margin-bottom: 36px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.3);
+}
+.hero__sub-label {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.hero__sub-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 2px;
+  background: var(--accent);
+}
+.hero__sub-text { color: rgba(255,255,255,.74); font-size: 14.5px; line-height: 1.65; }
+.hero__ctas { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+.hero__ctas .link-arrow { font-size: 14.5px; color: #fff; border-color: rgba(255,255,255,.5); }
+.hero__ctas .link-arrow:hover { color: var(--accent); border-color: var(--accent); }
 
-.hero__media { position: relative; }
-.hero__img {
-  width: 100%;
-  border-radius: var(--radius);
-  aspect-ratio: 4/5.2;
-  object-fit: cover;
-  object-position: top center;
-  box-shadow: var(--shadow-lg);
-  filter: grayscale(30%) contrast(1.06);
+.hero__social {
+  position: absolute;
+  z-index: 1;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
+.hero__social::after { content: ''; width: 1px; height: 60px; background: rgba(255,255,255,.32); }
+.hero__social a { color: #fff; opacity: .85; transition: var(--t-fast); line-height: 0; }
+.hero__social a:hover { opacity: 1; color: var(--accent); transform: translateY(-2px); }
+.hero__social svg { width: 17px; height: 17px; fill: currentColor; }
+
+.hero__scroll {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 68px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 50%;
+  color: #fff;
+  animation: heroScrollCue 2.2s ease-in-out infinite;
+}
+.hero__scroll:hover { border-color: var(--accent); color: var(--accent); }
+.hero__scroll svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes heroScrollCue {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(7px); }
+}
+@media (prefers-reduced-motion: reduce) { .hero__scroll { animation: none; } }
 
 /* =========================================================
    FEATURES — restyled bar
@@ -1284,10 +1377,10 @@ p { text-wrap: pretty; }
   .nav__link.is-active { font-weight: 600; border-left-color: var(--primary); background: var(--surface-2); }
   .nav-toggle { display: flex; }
 
-  .hero__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 0 20px 64px; }
-  .hero__content { max-width: none; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-  .hero__media { max-width: 480px; margin: 0 auto; order: -1; }
-  .hero__ctas { justify-content: center; }
+  .hero__inner { padding: 168px 20px 84px; }
+  .hero__content { max-width: 460px; }
+  .hero__social { right: 20px; gap: 16px; }
+  .hero__social::after { height: 44px; }
 
   .features__grid { grid-template-columns: 1fr; margin-top: 16px; padding: 8px; }
   .feature + .feature { border-left: none; border-top: 1px solid var(--line); }
@@ -1313,7 +1406,20 @@ p { text-wrap: pretty; }
   .footer__bar-inner { flex-direction: column; gap: 8px; text-align: center; padding: 22px 20px; }
   .cat__body { max-width: 90%; }
   .testi__quote { font-size: 17px; }
-  .card__cart, .card__wish { transform: none; opacity: 1; }
+ .card__cart,
+.card__wish {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(5px);
+  transition: 0.3s ease;
+}
+
+.card:hover .card__cart,
+.card:hover .card__wish {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
   .card__quick { display: none; }
   .section-head--row { flex-direction: column; align-items: flex-start; }
 
@@ -1328,6 +1434,13 @@ p { text-wrap: pretty; }
   .header__actions a[aria-label="Cart"] {
     display: none;
   }
+
+  /* The vertical social rail and scroll cue are a desktop/tablet flourish;
+     on phones the bottom tab bar already owns that screen real estate,
+     so both are dropped to avoid overlapping it. */
+  .hero { min-height: 92svh; }
+  .hero__social,
+  .hero__scroll { display: none; }
 }
 
 @media (max-width: 480px) {

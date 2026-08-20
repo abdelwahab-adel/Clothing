@@ -101,10 +101,10 @@ function buildTop() {
       </nav>
       <div class="nav-backdrop" id="navBackdrop"></div>
       <div class="header__actions">
-        <button class="icon-btn" style="display: none;"  id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
-        <a class="icon-btn" href="wishlist.html" style="display: none;" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
-        <a class="icon-btn icon-btn--cart" style="display: none;" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
-        <a class="icon-btn" href="account.html" style="display: none;" aria-label="Account">${ICON.user}</a>
+        <button  style="display: none;"  class="icon-btn" id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
+        <a style="display: none;"  class="icon-btn" href="wishlist.html" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
+        <a style="display: none;"  class="icon-btn icon-btn--cart" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
+        <a style="display: none;"  class="icon-btn" href="account.html" aria-label="Account">${ICON.user}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
