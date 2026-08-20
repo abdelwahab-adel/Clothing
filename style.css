@@ -1372,7 +1372,13 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
     border-left: 2px solid transparent;
     border-radius: 0;
     font-size: 16px;
+            color: #000 !important;
+
   }
+ 
+    .nav__link.is-active {
+        color: var(--accent) !important;
+    }
   .nav__link::after { display: none; }
   .nav__link.is-active { font-weight: 600; border-left-color: var(--primary); background: var(--surface-2); }
   .nav-toggle { display: flex; }
