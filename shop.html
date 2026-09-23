@@ -27,9 +27,46 @@
   </section>
 
   <main class="shop">
-    <div class="container shop__layout">
+    <div class="container">
+      <!-- MOBILE FILTER/SORT BAR -->
+      <div class="shop__mobile-bar" id="shopMobileBar">
+        <label class="side-search">
+          <span class="side-search__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input id="shopSearchMobile" type="search" placeholder="Search products..." aria-label="Search products" />
+        </label>
+        <div class="shop__mobile-actions">
+          <button type="button" class="shop__mobile-btn" id="shopFiltersBtn">
+            <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+            Filters
+            <span class="shop__mobile-btn__badge" id="shopFiltersBadge"></span>
+          </button>
+          <div class="shop__sort-wrap">
+            <button type="button" class="shop__mobile-btn" id="shopSortBtn" aria-expanded="false" aria-haspopup="true">
+              <svg viewBox="0 0 24 24"><path d="M7 4v16"/><path d="M3 8l4-4 4 4"/><path d="M17 20V4"/><path d="M13 16l4 4 4-4"/></svg>
+              Sort
+            </button>
+            <div class="shop__sort-menu" id="shopSortMenu" hidden>
+              <button type="button" class="shop__sort-option" data-sort="default">Default sorting</button>
+              <button type="button" class="shop__sort-option" data-sort="newest">Newest First</button>
+              <button type="button" class="shop__sort-option" data-sort="low">Price: Low to High</button>
+              <button type="button" class="shop__sort-option" data-sort="high">Price: High to Low</button>
+              <button type="button" class="shop__sort-option" data-sort="rating">Top Rated</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop__layout">
       <!-- SIDEBAR -->
-      <aside class="shop__side">
+      <aside class="shop__side" id="shopSide">
+        <div class="shop__side-head">
+          <h3>Filters</h3>
+          <button type="button" class="shop__side-close" id="shopSideClose" aria-label="Close filters">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
         <div class="side-box">
           <label class="side-search">
             <span class="side-search__icon" aria-hidden="true">
@@ -65,6 +102,7 @@
             <a href="shop.html" class="link-arrow">Shop Now <span>→</span></a>
           </div>
         </div>
+        <button type="button" class="btn btn--primary shop__side-apply" id="shopSideApply">Show Results</button>
       </aside>
 
       <!-- GRID -->
@@ -84,7 +122,9 @@
         <div class="products__grid shop__grid" id="shopGrid"></div>
         <nav class="pagination" id="shopPagination" aria-label="Pagination"></nav>
       </div>
+      </div>
     </div>
+    <div class="shop__backdrop" id="shopBackdrop"></div>
   </main>
 
   <div id="siteBottom"></div>

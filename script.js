@@ -32,6 +32,13 @@ const SOCIAL = {
   linkedin: 'https://www.linkedin.com/',
 };
 
+/* ---------- Store WhatsApp number ----------
+   Used by checkout to send the completed order as a WhatsApp message.
+   Format: country code + number, digits only, NO "+", NO leading 0
+   (e.g. Egyptian number 010 1234 5678 -> "201012345678").
+   ⚠️ Replace this with the real store number before going live. */
+const STORE_WHATSAPP = '201068300432';
+
 const ICON = {
   search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
   heart:  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
@@ -62,6 +69,7 @@ const ICON = {
   box:    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><line x1="12" y1="13" x2="12" y2="21"/></svg>',
   alert:  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.7 3.86a2 2 0 0 0-3.4 0z"/></svg>',
   home:   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1v-9"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><path d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.2 3.01.15.2 2.06 3.15 5 4.42.7.3 1.24.48 1.67.61.7.22 1.33.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.27.17-1.39-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.42 2.13 11.87c0 1.83.5 3.53 1.36 5L2 22l5.29-1.38a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.42 9.91-9.87C21.96 6.42 17.5 2 12.04 2zm0 18.05h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.14.82.84-3.05-.2-.31a8.14 8.14 0 0 1-1.26-4.31c0-4.5 3.68-8.16 8.26-8.16 2.21 0 4.28.86 5.84 2.42a8.1 8.1 0 0 1 2.42 5.76c0 4.5-3.69 8.16-8.27 8.16z"/></svg>',
 };
 
 const ACTIVE = document.body.dataset.page || 'home';
@@ -768,6 +776,14 @@ if (shopGrid) {
   const state = { cat: initialCat, color: 'All', price: 'All', sort: initialSort, q: initialQ, page: 1 };
   const countEl = document.getElementById('shopCount');
   const paginationNav = document.getElementById('shopPagination');
+  const mobileFiltersBtn = document.getElementById('shopFiltersBtn');
+  const filtersBadge = document.getElementById('shopFiltersBadge');
+  const sideEl = document.getElementById('shopSide');
+  const sideCloseBtn = document.getElementById('shopSideClose');
+  const sideApplyBtn = document.getElementById('shopSideApply');
+  const backdropEl = document.getElementById('shopBackdrop');
+  const mobileSortBtn = document.getElementById('shopSortBtn');
+  const sortMenuEl = document.getElementById('shopSortMenu');
 
   // Build the color swatches from every color actually present in the
   // catalog (not a hand-picked subset), so filtering always covers 100%
@@ -823,6 +839,13 @@ if (shopGrid) {
     renderPagination(paginationNav, total, PAGE_SIZE, state.page, (p) => { state.page = p; apply(false); });
     revealScan();
     paintWishlist();
+
+    if (sideApplyBtn) sideApplyBtn.textContent = `Show ${total} Result${total === 1 ? '' : 's'}`;
+    if (filtersBadge) {
+      const activeCount = (state.cat !== 'All' ? 1 : 0) + (state.color !== 'All' ? 1 : 0) + (state.price !== 'All' ? 1 : 0);
+      filtersBadge.textContent = String(activeCount);
+      filtersBadge.style.display = activeCount ? 'inline-flex' : 'none';
+    }
   }
 
   document.querySelectorAll('[data-filter-cat]').forEach((el) =>
@@ -848,10 +871,61 @@ if (shopGrid) {
   });
   document.getElementById('shopSort')?.addEventListener('change', (e) => { state.sort = e.target.value; apply(); });
   const shopSearchInput = document.getElementById('shopSearch');
+  const shopSearchMobileInput = document.getElementById('shopSearchMobile');
   if (shopSearchInput) {
     shopSearchInput.value = initialQ;
-    shopSearchInput.addEventListener('input', (e) => { state.q = e.target.value.toLowerCase().trim(); apply(); });
+    shopSearchInput.addEventListener('input', (e) => {
+      state.q = e.target.value.toLowerCase().trim();
+      if (shopSearchMobileInput) shopSearchMobileInput.value = e.target.value;
+      apply();
+    });
   }
+  if (shopSearchMobileInput) {
+    shopSearchMobileInput.value = initialQ;
+    shopSearchMobileInput.addEventListener('input', (e) => {
+      state.q = e.target.value.toLowerCase().trim();
+      if (shopSearchInput) shopSearchInput.value = e.target.value;
+      apply();
+    });
+  }
+
+  // ---- Mobile "Filters" drawer ----
+  function openFilterDrawer() {
+    sideEl?.classList.add('is-open');
+    backdropEl?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFilterDrawer() {
+    sideEl?.classList.remove('is-open');
+    backdropEl?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  mobileFiltersBtn?.addEventListener('click', openFilterDrawer);
+  sideCloseBtn?.addEventListener('click', closeFilterDrawer);
+  sideApplyBtn?.addEventListener('click', closeFilterDrawer);
+  backdropEl?.addEventListener('click', closeFilterDrawer);
+
+  // ---- Mobile "Sort" popover ----
+  function closeSortMenu() { sortMenuEl?.setAttribute('hidden', ''); mobileSortBtn?.setAttribute('aria-expanded', 'false'); }
+  function toggleSortMenu() {
+    if (!sortMenuEl) return;
+    const willOpen = sortMenuEl.hasAttribute('hidden');
+    if (willOpen) { sortMenuEl.removeAttribute('hidden'); mobileSortBtn?.setAttribute('aria-expanded', 'true'); }
+    else closeSortMenu();
+  }
+  mobileSortBtn?.addEventListener('click', (e) => { e.stopPropagation(); toggleSortMenu(); });
+  sortMenuEl?.addEventListener('click', (e) => e.stopPropagation());
+  document.addEventListener('click', () => closeSortMenu());
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeSortMenu(); closeFilterDrawer(); } });
+  sortMenuEl?.querySelectorAll('[data-sort]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state.sort = btn.dataset.sort;
+      if (sortSelectEl) sortSelectEl.value = state.sort;
+      sortMenuEl.querySelectorAll('[data-sort]').forEach((b) => b.classList.toggle('is-active', b === btn));
+      closeSortMenu();
+      apply();
+    });
+  });
 
   // Reflect the initial category (from ?cat=) on the sidebar buttons
   const initialCatBtn = document.querySelector(`[data-filter-cat="${state.cat}"]`);
@@ -859,8 +933,13 @@ if (shopGrid) {
     document.querySelectorAll('[data-filter-cat]').forEach((x) => x.classList.remove('is-active'));
     initialCatBtn.classList.add('is-active');
   }
-  const sortSelect = document.getElementById('shopSort');
-  if (sortSelect) sortSelect.value = state.sort;
+  const sortSelectEl = document.getElementById('shopSort');
+  if (sortSelectEl) sortSelectEl.value = state.sort;
+  const initialSortBtn = sortMenuEl?.querySelector(`[data-sort="${state.sort}"]`);
+  if (initialSortBtn) {
+    sortMenuEl.querySelectorAll('[data-sort]').forEach((b) => b.classList.remove('is-active'));
+    initialSortBtn.classList.add('is-active');
+  }
 
   apply();
 
@@ -1411,11 +1490,11 @@ if (checkoutRoot) {
     checkoutRoot.innerHTML = `
       <div class="checkout-page__layout">
         <div>
-          <div class="checkout-disclaimer">${ICON.alert}<span>This is a design demo. No real payment is collected and no order confirmation email is sent — placing an order only saves a demo record in this browser.</span></div>
+          <div class="checkout-disclaimer">${ICON.whatsapp}<span>Orders are confirmed over WhatsApp. When you place your order, we'll open WhatsApp with your order details pre-filled — just hit send to confirm with our team.</span></div>
           <form id="checkoutForm" novalidate>
             <div class="checkout__section">
               <h3><span class="checkout__step-num">1</span> Contact &amp; Shipping</h3>
-              <p class="checkout__hint">Where should we (hypothetically) send your order?</p>
+              <p class="checkout__hint">Where should we send your order?</p>
               <div class="field-row">
                 <label class="field"><span>Full Name</span><input type="text" id="coName" required autocomplete="name" /></label>
                 <label class="field"><span>Email</span><input type="email" id="coEmail" required autocomplete="email" /></label>
@@ -1439,7 +1518,7 @@ if (checkoutRoot) {
 
             <div class="checkout__section">
               <h3><span class="checkout__step-num">2</span> Payment Method</h3>
-              <p class="checkout__hint">Demo only — no card details are collected on this site.</p>
+              <p class="checkout__hint">Tell us how you'd like to pay — we'll confirm it with you on WhatsApp.</p>
               <div class="radio-options">
                 <label class="radio-option">
                   <input type="radio" name="payment" value="cod" checked />
@@ -1447,7 +1526,7 @@ if (checkoutRoot) {
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="payment" value="wallet" />
-                  <span><span class="radio-option__title">Mobile Wallet (Vodafone Cash / Fawry)</span><span class="radio-option__desc">Simulated for this demo — no real wallet is charged.</span></span>
+                  <span><span class="radio-option__title">Mobile Wallet (Vodafone Cash / Fawry)</span><span class="radio-option__desc">We'll send payment details over WhatsApp.</span></span>
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="payment" value="pickup" />
@@ -1455,12 +1534,12 @@ if (checkoutRoot) {
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="payment" value="demo-card" />
-                  <span><span class="radio-option__title">Demo Card (simulated)</span><span class="radio-option__desc">Simulates a card payment — no real card number is requested or charged.</span></span>
+                  <span><span class="radio-option__title">Card Payment</span><span class="radio-option__desc">We'll send a secure payment link over WhatsApp.</span></span>
                 </label>
               </div>
             </div>
             <div class="form-status" id="checkoutStatus" role="status" aria-live="polite"></div>
-            <button type="submit" class="btn btn--primary btn--lg" id="checkoutSubmit">Place Order (Demo) →</button>
+            <button type="submit" class="btn btn--whatsapp btn--lg" id="checkoutSubmit">${ICON.whatsapp} Order via WhatsApp</button>
           </form>
         </div>
 
@@ -1493,33 +1572,76 @@ if (checkoutRoot) {
         return;
       }
       statusEl.className = 'form-status form-status--loading';
-      statusEl.innerHTML = '<span class="spinner" aria-hidden="true"></span> Placing your order…';
+      statusEl.innerHTML = '<span class="spinner" aria-hidden="true"></span> Preparing your WhatsApp order…';
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Placing Order…';
+      submitBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Preparing…';
       const orderId = 'CL' + Date.now().toString().slice(-8);
+      const customer = {
+        name: document.getElementById('coName').value,
+        email: document.getElementById('coEmail').value,
+        phone: document.getElementById('coPhone').value,
+        country: document.getElementById('coCountry').value,
+        address: document.getElementById('coAddress').value,
+        city: document.getElementById('coCity').value,
+        zip: document.getElementById('coZip').value,
+        payment: form.querySelector('input[name="payment"]:checked')?.value || 'cod',
+      };
       setTimeout(() => {
         saveOrder({
           id: orderId,
           date: new Date().toISOString(),
-          name: document.getElementById('coName').value,
-          email: document.getElementById('coEmail').value,
+          name: customer.name,
+          email: customer.email,
           items: lines.map((l) => ({ id: l.id, name: l.product.name, qty: l.qty, price: l.product.now, img: l.product.img })),
           subtotal, shipping, total,
         });
+        const waUrl = buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer);
         setCart([]);
-        renderOrderSuccess(orderId, total);
-      }, 1000);
+        renderOrderSuccess(orderId, total, waUrl);
+        window.open(waUrl, '_blank', 'noopener');
+      }, 700);
     });
   }
 
-  function renderOrderSuccess(orderId, total) {
+  /* Builds a wa.me link pre-filled with a formatted order message. */
+  const PAYMENT_LABELS = {
+    cod: 'Cash on Delivery',
+    wallet: 'Mobile Wallet (Vodafone Cash / Fawry)',
+    pickup: 'Pay on Pickup',
+    'demo-card': 'Card Payment',
+  };
+  function buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer) {
+    const itemLines = lines.map((l, i) =>
+      `${i + 1}. ${l.product.name} (${l.product.nameAr}) — ${l.product.color}, Qty ${l.qty} — ${money(l.product.now * l.qty)}`
+    ).join('\n');
+    const message = [
+      `Hi Zay.! 👋 I'd like to confirm this order:`,
+      ``,
+      `*Order #${orderId}*`,
+      itemLines,
+      ``,
+      `Subtotal: ${money(subtotal)}`,
+      `Shipping: ${shipping === 0 ? 'Free' : money(shipping)}`,
+      `*Total: ${money(total)}*`,
+      ``,
+      `*Shipping Details*`,
+      `Name: ${customer.name}`,
+      `Phone: ${customer.phone}`,
+      `Address: ${customer.address}, ${customer.city}${customer.zip ? ' ' + customer.zip : ''}, ${customer.country}`,
+      `Payment: ${PAYMENT_LABELS[customer.payment] || customer.payment}`,
+    ].join('\n');
+    return `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`;
+  }
+
+  function renderOrderSuccess(orderId, total, waUrl) {
     checkoutRoot.innerHTML = `
       <div class="order-success">
-        <div class="order-success__icon">${ICON.check}</div>
-        <h2>Order Placed!</h2>
-        <p>Thank you — your demo order has been recorded. (No real payment was processed and no email was sent.)</p>
+        <div class="order-success__icon order-success__icon--whatsapp">${ICON.whatsapp}</div>
+        <h2>Almost there!</h2>
+        <p>We've opened WhatsApp with your order details filled in — just hit send to confirm with our team.</p>
         <span class="order-success__id">Order #${orderId} · ${money(total)}</span>
         <div class="order-success__actions">
+          <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--whatsapp">${ICON.whatsapp} Open WhatsApp</a>
           <a href="shop.html" class="btn btn--outline">Continue Shopping</a>
           <a href="account.html#orders" class="btn btn--primary">View Order in Account</a>
         </div>
@@ -1642,7 +1764,7 @@ if (accountRoot) {
                   <div class="order-card">
                     <div class="order-card__head">
                       <div><div class="order-card__id">Order #${o.id}</div><div class="order-card__date">${new Date(o.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div></div>
-                      <span class="order-card__status">Confirmed (Demo)</span>
+                      <span class="order-card__status">Sent via WhatsApp</span>
                     </div>
                     <div class="order-card__items">
                       ${o.items.map((it) => `<div class="order-card__item"><span>${it.name} × ${it.qty}</span><span>${money((it.price * it.qty))}</span></div>`).join('')}
