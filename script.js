@@ -8,14 +8,10 @@
 const NAV = [
   { label: 'Home', href: 'index.html', key: 'home' },
   { label: 'Shop', href: 'shop.html', key: 'shop' },
-  { label: 'Women', href: 'shop.html?cat=Women', key: 'women' },
-  { label: 'Men', href: 'shop.html?cat=Men', key: 'men' },
-  { label: 'Kids', href: 'shop.html?cat=Kids', key: 'kids' },
-  { label: 'Sportswear', href: 'shop.html?cat=Sportswear', key: 'sportswear' },
-  { label: 'Accessories', href: 'shop.html?cat=Accessories', key: 'acc' },
   { label: 'About Us', href: 'about.html', key: 'about' },
   { label: 'Contact Us', href: 'contact.html', key: 'contact' },
   { label: 'Blog', href: 'blog.html', key: 'blog' },
+  { label: 'Policies', href: 'policies.html', key: 'policies' },
 ];
 
 /* ---------- External placeholder destinations ----------
@@ -46,6 +42,7 @@ const ICON = {
   cart:   '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2l2.2 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L22 7H6"/></svg>',
   user:   '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
   truck:  '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="6" width="13" height="11" rx="1"/><path d="M14 9h4l3 3v5h-7z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>',
+  card:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="5" y1="15" x2="9" y2="15"/></svg>',
   shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v7c0 5 3.5 9 8 10 4.5-1 8-5 8-10V5z"/></svg>',
   refresh:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>',
   bag:    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></svg>',
@@ -79,17 +76,12 @@ function buildTop() {
   const links = NAV.map(
     (n) => `<li><a href="${n.href}" class="nav__link${n.key === ACTIVE ? ' is-active' : ''}">${n.label}</a></li>`
   ).join('');
-  /* Account has no slot in the mobile bottom tab bar (home/shop/search/
-     wishlist/cart), so it stays reachable here inside the drawer. */
-  const utilityLinks = `
-    <li class="nav__util-sep" role="separator" aria-hidden="true"></li>
-    <li class="nav__util-item"><a href="account.html" class="nav__link${ACTIVE === 'account' ? ' is-active' : ''}">Account</a></li>`;
 
   return `
-  <div style="display: none;"  class="promo-bar" id="promoBar">
+  <div class="promo-bar" id="promoBar">
     <div class="container promo-bar__inner">
-      <span class="promo-bar__support">Support <a href="tel:+20221234567">+20 2 2123 4567</a></span>
-      <p class="promo-bar__text">Sign up and <strong>GET 25% OFF</strong> for your first order.<a href="account.html" class="promo-bar__link">Sign up now</a></p>
+      <span class="promo-bar__support">Support <a href="tel:+201068300432">+20 10 6830 0432</a></span>
+      <p class="promo-bar__text">Message us on WhatsApp and <strong>GET 25% OFF</strong> your first order.<a href="https://wa.me/${STORE_WHATSAPP}" class="promo-bar__link" target="_blank" rel="noopener">Message us</a></p>
       <button class="promo-bar__close" id="promoClose" aria-label="Close announcement">&times;</button>
     </div>
   </div>
@@ -105,48 +97,38 @@ function buildTop() {
           <span class="nav__head-label">Menu</span>
           <button class="nav__close" id="navClose" aria-label="Close menu">&times;</button>
         </div>
-        <ul class="nav__list">${links}${utilityLinks}</ul>
+        <ul class="nav__list">${links}</ul>
       </nav>
       <div class="nav-backdrop" id="navBackdrop"></div>
       <div class="header__actions">
-        <button  style="display: none;"  class="icon-btn" id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
-        <a style="display: none;"  class="icon-btn" href="wishlist.html" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
-        <a style="display: none;"  class="icon-btn icon-btn--cart" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
-        <a style="display: none;"  class="icon-btn" href="account.html" aria-label="Account">${ICON.user}</a>
+        <button class="icon-btn" id="searchTrigger" aria-label="Search" aria-haspopup="dialog">${ICON.search}</button>
+        <a class="icon-btn" href="wishlist.html" aria-label="Wishlist">${ICON.heart}<span class="cart-badge" id="wishBadge">0</span></a>
+        <a class="icon-btn icon-btn--cart" href="cart.html" aria-label="Cart">${ICON.cart}<span class="cart-badge" id="cartBadge">0</span></a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-     
-         <a href="wishlist.html" class="mobile-tabbar__item${ACTIVE === 'wishlist' ? ' is-active' : ''}">
-      <span class="mm   mobile-tabbar__icon">${ICON.heart}<span class="cart-badge" id="wishBadgeMobile">0</span></span>
-      <span class="mm">المفضلة</span>
-    </a>
-    <a href="cart.html" class="mobile-tabbar__item${ACTIVE === 'cart' ? ' is-active' : ''}">
-      <span class="mm  mobile-tabbar__icon">${ICON.cart}<span class="cart-badge" id="cartBadgeMobile">0</span></span>
-      <span class="mm">السلة</span>
-    </a>
-        </div>
+      </div>
     </div>
   </header>
 
   <nav class="mobile-tabbar" aria-label="Primary mobile">
     <a href="index.html" class="mobile-tabbar__item${ACTIVE === 'home' ? ' is-active' : ''}">
       <span class="mobile-tabbar__icon">${ICON.home}</span>
-      <span>الرئيسية</span>
+      <span>Home</span>
     </a>
     <a href="shop.html" class="mobile-tabbar__item${ACTIVE === 'shop' ? ' is-active' : ''}">
       <span class="mobile-tabbar__icon">${ICON.bag}</span>
-      <span>المتجر</span>
+      <span>Shop</span>
     </a>
     <button type="button" class="mobile-tabbar__item" id="mobileSearchTrigger" aria-haspopup="dialog">
       <span class="mobile-tabbar__icon">${ICON.search}</span>
-      <span>البحث</span>
+      <span>Search</span>
     </button>
     <a href="wishlist.html" class="mobile-tabbar__item${ACTIVE === 'wishlist' ? ' is-active' : ''}">
       <span class="mobile-tabbar__icon">${ICON.heart}<span class="cart-badge" id="wishBadgeMobile">0</span></span>
-      <span>المفضلة</span>
+      <span>Wishlist</span>
     </a>
     <a href="cart.html" class="mobile-tabbar__item${ACTIVE === 'cart' ? ' is-active' : ''}">
       <span class="mobile-tabbar__icon">${ICON.cart}<span class="cart-badge" id="cartBadgeMobile">0</span></span>
-      <span>السلة</span>
+      <span>Cart</span>
     </a>
   </nav>`;
 }
@@ -168,14 +150,19 @@ function buildBottom() {
       </div>
       <div class="footer__col"><h4>Information</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="policies.html#terms">Terms &amp; Conditions</a></li><li><a href="policies.html#privacy">Privacy Policy</a></li></ul></div>
       <div class="footer__col"><h4>Quick Links</h4><ul><li><a href="shop.html?cat=Women">Women</a></li><li><a href="shop.html?cat=Men">Men</a></li><li><a href="shop.html?cat=Accessories">Accessories</a></li><li><a href="shop.html?sort=newest">New Arrivals</a></li></ul></div>
-      <div class="footer__col"><h4>Customer Service</h4><ul><li><a href="account.html">My Account</a></li><li><a href="account.html#orders">Track Order</a></li><li><a href="policies.html#returns">Returns</a></li><li><a href="policies.html#shipping">Shipping Info</a></li></ul></div>
-      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:+20221234567">+20 2 2123 4567</a></li><li>${ICON.mail} <a href="mailto:hello@zay.eg">hello@zay.eg</a></li></ul></div>
+      <div class="footer__col"><h4>Customer Service</h4><ul><li><a href="https://wa.me/${STORE_WHATSAPP}" target="_blank" rel="noopener">Track Your Order</a></li><li><a href="policies.html#returns">Returns</a></li><li><a href="policies.html#shipping">Shipping Info</a></li></ul></div>
+      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:+201068300432">+20 10 6830 0432</a></li><li>${ICON.mail} <a href="mailto:hello@zay.eg">hello@zay.eg</a></li></ul></div>
     </div>
     <div class="footer__bar">
       <div class="container footer__bar-inner">
         <p>&copy; 2026 Zay. — Crafted with care.</p>
         <div class="footer__pay">
-          <span>VISA</span><span>MC</span><span>Fawry</span><span>Vodafone Cash</span><span>Cash on Delivery</span>
+          <span class="footer__pay-badge">${ICON.truck} Cash on Delivery</span>
+          <span class="footer__pay-badge">${ICON.pin} Pay on Pickup</span>
+          <span class="footer__pay-badge">${ICON.card} Card</span>
+          <span class="footer__pay-badge footer__pay-badge--logo"><img src="assets/img/payments/instapay.png" alt="InstaPay" loading="lazy" /></span>
+          <span class="footer__pay-badge footer__pay-badge--logo"><img src="assets/img/payments/vodafone-cash.jpg" alt="Vodafone Cash" loading="lazy" /></span>
+          <span class="footer__pay-badge footer__pay-badge--logo"><img src="assets/img/payments/fawry.jpg" alt="Fawry" loading="lazy" /></span>
         </div>
         <p>Designed for fashion lovers.</p>
       </div>
@@ -1468,13 +1455,6 @@ if (wishRoot) {
    ========================================================= */
 const checkoutRoot = document.getElementById('checkoutRoot');
 if (checkoutRoot) {
-  function getOrders() { try { return JSON.parse(localStorage.getItem('cl_orders') || '[]'); } catch { return []; } }
-  function saveOrder(order) {
-    const orders = getOrders();
-    orders.unshift(order);
-    localStorage.setItem('cl_orders', JSON.stringify(orders));
-  }
-
   function renderCheckoutForm() {
     const { lines, subtotal, shipping, total } = cartTotals();
     if (lines.length === 0) {
@@ -1518,23 +1498,46 @@ if (checkoutRoot) {
 
             <div class="checkout__section">
               <h3><span class="checkout__step-num">2</span> Payment Method</h3>
-              <p class="checkout__hint">Tell us how you'd like to pay — we'll confirm it with you on WhatsApp.</p>
-              <div class="radio-options">
-                <label class="radio-option">
+              <p class="checkout__hint">Choose how you'd like to pay — we'll confirm it with you on WhatsApp.</p>
+              <div class="pay-methods">
+                <label class="pay-method">
+                  <span class="pay-method__logo pay-method__logo--icon">${ICON.truck}</span>
+                  <span class="pay-method__body">
+                    <span class="pay-method__name">Cash on Delivery</span>
+                    <span class="pay-method__desc">Pay with cash when your order arrives.</span>
+                  </span>
                   <input type="radio" name="payment" value="cod" checked />
-                  <span><span class="radio-option__title">Cash on Delivery</span><span class="radio-option__desc">Pay with cash when your order arrives.</span></span>
                 </label>
-                <label class="radio-option">
-                  <input type="radio" name="payment" value="wallet" />
-                  <span><span class="radio-option__title">Mobile Wallet (Vodafone Cash / Fawry)</span><span class="radio-option__desc">We'll send payment details over WhatsApp.</span></span>
-                </label>
-                <label class="radio-option">
+                <label class="pay-method">
+                  <span class="pay-method__logo pay-method__logo--icon">${ICON.pin}</span>
+                  <span class="pay-method__body">
+                    <span class="pay-method__name">Pay on Pickup</span>
+                    <span class="pay-method__desc">Pay in-store when you collect your order.</span>
+                  </span>
                   <input type="radio" name="payment" value="pickup" />
-                  <span><span class="radio-option__title">Pay on Pickup</span><span class="radio-option__desc">Pay in-store when you collect your order.</span></span>
                 </label>
-                <label class="radio-option">
-                  <input type="radio" name="payment" value="demo-card" />
-                  <span><span class="radio-option__title">Card Payment</span><span class="radio-option__desc">We'll send a secure payment link over WhatsApp.</span></span>
+                <label class="pay-method">
+                  <span class="pay-method__logo pay-method__logo--icon">${ICON.card}</span>
+                  <span class="pay-method__body">
+                    <span class="pay-method__name">Card Payment</span>
+                    <span class="pay-method__desc">We'll send a secure payment link over WhatsApp.</span>
+                  </span>
+                  <input type="radio" name="payment" value="card" />
+                </label>
+                <label class="pay-method">
+                  <img class="pay-method__logo" src="assets/img/payments/instapay.png" alt="InstaPay" loading="lazy" />
+                  <span class="pay-method__body"><span class="pay-method__name">InstaPay</span></span>
+                  <input type="radio" name="payment" value="instapay" />
+                </label>
+                <label class="pay-method">
+                  <img class="pay-method__logo pay-method__logo--tile" src="assets/img/payments/vodafone-cash.jpg" alt="Vodafone Cash" loading="lazy" />
+                  <span class="pay-method__body"><span class="pay-method__name">Vodafone Cash</span></span>
+                  <input type="radio" name="payment" value="vodafone-cash" />
+                </label>
+                <label class="pay-method">
+                  <img class="pay-method__logo" src="assets/img/payments/fawry.jpg" alt="Fawry" loading="lazy" />
+                  <span class="pay-method__body"><span class="pay-method__name">Fawry</span></span>
+                  <input type="radio" name="payment" value="fawry" />
                 </label>
               </div>
             </div>
@@ -1587,14 +1590,6 @@ if (checkoutRoot) {
         payment: form.querySelector('input[name="payment"]:checked')?.value || 'cod',
       };
       setTimeout(() => {
-        saveOrder({
-          id: orderId,
-          date: new Date().toISOString(),
-          name: customer.name,
-          email: customer.email,
-          items: lines.map((l) => ({ id: l.id, name: l.product.name, qty: l.qty, price: l.product.now, img: l.product.img })),
-          subtotal, shipping, total,
-        });
         const waUrl = buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer);
         setCart([]);
         renderOrderSuccess(orderId, total, waUrl);
@@ -1606,9 +1601,11 @@ if (checkoutRoot) {
   /* Builds a wa.me link pre-filled with a formatted order message. */
   const PAYMENT_LABELS = {
     cod: 'Cash on Delivery',
-    wallet: 'Mobile Wallet (Vodafone Cash / Fawry)',
     pickup: 'Pay on Pickup',
-    'demo-card': 'Card Payment',
+    card: 'Card Payment',
+    instapay: 'InstaPay',
+    'vodafone-cash': 'Vodafone Cash',
+    fawry: 'Fawry',
   };
   function buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer) {
     const itemLines = lines.map((l, i) =>
@@ -1642,167 +1639,12 @@ if (checkoutRoot) {
         <span class="order-success__id">Order #${orderId} · ${money(total)}</span>
         <div class="order-success__actions">
           <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--whatsapp">${ICON.whatsapp} Open WhatsApp</a>
-          <a href="shop.html" class="btn btn--outline">Continue Shopping</a>
-          <a href="account.html#orders" class="btn btn--primary">View Order in Account</a>
+          <a href="shop.html" class="btn btn--primary">Continue Shopping</a>
         </div>
       </div>`;
   }
 
   renderCheckoutForm();
-}
-
-/* =========================================================
-   ACCOUNT PAGE (account.html)
-   ========================================================= */
-const accountRoot = document.getElementById('accountRoot');
-if (accountRoot) {
-  function getUser() { try { return JSON.parse(localStorage.getItem('cl_user') || 'null'); } catch { return null; } }
-  function setUser(u) { localStorage.setItem('cl_user', JSON.stringify(u)); }
-  function getAccOrders() { try { return JSON.parse(localStorage.getItem('cl_orders') || '[]'); } catch { return []; } }
-
-  function renderAuth() {
-    accountRoot.innerHTML = `
-      <div class="account-auth">
-        <div class="account-demo-note">${ICON.lock}<span>Demo mode — there's no real authentication backend. Your name and email are only kept in this browser's local storage.</span></div>
-        <div class="account-auth__tabs">
-          <button type="button" class="account-auth__tab is-active" data-tab="signin">Sign In</button>
-          <button type="button" class="account-auth__tab" data-tab="register">Create Account</button>
-        </div>
-        <div class="account-auth__panel is-active" data-panel="signin">
-          <form class="contact__form" id="signinForm" novalidate>
-            <label class="field"><span>Email</span><input type="email" id="siEmail" required autocomplete="email" /></label>
-            <label class="field"><span>Password</span><input type="password" id="siPassword" required minlength="4" autocomplete="current-password" /></label>
-            <div class="form-status" id="signinStatus" role="status" aria-live="polite"></div>
-            <button type="submit" class="btn btn--primary btn--lg">Sign In →</button>
-          </form>
-        </div>
-        <div class="account-auth__panel" data-panel="register">
-          <form class="contact__form" id="registerForm" novalidate>
-            <label class="field"><span>Full Name</span><input type="text" id="rgName" required autocomplete="name" /></label>
-            <label class="field"><span>Email</span><input type="email" id="rgEmail" required autocomplete="email" /></label>
-            <label class="field"><span>Password</span><input type="password" id="rgPassword" required minlength="4" autocomplete="new-password" /></label>
-            <div class="form-status" id="registerStatus" role="status" aria-live="polite"></div>
-            <button type="submit" class="btn btn--primary btn--lg">Create Account →</button>
-          </form>
-        </div>
-      </div>`;
-
-    accountRoot.querySelectorAll('.account-auth__tab').forEach((tab) =>
-      tab.addEventListener('click', () => {
-        accountRoot.querySelectorAll('.account-auth__tab').forEach((t) => t.classList.remove('is-active'));
-        accountRoot.querySelectorAll('.account-auth__panel').forEach((p) => p.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        accountRoot.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('is-active');
-      })
-    );
-
-    function handleAuthSubmit(formId, statusId, run) {
-      const form = document.getElementById(formId);
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const statusEl = document.getElementById(statusId);
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          statusEl.className = 'form-status form-status--error';
-          statusEl.textContent = 'Please fill in all fields correctly.';
-          return;
-        }
-        const btn = form.querySelector('button[type=submit]');
-        const old = btn.innerHTML;
-        statusEl.className = 'form-status form-status--loading';
-        statusEl.innerHTML = '<span class="spinner" aria-hidden="true"></span> Just a moment…';
-        btn.disabled = true;
-        setTimeout(() => { run(); btn.disabled = false; btn.innerHTML = old; }, 700);
-      });
-    }
-    handleAuthSubmit('signinForm', 'signinStatus', () => {
-      const email = document.getElementById('siEmail').value;
-      setUser({ name: email.split('@')[0], email });
-      renderDashboard();
-    });
-    handleAuthSubmit('registerForm', 'registerStatus', () => {
-      setUser({ name: document.getElementById('rgName').value, email: document.getElementById('rgEmail').value });
-      renderDashboard();
-    });
-  }
-
-  function renderDashboard() {
-    const user = getUser();
-    if (!user) { renderAuth(); return; }
-    const orders = getAccOrders();
-    const initial = (user.name || user.email || '?').trim().charAt(0).toUpperCase();
-    accountRoot.innerHTML = `
-      <div class="account-dash">
-        <aside class="account-dash__side">
-          <div class="account-dash__profile">
-            <div class="account-dash__avatar">${initial}</div>
-            <div><strong>${escapeHTML(user.name || 'Member')}</strong><span>${escapeHTML(user.email || '')}</span></div>
-          </div>
-          <nav class="account-dash__nav">
-            <button type="button" data-panel="profile" class="is-active">${ICON.user} Profile</button>
-            <button type="button" data-panel="orders">${ICON.box} Order History</button>
-            <button type="button" data-panel="wishlist">${ICON.heart} Wishlist</button>
-            <button type="button" id="accLogout" class="is-danger">${ICON.logout} Sign Out</button>
-          </nav>
-        </aside>
-        <div>
-          <div class="account-dash__panel is-active" data-content="profile">
-            <div class="account-panel-box">
-              <h2>Profile</h2>
-              <div class="field-row">
-                <label class="field"><span>Full Name</span><input type="text" value="${escapeHTML(user.name || '')}" disabled /></label>
-                <label class="field"><span>Email</span><input type="email" value="${escapeHTML(user.email || '')}" disabled /></label>
-              </div>
-              <p class="checkout__hint">This is a demo profile stored only in your browser. Editing isn't wired to a backend yet.</p>
-            </div>
-          </div>
-          <div class="account-dash__panel" data-content="orders">
-            <div class="account-panel-box">
-              <h2>Order History</h2>
-              ${orders.length === 0 ? `<div class="account-orders-empty"><p>No orders yet.</p><a href="shop.html" class="btn btn--outline" style="margin-top:14px;display:inline-block;">Start Shopping</a></div>` :
-                orders.map((o) => `
-                  <div class="order-card">
-                    <div class="order-card__head">
-                      <div><div class="order-card__id">Order #${o.id}</div><div class="order-card__date">${new Date(o.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div></div>
-                      <span class="order-card__status">Sent via WhatsApp</span>
-                    </div>
-                    <div class="order-card__items">
-                      ${o.items.map((it) => `<div class="order-card__item"><span>${it.name} × ${it.qty}</span><span>${money((it.price * it.qty))}</span></div>`).join('')}
-                    </div>
-                    <div class="order-card__total"><span>Total</span><span>${money(o.total)}</span></div>
-                  </div>`).join('')}
-            </div>
-          </div>
-          <div class="account-dash__panel" data-content="wishlist">
-            <div class="account-panel-box">
-              <h2>Wishlist</h2>
-              <p class="checkout__hint">Manage your saved items on the dedicated wishlist page.</p>
-              <a href="wishlist.html" class="btn btn--primary" style="margin-top:10px;display:inline-block;">Go to Wishlist</a>
-            </div>
-          </div>
-        </div>
-      </div>`;
-
-    accountRoot.querySelectorAll('.account-dash__nav button[data-panel]').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        accountRoot.querySelectorAll('.account-dash__nav button').forEach((b) => b.classList.remove('is-active'));
-        accountRoot.querySelectorAll('.account-dash__panel').forEach((p) => p.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        accountRoot.querySelector(`[data-content="${btn.dataset.panel}"]`).classList.add('is-active');
-      })
-    );
-    document.getElementById('accLogout')?.addEventListener('click', () => {
-      localStorage.removeItem('cl_user');
-      toast('Signed out');
-      renderAuth();
-    });
-    // Deep link support: account.html#orders jumps straight to Order History
-    if (location.hash === '#orders') {
-      accountRoot.querySelector('[data-panel="orders"]')?.click();
-    }
-  }
-
-  getUser() ? renderDashboard() : renderAuth();
 }
 
 /* =========================================================
