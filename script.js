@@ -796,7 +796,7 @@ if (shopGrid) {
   const initialCat = VALID_CATS.includes(urlCat) ? urlCat : 'All';
   const initialQ = urlParams.get('q') || '';
   const initialSort = urlParams.get('sort') === 'newest' ? 'newest' : 'default';
-  const PAGE_SIZE = 12;
+  const PAGE_SIZE = 14;
   const PRICE_RANGES = {
     'under-500':  { label: 'Under EGP 500',        test: (p) => p.now < 500 },
     '500-900':    { label: 'EGP 500 — 900',        test: (p) => p.now >= 500 && p.now <= 900 },
