@@ -2092,11 +2092,21 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
    PAGE HEAD + BREADCRUMBS
    ========================================================= */
 .page-head {
-  background: var(--bg-warm);
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url('assets/img/page.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   padding: 64px 0 56px;
   text-align: center;
   position: relative;
   overflow: hidden;
+      height: 300px;
 }
 .page-head::before {
   content: '';
@@ -2107,10 +2117,10 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   background: radial-gradient(circle, rgba(200,149,84,.18), transparent 65%);
   pointer-events: none;
 }
-.page-head__title { font-size: clamp(34px, 4.6vw, 52px); margin-bottom: 12px; position: relative; }
+.page-head__title { font-size: clamp(34px, 4.6vw, 52px); margin-bottom: 12px; position: relative; color: white;}
 .crumbs {
   font-size: 13.5px;
-  color: var(--muted);
+  color: white;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -2119,13 +2129,13 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   position: relative;
 }
 .crumbs a {
-  color: var(--primary);
+  color: white;
   font-weight: 500;
   transition: color var(--t-fast);
 }
-.crumbs a:hover { color: var(--primary-700); text-decoration: underline; text-underline-offset: 3px; }
-.crumbs span[aria-current] { color: var(--ink); font-weight: 500; }
-.crumbs .sep { color: var(--muted-2); }
+.crumbs a:hover { color: white; text-decoration: underline; text-underline-offset: 3px; }
+.crumbs span[aria-current] { color:wheat; font-weight: 500; }
+.crumbs .sep { color: white;}
 
 /* =========================================================
    SHOP
