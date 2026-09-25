@@ -89,7 +89,6 @@ function buildTop() {
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="index.html" class="logo" aria-label="Zay home">
-        <span class="logo__mark" aria-hidden="true">Z</span>
         <span class="logo__text">Zay<span class="logo__dot">.</span></span>
       </a>
       <nav class="nav" id="primaryNav" aria-label="Primary">

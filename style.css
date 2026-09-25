@@ -330,13 +330,14 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   gap: 32px;
   min-height: 78px;
 }
-
 .logo {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  text-decoration: none;
 }
+
 .logo__mark {
   display: grid;
   place-items: center;
@@ -351,22 +352,39 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   font-size: 19px;
   letter-spacing: 0.02em;
   position: relative;
+  transition: transform 0.3s ease;
 }
+
 .logo__mark::after {
   content: '';
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1px solid rgba(200,149,84,.4);
+  border: 1px solid rgba(200, 149, 84, 0.4);
 }
+
 .logo__text {
   font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 23px;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  transform: skewX(-8deg);
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  transition: all 0.3s ease;
 }
-.logo__dot { color: var(--primary); }
-.logo--light .logo__text { color: #fff; }
+
+.logo__dot {
+  color: var(--primary);
+  font-style: normal;
+}
+
+.logo--light .logo__text {
+  color: #fff;
+}
+
 
 .nav { margin-inline: auto; }
 .nav__list { display: flex; gap: 4px; }
