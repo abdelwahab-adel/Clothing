@@ -1105,30 +1105,255 @@ if (articleRoot) {
 }
 
 /* =========================================================
-   Promo slider (home hero banner carousel)
+   Promo Slider
    ========================================================= */
-const promoTrack = document.getElementById('promoTrack');
-if (promoTrack) {
-  const slides = [...promoTrack.children];
-  const dotsWrap = document.getElementById('promoDots');
-  dotsWrap.innerHTML = slides.map((_, i) => `<button type="button" aria-label="Go to slide ${i + 1}"></button>`).join('');
-  const dots = [...dotsWrap.children];
-  let idx = 0;
-  const go = (n) => {
-    idx = (n + slides.length) % slides.length;
-    promoTrack.style.transform = `translateX(-${idx * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-  };
-  document.getElementById('promoPrev')?.addEventListener('click', () => go(idx - 1));
-  document.getElementById('promoNext')?.addEventListener('click', () => go(idx + 1));
-  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
-  go(0);
-  const promoSection = document.getElementById('promoSlider');
-  let auto = setInterval(() => go(idx + 1), 5000);
-  promoSection.addEventListener('mouseenter', () => clearInterval(auto));
-  promoSection.addEventListener('mouseleave', () => { auto = setInterval(() => go(idx + 1), 5000); });
-}
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================================================
+       Promo Slider
+       ========================================================= */
+
+    const promoTrack = document.getElementById("promoTrack");
+    const promoSlider = document.getElementById("promoSlider");
+    const promoDots = document.getElementById("promoDots");
+    const promoPrev = document.getElementById("promoPrev");
+    const promoNext = document.getElementById("promoNext");
+
+    if (!promoTrack || !promoSlider || !promoDots) {
+        console.error("Promo slider elements not found.");
+        return;
+    }
+
+    const slides = Array.from(
+        promoTrack.querySelectorAll(".promo-slider__slide")
+    );
+
+    console.log("Promo slides:", slides.length);
+
+    if (slides.length === 0) {
+        return;
+    }
+
+    let currentIndex = 0;
+    let autoPlay = null;
+
+    /* =========================================================
+       Create Dots
+       ========================================================= */
+
+    promoDots.innerHTML = "";
+
+    slides.forEach((_, index) => {
+
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+
+        dot.setAttribute(
+            "aria-label",
+            `Go to slide ${index + 1}`
+        );
+
+        dot.setAttribute(
+            "aria-current",
+            index === 0 ? "true" : "false"
+        );
+
+        dot.addEventListener("click", function () {
+            goToSlide(index);
+            restartAutoPlay();
+        });
+
+        promoDots.appendChild(dot);
+    });
+
+    const dots = Array.from(
+        promoDots.querySelectorAll("button")
+    );
+
+    /* =========================================================
+       Move Slider
+       ========================================================= */
+
+    function goToSlide(index) {
+
+        currentIndex =
+            (index + slides.length) % slides.length;
+
+        promoTrack.style.transform =
+            `translate3d(-${currentIndex * 100}%, 0, 0)`;
+
+        dots.forEach((dot, i) => {
+
+            const isActive = i === currentIndex;
+
+            dot.classList.toggle(
+                "is-active",
+                isActive
+            );
+
+            dot.setAttribute(
+                "aria-current",
+                isActive ? "true" : "false"
+            );
+        });
+    }
+
+    /* =========================================================
+       Previous Button
+       ========================================================= */
+
+    if (promoPrev) {
+
+        promoPrev.addEventListener("click", function () {
+
+            goToSlide(currentIndex - 1);
+
+            restartAutoPlay();
+        });
+    }
+
+    /* =========================================================
+       Next Button
+       ========================================================= */
+
+    if (promoNext) {
+
+        promoNext.addEventListener("click", function () {
+
+            goToSlide(currentIndex + 1);
+
+            restartAutoPlay();
+        });
+    }
+
+    /* =========================================================
+       Auto Play
+       ========================================================= */
+
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+        autoPlay = setInterval(function () {
+
+            goToSlide(currentIndex + 1);
+
+        }, 5000);
+    }
+
+    function stopAutoPlay() {
+
+        if (autoPlay) {
+
+            clearInterval(autoPlay);
+
+            autoPlay = null;
+        }
+    }
+
+    function restartAutoPlay() {
+
+        stopAutoPlay();
+
+        startAutoPlay();
+    }
+
+    /* =========================================================
+       Pause On Hover
+       ========================================================= */
+
+    promoSlider.addEventListener(
+        "mouseenter",
+        stopAutoPlay
+    );
+
+    promoSlider.addEventListener(
+        "mouseleave",
+        startAutoPlay
+    );
+
+    /* =========================================================
+       Touch Swipe - Mobile
+       ========================================================= */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    promoSlider.addEventListener(
+        "touchstart",
+        function (event) {
+
+            touchStartX =
+                event.touches[0].clientX;
+
+        },
+        { passive: true }
+    );
+
+    promoSlider.addEventListener(
+        "touchend",
+        function (event) {
+
+            touchEndX =
+                event.changedTouches[0].clientX;
+
+            const difference =
+                touchStartX - touchEndX;
+
+            /* Swipe Left */
+            if (difference > 50) {
+
+                goToSlide(currentIndex + 1);
+
+                restartAutoPlay();
+            }
+
+            /* Swipe Right */
+            else if (difference < -50) {
+
+                goToSlide(currentIndex - 1);
+
+                restartAutoPlay();
+            }
+
+        },
+        { passive: true }
+    );
+
+    /* =========================================================
+       Keyboard Navigation
+       ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "ArrowLeft") {
+
+                goToSlide(currentIndex - 1);
+
+                restartAutoPlay();
+
+            } else if (event.key === "ArrowRight") {
+
+                goToSlide(currentIndex + 1);
+
+                restartAutoPlay();
+            }
+        }
+    );
+
+    /* =========================================================
+       Initialize
+       ========================================================= */
+
+    goToSlide(0);
+
+    startAutoPlay();
+
+});
 /* =========================================================
    Testimonials (home + about)
    ========================================================= */

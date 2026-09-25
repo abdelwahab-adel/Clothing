@@ -634,94 +634,520 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 /* =========================================================
    PROMO SLIDER — sliding ad carousel with left/right nav
    ========================================================= */
-.promo-slider { position: relative; padding: 28px 0; background: var(--bg); }
+
+
+.promo-slider {
+    position: relative;
+    padding: 28px 0;
+    background: var(--bg);
+}
+
+
+/* =========================================================
+   VIEWPORT
+   ========================================================= */
+
 .promo-slider__viewport {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 70px;
-  overflow: hidden;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 70px;
+
+    overflow: hidden;
+    direction: ltr;
 }
+
+
+/* =========================================================
+   TRACK
+   ========================================================= */
+
 .promo-slider__track {
-  display: flex;
-  transition: transform .5s cubic-bezier(.65,0,.35,1);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    width: 100%;
+
+    direction: ltr;
+
+    transition: transform 0.5s cubic-bezier(.65, 0, .35, 1);
+
+    will-change: transform;
+
+    overflow: visible;
 }
+
+
+/* =========================================================
+   SLIDES
+   ========================================================= */
+
 .promo-slider__slide {
-  flex: 0 0 100%;
-  width: 100%;
-  aspect-ratio: 2000 / 630;
-  position: relative;
-  overflow: hidden;
+    position: relative;
+
+    flex: 0 0 100%;
+    min-width: 100%;
+    width: 100%;
+
+    aspect-ratio: 2000 / 630;
+
+    padding: 0 8px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
 .promo-slider__slide img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 8px;
+    right: 8px;
+
+    width: calc(100% - 16px);
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: var(--radius-lg);
 }
-.promo-slider__slide--brand { display: flex; align-items: center; padding: 0 60px; }
-.promo-slider__content { max-width: 420px; }
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.promo-slider__overlay {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 8px;
+    right: 8px;
+
+    z-index: 1;
+
+    border-radius: var(--radius-lg);
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.42) 35%,
+        rgba(0, 0, 0, 0.12) 72%,
+        rgba(0, 0, 0, 0) 100%
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.promo-slider__content {
+    position: absolute;
+
+    top: 50%;
+    left: 7%;
+
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    width: min(480px, 44%);
+
+    color: #fff;
+}
+
 .promo-slider__eyebrow {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
+    margin: 0 0 10px;
+
+    font-family: var(--font-display);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+
+    color: #fff;
 }
+
 .promo-slider__title {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(22px, 3vw, 32px);
-  line-height: 1.25;
-  color: #fff;
-  margin-bottom: 22px;
+    margin: 0 0 12px;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(28px, 4vw, 52px);
+
+    font-weight: 700;
+
+    line-height: 1.05;
+
+    color: #fff;
 }
+
+.promo-slider__description {
+    margin: 0 0 18px;
+
+    max-width: 440px;
+
+    font-size: clamp(13px, 1.3vw, 17px);
+
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.promo-slider__offer {
+    margin: 0 0 8px;
+
+    font-size: clamp(13px, 1.4vw, 18px);
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    color: #fff;
+}
+
+.promo-slider__code {
+    margin: 0 0 20px;
+
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.promo-slider__code strong {
+    color: #fff;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+   ========================================================= */
+
+.promo-slider__btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 22px;
+
+    background: #fff;
+    color: #111;
+
+    border-radius: var(--pill);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.promo-slider__btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--primary);
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   PROMO SLIDER NAVIGATION
+   ========================================================= */
+
 .promo-slider__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--ink);
-  display: grid;
-  place-items: center;
-  box-shadow: var(--shadow);
-  transition: var(--t-fast);
-  z-index: 2;
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: var(--surface);
+    color: var(--ink);
+
+    display: grid;
+    place-items: center;
+
+    box-shadow: var(--shadow);
+
+    transition: var(--t-fast);
+
+    z-index: 2;
 }
-.promo-slider__nav:hover { background: var(--primary); color: #fff; }
-.promo-slider__nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.promo-slider__nav--prev { left: 12px; }
-.promo-slider__nav--next { right: 12px; }
-.promo-slider__dots { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
+
+.promo-slider__nav:hover {
+    background: var(--primary);
+    color: #fff;
+
+    transform: translateY(-50%) scale(1.05);
+}
+
+.promo-slider__nav--prev {
+    left: 12px;
+}
+
+.promo-slider__nav--next {
+    right: 12px;
+}
+
+.promo-slider__nav svg {
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   DOTS
+   ========================================================= */
+
+.promo-slider__dots {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    direction: ltr;
+}
+
 .promo-slider__dots button {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--line-2);
-  transition: var(--t-fast);
+    width: 7px;
+    height: 7px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: var(--line-2);
+
+    transition: var(--t-fast);
+
+    cursor: pointer;
 }
-.promo-slider__dots button.is-active { background: var(--primary); width: 20px; border-radius: var(--pill); }
+
+.promo-slider__dots button.is-active {
+    width: 20px;
+
+    background: var(--primary);
+
+    border-radius: var(--pill);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
 @media (max-width: 860px) {
-  .promo-slider__viewport { padding: 0 48px; }
-  .promo-slider__slide--brand { padding: 0 28px; }
-  .promo-slider__nav { width: 36px; height: 36px; }
+
+    .promo-slider__viewport {
+        padding: 0 48px;
+    }
+
+    .promo-slider__content {
+        left: 6%;
+
+        width: 55%;
+    }
+
+    .promo-slider__title {
+        font-size: clamp(24px, 4vw, 38px);
+    }
+
+    .promo-slider__description {
+        font-size: 14px;
+    }
+
+    .promo-slider__nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .promo-slider__nav--prev {
+        left: 10px;
+    }
+
+    .promo-slider__nav--next {
+        right: 10px;
+    }
+
+    .promo-slider__nav svg {
+        width: 17px;
+        height: 17px;
+    }
 }
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 600px) {
-  .promo-slider__viewport { padding: 0; }
-  .promo-slider__track { border-radius: 0; }
-  .promo-slider__nav--prev { left: 10px; }
-  .promo-slider__nav--next { right: 10px; }
-  .promo-slider__slide { aspect-ratio: 4 / 5; }
-  .promo-slider__slide img { object-position: center; }
+
+    .promo-slider {
+        padding: 18px 0;
+    }
+
+    .promo-slider__viewport {
+        padding: 0;
+    }
+
+    .promo-slider__track {
+        border-radius: 0;
+    }
+
+    .promo-slider__slide {
+        aspect-ratio: 2000 / 630;
+
+        padding: 0 5px;
+    }
+
+    .promo-slider__slide img {
+        left: 5px;
+        right: 5px;
+
+        width: calc(100% - 10px);
+
+        border-radius: 0;
+    }
+
+    .promo-slider__overlay {
+        left: 5px;
+        right: 5px;
+
+        border-radius: 0;
+
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.68) 0%,
+            rgba(0, 0, 0, 0.45) 65%,
+            rgba(0, 0, 0, 0.12) 100%
+        );
+    }
+
+    .promo-slider__content {
+        left: 22px;
+
+        width: calc(100% - 44px);
+    }
+
+    .promo-slider__eyebrow {
+        font-size: 9px;
+
+        margin-bottom: 7px;
+    }
+
+    .promo-slider__title {
+        font-size: 25px;
+
+        line-height: 1.05;
+
+        margin-bottom: 8px;
+    }
+
+    .promo-slider__description {
+        font-size: 12px;
+
+        line-height: 1.45;
+
+        margin-bottom: 10px;
+    }
+
+    .promo-slider__offer {
+        font-size: 13px;
+
+        line-height: 1.4;
+
+        margin-bottom: 5px;
+    }
+
+    .promo-slider__code {
+        font-size: 11px;
+
+        margin-bottom: 12px;
+    }
+
+    .promo-slider__btn {
+        min-height: 36px;
+
+        padding: 0 14px;
+
+        font-size: 10px;
+    }
+
+    .promo-slider__nav {
+        width: 36px;
+        height: 36px;
+    }
+
+    .promo-slider__nav--prev {
+        left: 10px;
+    }
+
+    .promo-slider__nav--next {
+        right: 10px;
+    }
+
+    .promo-slider__nav svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .promo-slider__dots {
+        margin-top: 12px;
+    }
 }
+```
+
+
 
 /* =========================================================
    FEATURES — restyled bar
