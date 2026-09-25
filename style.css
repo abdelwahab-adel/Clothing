@@ -1048,6 +1048,8 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
         aspect-ratio: 2000 / 630;
         padding: 0 5px;
         height: 200px;
+            border-radius: var(--radius-lg);
+
     }
 
     .promo-slider__slide img {
@@ -1056,14 +1058,14 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 
         width: calc(100% - 10px);
 
-        border-radius: 0;
+    border-radius: var(--radius-lg);
     }
 
     .promo-slider__overlay {
         left: 5px;
         right: 5px;
 
-        border-radius: 0;
+        /* border-radius: 0; */
 
         background: linear-gradient(
             90deg,
