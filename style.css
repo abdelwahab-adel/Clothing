@@ -480,7 +480,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   border: none;
   background: none;
   color: var(--muted);
-  font-family: var(--font-arabic);
+  font-family: var(--font-display);
   font-size: 10.5px;
   font-weight: 500;
   transition: color var(--t-fast);
@@ -630,6 +630,98 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   50% { transform: translateX(-50%) translateY(7px); }
 }
 @media (prefers-reduced-motion: reduce) { .hero__scroll { animation: none; } }
+
+/* =========================================================
+   PROMO SLIDER — sliding ad carousel with left/right nav
+   ========================================================= */
+.promo-slider { position: relative; padding: 28px 0; background: var(--bg); }
+.promo-slider__viewport {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 70px;
+  overflow: hidden;
+}
+.promo-slider__track {
+  display: flex;
+  transition: transform .5s cubic-bezier(.65,0,.35,1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.promo-slider__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 2000 / 630;
+  position: relative;
+  overflow: hidden;
+}
+.promo-slider__slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.promo-slider__slide--brand { display: flex; align-items: center; padding: 0 60px; }
+.promo-slider__content { max-width: 420px; }
+.promo-slider__eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.promo-slider__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 22px;
+}
+.promo-slider__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+  transition: var(--t-fast);
+  z-index: 2;
+}
+.promo-slider__nav:hover { background: var(--primary); color: #fff; }
+.promo-slider__nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.promo-slider__nav--prev { left: 12px; }
+.promo-slider__nav--next { right: 12px; }
+.promo-slider__dots { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
+.promo-slider__dots button {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-2);
+  transition: var(--t-fast);
+}
+.promo-slider__dots button.is-active { background: var(--primary); width: 20px; border-radius: var(--pill); }
+@media (max-width: 860px) {
+  .promo-slider__viewport { padding: 0 48px; }
+  .promo-slider__slide--brand { padding: 0 28px; }
+  .promo-slider__nav { width: 36px; height: 36px; }
+}
+@media (max-width: 600px) {
+  .promo-slider__viewport { padding: 0; }
+  .promo-slider__track { border-radius: 0; }
+  .promo-slider__nav--prev { left: 10px; }
+  .promo-slider__nav--next { right: 10px; }
+  .promo-slider__slide { aspect-ratio: 4 / 5; }
+  .promo-slider__slide img { object-position: center; }
+}
 
 /* =========================================================
    FEATURES — restyled bar
@@ -1458,14 +1550,13 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   .hero__scroll { display: none; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   /* Header icon row was wider than the viewport on real phones, pushing
      the menu button off-screen. Search is the only icon left here now
      (Wishlist/Cart moved to the bottom tab bar above). */
   .header__inner { gap: 14px; }
   .header__actions { gap: 2px; }
-  .icon-btn, .nav-toggle { width: 38px; height: 38px; right: 10%; position: absolute;
-    } 
+  .icon-btn, .nav-toggle { width: 38px; height: 38px; }
   .icon-btn svg { width: 18px; height: 18px; }
   .logo__text { font-size: 20px; }
   .logo__mark { width: 34px; height: 34px; font-size: 17px; }
@@ -1527,20 +1618,20 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 .brands__row {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px 56px;
+  gap: 30px 44px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
-.brands__row span {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(18px, 2.4vw, 26px);
-  letter-spacing: 0.18em;
-  color: #c9bcab;
-  transition: color var(--t-fast);
-  text-transform: uppercase;
+.brands__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1);
+  opacity: .7;
+  transition: var(--t-fast);
 }
-.brands__row span:hover { color: var(--primary); }
+.brands__logo:hover { filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
+.brands__logo img { height: 40px; width: auto; max-width: 130px; object-fit: contain; display: block; }
 
 /* ---------- Toast ---------- */
 .toast {

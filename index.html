@@ -52,6 +52,44 @@
       </a>
     </section>
 
+    <!-- PROMO SLIDER -->
+    <section class="promo-slider" id="promoSlider" aria-label="Promotions" aria-roledescription="carousel">
+      <div class="promo-slider__viewport">
+        <div class="promo-slider__track" id="promoTrack">
+          <div class="promo-slider__slide">
+            <img src="assets/img/promos/promo-autumn-winter.webp" alt="Autumn Winter '26 — New In. Shop Now" loading="lazy" />
+          </div>
+          <div class="promo-slider__slide promo-slider__slide--brand" style="background:linear-gradient(120deg,var(--primary) 0%,var(--primary-700) 100%);">
+            <div class="promo-slider__content">
+              <p class="promo-slider__eyebrow">Free Shipping</p>
+              <h3 class="promo-slider__title">Free shipping on every order over EGP 1,000</h3>
+              <a href="shop.html" class="btn btn--light">Shop Now</a>
+            </div>
+          </div>
+          <div class="promo-slider__slide">
+            <img src="assets/img/promos/promo-zay-men.webp" alt="Zay. Men's Latest Collection — Up to 60% Off. Style Meets Comfort. Shop Now" loading="lazy" />
+          </div>
+          <div class="promo-slider__slide promo-slider__slide--brand" style="background:linear-gradient(120deg,var(--secondary) 0%,#0f0a06 100%);">
+            <div class="promo-slider__content">
+              <p class="promo-slider__eyebrow">New Drop</p>
+              <h3 class="promo-slider__title">Gear up with our sportswear edit</h3>
+              <a href="shop.html?cat=Sportswear" class="btn btn--light">Shop Now</a>
+            </div>
+          </div>
+          <div class="promo-slider__slide">
+            <img src="assets/img/promos/promo-zay-women.webp" alt="Zay. New Season — Women's Latest Fashion. Shop Now" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <button type="button" class="promo-slider__nav promo-slider__nav--prev" id="promoPrev" aria-label="Previous promotion">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="promo-slider__nav promo-slider__nav--next" id="promoNext" aria-label="Next promotion">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="promo-slider__dots" id="promoDots"></div>
+    </section>
+
     <!-- FEATURES -->
     <section class="features">
       <div class="container features__grid">
@@ -198,9 +236,16 @@
     <!-- BRAND STRIP -->
     <section class="brands">
       <div class="container">
-        <span class="brands__eyebrow">As Featured In</span>
+        <span class="brands__eyebrow">Labels you love</span>
         <div class="brands__row">
-          <span>Vogue Arabia</span><span>Harper's Bazaar Arabia</span><span>ELLE Arabia</span><span>Grazia Middle East</span><span>CairoScene</span><span>Sail Magazine</span>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/nike.png" alt="Nike" loading="lazy" /></a>
+          <a href="shop.html?cat=Women" class="brands__logo"><img src="assets/img/brands/missguided.png" alt="Missguided" loading="lazy" /></a>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/puma.png" alt="Puma" loading="lazy" /></a>
+          <a href="shop.html?cat=Women" class="brands__logo"><img src="assets/img/brands/newlook.png" alt="New Look" loading="lazy" /></a>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/adidas.png" alt="Adidas" loading="lazy" /></a>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/reebok.png" alt="Reebok" loading="lazy" /></a>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/jordan.png" alt="Jordan" loading="lazy" /></a>
+          <a href="shop.html?cat=Sportswear" class="brands__logo"><img src="assets/img/brands/newbalance.png" alt="New Balance" loading="lazy" /></a>
         </div>
       </div>
     </section>

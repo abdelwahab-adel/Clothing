@@ -8,10 +8,10 @@
 const NAV = [
   { label: 'Home', href: 'index.html', key: 'home' },
   { label: 'Shop', href: 'shop.html', key: 'shop' },
-  { label: 'About Us', href: 'about.html', key: 'about' },
-  { label: 'Contact Us', href: 'contact.html', key: 'contact' },
   { label: 'Blog', href: 'blog.html', key: 'blog' },
   { label: 'Policies', href: 'policies.html', key: 'policies' },
+  { label: 'About Us', href: 'about.html', key: 'about' },
+  { label: 'Contact Us', href: 'contact.html', key: 'contact' },
 ];
 
 /* ---------- External placeholder destinations ----------
@@ -1102,6 +1102,31 @@ if (articleRoot) {
         <span class="link-arrow">Read More <span>→</span></span>
       </div>
     </a>`).join('');
+}
+
+/* =========================================================
+   Promo slider (home hero banner carousel)
+   ========================================================= */
+const promoTrack = document.getElementById('promoTrack');
+if (promoTrack) {
+  const slides = [...promoTrack.children];
+  const dotsWrap = document.getElementById('promoDots');
+  dotsWrap.innerHTML = slides.map((_, i) => `<button type="button" aria-label="Go to slide ${i + 1}"></button>`).join('');
+  const dots = [...dotsWrap.children];
+  let idx = 0;
+  const go = (n) => {
+    idx = (n + slides.length) % slides.length;
+    promoTrack.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  };
+  document.getElementById('promoPrev')?.addEventListener('click', () => go(idx - 1));
+  document.getElementById('promoNext')?.addEventListener('click', () => go(idx + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  go(0);
+  const promoSection = document.getElementById('promoSlider');
+  let auto = setInterval(() => go(idx + 1), 5000);
+  promoSection.addEventListener('mouseenter', () => clearInterval(auto));
+  promoSection.addEventListener('mouseleave', () => { auto = setInterval(() => go(idx + 1), 5000); });
 }
 
 /* =========================================================
