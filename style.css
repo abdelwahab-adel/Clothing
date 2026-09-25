@@ -1046,8 +1046,8 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 
     .promo-slider__slide {
         aspect-ratio: 2000 / 630;
-
         padding: 0 5px;
+        height: 200px;
     }
 
     .promo-slider__slide img {
