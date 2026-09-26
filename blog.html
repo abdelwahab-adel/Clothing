@@ -13,8 +13,9 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.min.css" />
 </head>
 <body data-page="blog">
   <div id="siteTop"></div>
@@ -48,38 +49,43 @@
   </main>
 
   <div id="siteBottom"></div>
-  <script src="script.js"></script>
+  <script src="script.min.js" defer></script>
   <script>
     /* The featured post above is shown once at the top, so the grid
        below lists every other article from the shared BLOG_POSTS
        dataset (defined once in script.js and reused by
        blog-details.html) rather than a separate, duplicate list that
-       could drift out of sync with it. */
-    const POSTS = BLOG_POSTS.filter((p) => p.id !== 'fall-fashion-frenzy');
-    const grid = document.getElementById('blogGrid');
-    const pager = document.getElementById('blogPagination');
-    const PAGE_SIZE = 3;
-    let page = 1;
-    function renderPage() {
-      const start = (page - 1) * PAGE_SIZE;
-      const items = POSTS.slice(start, start + PAGE_SIZE);
-      grid.innerHTML = items.map((p) => `
-        <a class="post reveal" href="blog-details.html?id=${p.id}">
-          <div class="post__media"><img src="${p.img}" alt="${p.title}" loading="lazy"><span class="post__tag">${p.tag}</span></div>
-          <div class="post__body">
-            <span class="post__date">${p.date}</span>
-            <h3 class="post__title">${p.title}</h3>
-            <p class="post__excerpt">${p.excerpt}</p>
-            <span class="link-arrow">Read More <span>→</span></span>
-          </div>
-        </a>`).join('');
-      if (window.renderPagination) {
-        window.renderPagination(pager, POSTS.length, PAGE_SIZE, page, (p) => { page = p; renderPage(); });
+       could drift out of sync with it.
+       Wrapped in DOMContentLoaded because script.js above is now
+       deferred (non-blocking) — this ensures BLOG_POSTS exists
+       before we use it. */
+    document.addEventListener('DOMContentLoaded', () => {
+      const POSTS = BLOG_POSTS.filter((p) => p.id !== 'fall-fashion-frenzy');
+      const grid = document.getElementById('blogGrid');
+      const pager = document.getElementById('blogPagination');
+      const PAGE_SIZE = 3;
+      let page = 1;
+      function renderPage() {
+        const start = (page - 1) * PAGE_SIZE;
+        const items = POSTS.slice(start, start + PAGE_SIZE);
+        grid.innerHTML = items.map((p) => `
+          <a class="post reveal" href="blog-details.html?id=${p.id}">
+            <div class="post__media"><img src="${p.img}" alt="${p.title}" loading="lazy"><span class="post__tag">${p.tag}</span></div>
+            <div class="post__body">
+              <span class="post__date">${p.date}</span>
+              <h3 class="post__title">${p.title}</h3>
+              <p class="post__excerpt">${p.excerpt}</p>
+              <span class="link-arrow">Read More <span>→</span></span>
+            </div>
+          </a>`).join('');
+        if (window.renderPagination) {
+          window.renderPagination(pager, POSTS.length, PAGE_SIZE, page, (p) => { page = p; renderPage(); });
+        }
+        if (window.revealScan) window.revealScan();
+        else document.querySelectorAll('.post').forEach((e) => e.classList.add('is-visible'));
       }
-      if (window.revealScan) window.revealScan();
-      else document.querySelectorAll('.post').forEach((e) => e.classList.add('is-visible'));
-    }
-    renderPage();
+      renderPage();
+    });
   </script>
 </body>
 </html>
