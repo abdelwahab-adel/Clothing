@@ -138,7 +138,7 @@ function buildBottom() {
   <footer class="footer" id="footer">
     <div class="container footer__grid">
       <div class="footer__col footer__brand">
-        <a href="index.html" class="logo logo--light"><span class="logo__mark" aria-hidden="true">Z</span><span class="logo__text">Zay<span class="logo__dot">.</span></span></a>
+        <a href="index.html" class="logo logo--light"><span class="logo__text">Zay<span class="logo__dot">.</span></span></a>
         <p>A curated edit of modern fashion essentials — designed in our atelier, crafted for everyday confidence, delivered to your door.</p>
         <div class="footer__social">
           <a href="${SOCIAL.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICON.fb}</a>
@@ -258,7 +258,7 @@ const CATALOG = [
 
   /* Sportswear (4) */
   { id: 'leggings-black',    name: 'Black High-Waist Leggings', nameAr: 'ليجن أسود هاي ويست', cat: 'Sportswear', color: 'Black',    desc: 'Squat-proof, high-waist leggings built to move — from a sunrise gym session to a full day of errands.', material: 'Nylon-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leggings-black.webp', now: 480,  old: 720, rating: 5, badge: '-33%' },
-  { id: 'running-sneakers',  name: 'Lightweight Running Sneakers',   nameAr: 'جزمة جري خفيفة', cat: 'Sportswear', color: 'White',    desc: 'Lightweight, breathable running sneakers built for Cairo\'s pavements, whether it\'s an early morning Corniche run or a gym session.', material: 'Mesh upper, rubber sole', sizes: '38, 39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/running-sneakers.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot' },
+  { id: 'running-sneakers',  name: 'Lightweight Running Sneakers',   nameAr: 'جزمة جري خفيفة', cat: 'Shoes', color: 'White',    desc: 'Lightweight, breathable running sneakers built for Cairo\'s pavements, whether it\'s an early morning Corniche run or a gym session.', material: 'Mesh upper, rubber sole', sizes: '38, 39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/running-sneakers.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot' },
   { id: 'yoga-tank',         name: 'Stretch Yoga Tank Top',          nameAr: 'توب يوجا', cat: 'Sportswear', color: 'Purple',   desc: 'A soft, stretchy tank built to move with every pose — breathable enough for a hot studio or an outdoor session.', material: 'Cotton-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/yoga-tank.webp', now: 320,  old: 480, rating: 4, badge: '-33%' },
   { id: 'track-pants',       name: 'Tapered Track Pants',            nameAr: 'بنطلون رياضي', cat: 'Sportswear', color: 'Charcoal', desc: 'Tapered track pants that go from the gym to running errands without missing a beat — soft, breathable, and easy to move in.', material: 'Polyester-spandex blend', sizes: 'S, M, L, XL', img: 'assets/img/products/track-pants.webp', now: 580,  old: 850, rating: 5, badge: '-32%' },
 
@@ -276,11 +276,11 @@ const CATALOG = [
   /* === NEW: Brand drop — sneakers, hoodies, bags & accessories === */
 
   /* Sneakers */
-  { id: 'puma-speedcat',      name: 'Puma Speedcat Sneakers',       nameAr: 'سنيكرز بوما سبيدكات', cat: 'Sportswear', color: 'Red',    desc: 'A retro racing-inspired suede sneaker with the classic Puma stripe — sharp enough for the street, comfortable enough for a full day out.', material: 'Suede upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/puma-speedcat-sneakers.webp', now: 2450, old: 3200, rating: 5, badge: 'Hot' },
-  { id: 'nike-dunk-panda',    name: 'Nike Dunk Low "Panda"',        nameAr: 'نايك دانك لو باندا', cat: 'Sportswear', color: 'Black',  desc: 'The black-and-white Dunk Low everyone\'s wearing right now — a clean two-tone leather sneaker that goes with absolutely everything.', material: 'Leather upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/nike-dunk-low-panda.webp', now: 3800, old: 4600, rating: 5, badge: 'Hot' },
-  { id: 'nike-pegasus-41',    name: 'Nike Air Zoom Pegasus 41',     nameAr: 'نايك اير زوم بيجاسوس 41', cat: 'Sportswear', color: 'White',  desc: 'A responsive, everyday running shoe with Nike\'s Zoom Air cushioning — built for logging kilometers along the Corniche or the treadmill alike.', material: 'Mesh upper, foam midsole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/nike-pegasus-41.webp', now: 4200, old: 5100, rating: 5, badge: 'New' },
-  { id: 'adidas-gazelle',     name: 'Adidas Gazelle Sneakers',      nameAr: 'أديداس جازيل', cat: 'Sportswear', color: 'Grey',   desc: 'The timeless suede Gazelle with the three stripes — a low-profile classic that pairs as easily with jeans as it does joggers.', material: 'Suede upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/adidas-gazelle-grey.webp', now: 3100, old: 3900, rating: 5, badge: '-21%' },
-  { id: 'adidas-samba',       name: 'Adidas Samba OG',              nameAr: 'أديداس سامبا', cat: 'Sportswear', color: 'White',  desc: 'The football-terrace icon turned everyday staple — a white leather sneaker with gum sole and the classic three stripes down the side.', material: 'Leather upper, gum rubber sole', sizes: '38, 39, 40, 41, 42, 43 (EU)', img: 'assets/img/products/adidas-samba.webp', now: 3300, old: 4100, rating: 5, badge: 'Hot' },
+  { id: 'puma-speedcat',      name: 'Puma Speedcat Sneakers',       nameAr: 'سنيكرز بوما سبيدكات', cat: 'Shoes', color: 'Red',    desc: 'A retro racing-inspired suede sneaker with the classic Puma stripe — sharp enough for the street, comfortable enough for a full day out.', material: 'Suede upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/puma-speedcat-sneakers.webp', now: 2450, old: 3200, rating: 5, badge: 'Hot' },
+  { id: 'nike-dunk-panda',    name: 'Nike Dunk Low "Panda"',        nameAr: 'نايك دانك لو باندا', cat: 'Shoes', color: 'Black',  desc: 'The black-and-white Dunk Low everyone\'s wearing right now — a clean two-tone leather sneaker that goes with absolutely everything.', material: 'Leather upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/nike-dunk-low-panda.webp', now: 3800, old: 4600, rating: 5, badge: 'Hot' },
+  { id: 'nike-pegasus-41',    name: 'Nike Air Zoom Pegasus 41',     nameAr: 'نايك اير زوم بيجاسوس 41', cat: 'Shoes', color: 'White',  desc: 'A responsive, everyday running shoe with Nike\'s Zoom Air cushioning — built for logging kilometers along the Corniche or the treadmill alike.', material: 'Mesh upper, foam midsole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/nike-pegasus-41.webp', now: 4200, old: 5100, rating: 5, badge: 'New' },
+  { id: 'adidas-gazelle',     name: 'Adidas Gazelle Sneakers',      nameAr: 'أديداس جازيل', cat: 'Shoes', color: 'Grey',   desc: 'The timeless suede Gazelle with the three stripes — a low-profile classic that pairs as easily with jeans as it does joggers.', material: 'Suede upper, rubber sole', sizes: '39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/adidas-gazelle-grey.webp', now: 3100, old: 3900, rating: 5, badge: '-21%' },
+  { id: 'adidas-samba',       name: 'Adidas Samba OG',              nameAr: 'أديداس سامبا', cat: 'Shoes', color: 'White',  desc: 'The football-terrace icon turned everyday staple — a white leather sneaker with gum sole and the classic three stripes down the side.', material: 'Leather upper, gum rubber sole', sizes: '38, 39, 40, 41, 42, 43 (EU)', img: 'assets/img/products/adidas-samba.webp', now: 3300, old: 4100, rating: 5, badge: 'Hot' },
 
   /* Hoodies & sweatshirts */
   { id: 'adidas-trefoil-hoodie', name: 'Adidas Trefoil Hoodie',     nameAr: 'هودي أديداس تريفويل', cat: 'Men', color: 'Beige', desc: 'A soft fleece pullover hoodie with the classic Adidas Trefoil logo across the chest — an easy layer for Cairo\'s cooler evenings.', material: 'Cotton fleece', sizes: 'S, M, L, XL, XXL', img: 'assets/img/products/adidas-trefoil-hoodie.webp', now: 1850, old: 2400, rating: 5, badge: 'New' },
@@ -789,7 +789,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuick
    ========================================================= */
 const shopGrid = document.getElementById('shopGrid');
 if (shopGrid) {
-  const VALID_CATS = ['Women', 'Men', 'Kids', 'Sportswear', 'Accessories'];
+  const VALID_CATS = ['Women', 'Men', 'Kids', 'Sportswear', 'Shoes', 'Accessories'];
   const urlParams = new URLSearchParams(location.search);
   const urlCat = urlParams.get('cat');
   const initialCat = VALID_CATS.includes(urlCat) ? urlCat : 'All';
@@ -973,7 +973,7 @@ if (shopGrid) {
   apply();
 
   // Append count badges
-  ['All', 'Women', 'Men', 'Kids', 'Sportswear', 'Accessories'].forEach((c) => {
+  ['All', 'Women', 'Men', 'Kids', 'Sportswear', 'Shoes', 'Accessories'].forEach((c) => {
     const btn = document.querySelector(`[data-filter-cat="${c}"]`);
     if (!btn) return;
     const n = c === 'All' ? CATALOG.length : CATALOG.filter((p) => p.cat === c).length;
@@ -1162,16 +1162,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const promoPrev = document.getElementById("promoPrev");
     const promoNext = document.getElementById("promoNext");
 
+    // The promo slider only exists on the homepage — every other page
+    // intentionally has none of these elements, so return quietly instead
+    // of logging a (previously page-wide, false-positive) console error.
     if (!promoTrack || !promoSlider || !promoDots) {
-        console.error("Promo slider elements not found.");
         return;
     }
 
     const slides = Array.from(
         promoTrack.querySelectorAll(".promo-slider__slide")
     );
-
-    console.log("Promo slides:", slides.length);
 
     if (slides.length === 0) {
         return;
