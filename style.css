@@ -232,51 +232,6 @@ p { text-wrap: pretty; }
 /* =========================================================
    PROMO BAR
    ========================================================= */
-.promo-bar {
-  background: var(--secondary);
-  color: #e9ddcb;
-  font-size: 13px;
-  position: relative;
-  overflow: hidden;
-}
-.promo-bar::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: radial-gradient(circle at 80% 50%, rgba(200,149,84,.18), transparent 50%);
-  pointer-events: none;
-}
-.promo-bar__inner {
-  display: flex;
-  align-items: center;
-  min-height: 42px;
-  position: relative;
-  z-index: 1;
-}
-.promo-bar__support { color: #b9a98d; font-size: 12px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
-.promo-bar__support a { color: #fff; font-weight: 500; }
-.promo-bar__text { width: 100%; text-align: center; letter-spacing: 0.01em; padding: 0 30px; }
-.promo-bar__text strong { color: var(--accent); font-weight: 600; }
-.promo-bar__link {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  margin-left: 4px;
-}
-.promo-bar__link:hover { color: var(--accent); }
-.promo-bar__close {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #b9a98d;
-  font-size: 18px;
-  line-height: 1;
-  padding: 6px 8px;
-  border-radius: 4px;
-  transition: var(--t-fast);
-}
-.promo-bar__close:hover { color: #fff; background: rgba(255,255,255,.06); }
-.promo-bar.is-hidden { display: none; }
 
 /* #siteTop is just an empty injection target for the promo-bar + header.
    Left as a normal block box, its height would only ever equal
@@ -328,7 +283,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   display: flex;
   align-items: center;
   gap: 32px;
-  min-height: 78px;
+  min-height: 60px;
 }
 
 .logo {
@@ -658,6 +613,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 
     overflow: hidden;
     direction: ltr;
+    padding-bottom: 25px;
 }
 
 
@@ -1042,6 +998,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 
     .promo-slider__viewport {
         padding: 0;
+        padding-bottom: 25px;
     }
 
     .promo-slider__track {
@@ -1937,7 +1894,6 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 @media (max-width: 600px) {
    .hero__content { padding-bottom: 56px; }
   .container { padding: 0 20px; }
-  .promo-bar__support { display: none; }
   .products__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .instagram__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; padding: 56px 20px 32px; }
@@ -2047,7 +2003,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 .brands__row {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px 44px;
+  gap: 30px 80px;
   align-items: center;
   justify-content: center;
 }
@@ -2246,7 +2202,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   color: var(--accent);
   font-weight: 500;
 }
-.side-promo__body h4 { color: #fff; font-size: 28px; margin: 6px 0 12px; line-height: 1.1; }
+.side-promo__body h4 { color: #fff; font-size: 18px; margin: 6px 0 12px; line-height: 1.1; }
 .side-promo .link-arrow { color: #fff; }
 
 .shop__bar {

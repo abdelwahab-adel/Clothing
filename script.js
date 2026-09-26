@@ -78,13 +78,7 @@ function buildTop() {
   ).join('');
 
   return `
-  <div class="promo-bar" id="promoBar">
-    <div class="container promo-bar__inner">
-      <span class="promo-bar__support">Support <a href="tel:+201068300432">+20 10 6830 0432</a></span>
-      <p class="promo-bar__text">Message us on WhatsApp and <strong>GET 25% OFF</strong> your first order.<a href="https://wa.me/${STORE_WHATSAPP}" class="promo-bar__link" target="_blank" rel="noopener">Message us</a></p>
-      <button class="promo-bar__close" id="promoClose" aria-label="Close announcement">&times;</button>
-    </div>
-  </div>
+  
 
   <header class="header" id="header">
     <div class="container header__inner">
@@ -602,7 +596,7 @@ renderProducts('trendingGrid', [
 // Sportswear Collection: all tagged + sportswear category
 renderProducts('sportsGrid', CATALOG.filter((p) => p.tag === 'sportswear' || p.cat === 'Sportswear').slice(0, 5));
 // New Arrivals: latest 6 by reverse index
-renderProducts('newArrivalsGrid', CATALOG.slice(-6));
+renderProducts('newArrivalsGrid', CATALOG.slice(-5));
 // Featured Brand (Puma) — mixed sportswear + menswear picks
 renderProducts('featuredBrandGrid', [
   CATALOG.find((p) => p.id === 'jacket-black'),
@@ -1410,7 +1404,7 @@ if (testiTrack) {
     <div class="testi__slide">
       <p class="testi__quote">${t.quote}</p>
       <div class="testi__stars">${STARS(t.rating)}</div>
-      <img class="testi__avatar" src="${t.avatar}" alt="${t.name}" loading="lazy" />
+      <img style="display: none;" class="testi__avatar" src="${t.avatar}" alt="${t.name}" loading="lazy" />
       <div class="testi__name">${t.name}</div>
       <div class="testi__role">${t.role}</div>
     </div>`).join('')}</div>`;
