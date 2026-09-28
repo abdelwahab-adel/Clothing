@@ -3870,6 +3870,26 @@ img.img-fallback {
 .showcase{background:var(--bg-warm)}
 .showcase__grid{display:grid;grid-template-columns:minmax(300px,400px) 1fr;gap:72px;align-items:center;padding-top:88px;padding-bottom:88px}
 .showcase__media{position:relative;aspect-ratio:9/16;max-height:720px;width:100%;border-radius:var(--radius-xl);overflow:hidden;background:#1c140d;box-shadow:0 24px 60px rgba(40,25,10,.22)}
+
+.showcase__grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(280px, 400px);
+  gap:60px;
+  align-items:center;
+  padding-top:88px;
+  padding-bottom:88px;
+}
+
+.showcase__body{
+  grid-column:1;
+  grid-row:1;
+}
+
+.showcase__media{
+  grid-column:2;
+  grid-row:1;
+}
+
 .showcase__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .showcase__controls{position:absolute;right:14px;bottom:14px;display:flex;gap:10px;z-index:2}
 .showcase__btn{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(20,13,8,.5);backdrop-filter:blur(6px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
@@ -3896,28 +3916,36 @@ img.img-fallback {
 .showcase__perks strong{font-size:14px;font-weight:600;color:var(--ink)}
 .showcase__perks span{font-size:13px;color:var(--muted)}
 @media (max-width:1080px){
-  .showcase__grid{grid-template-columns:1fr;gap:40px;padding-top:64px;padding-bottom:64px}
-  .showcase__media{max-width:360px;margin-inline:auto}
-  .showcase__body{max-width:none}
-}
-@media (max-width:560px){.showcase__cats{grid-template-columns:repeat(2,1fr)}.showcase__perks{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.showcase__cat,.showcase__btn{transition:none}}
+  .showcase__grid{
+    grid-template-columns:1fr;
+    gap:40px;
+    padding-top:64px;
+    padding-bottom:64px;
+  }
 
-.showcase__grid{
-  display:grid;
-  grid-template-columns:minmax(0, 1.7fr) minmax(280px, 400px);
-  gap:60px;
-  align-items:center;
-  padding-top:88px;
-  padding-bottom:88px;
+  .showcase__body,
+  .showcase__media{
+    grid-column:1;
+    grid-row:auto;
+  }
+
+  .showcase__media{
+    width:100%;
+    max-width:360px;
+    margin-inline:auto;
+  }
+
+  .showcase__body{
+    max-width:none;
+  }
 }
 
-.showcase__body{
-  grid-column:1;
-  grid-row:1;
-}
+@media (max-width:560px){
+  .showcase__cats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-.showcase__media{
-  grid-column:2;
-  grid-row:1;
+  .showcase__perks{
+    grid-template-columns:1fr;
+  }
 }
