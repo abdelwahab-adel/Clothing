@@ -3902,3 +3902,22 @@ img.img-fallback {
 }
 @media (max-width:560px){.showcase__cats{grid-template-columns:repeat(2,1fr)}.showcase__perks{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.showcase__cat,.showcase__btn{transition:none}}
+
+.showcase__grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(280px, 400px);
+  gap:60px;
+  align-items:center;
+  padding-top:88px;
+  padding-bottom:88px;
+}
+
+.showcase__body{
+  grid-column:1;
+  grid-row:1;
+}
+
+.showcase__media{
+  grid-column:2;
+  grid-row:1;
+}
