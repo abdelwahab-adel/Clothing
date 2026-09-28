@@ -1116,7 +1116,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
 .features { padding: 0 0 24px; }
 .features__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
   background: var(--surface);
   border: 1px solid var(--line);
