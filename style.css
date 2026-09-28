@@ -1285,6 +1285,16 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   aspect-ratio: 3/3.8;
   background: var(--surface-2);
 }
+/* Fallback placeholder shown when a product/blog photo fails to load
+   (see imgFallback() in script.js). Forced to `contain` + padded so the
+   icon reads cleanly inside any card, thumbnail or gallery slot instead
+   of being cropped by that slot's normal object-fit: cover. */
+img.img-fallback {
+  object-fit: contain !important;
+  background: #f2ece1;
+  padding: 14%;
+  box-sizing: border-box;
+}
 .card__img {
   width: 100%;
   height: 100%;
@@ -3213,6 +3223,68 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   .featured-brand__grid { padding: 56px 28px; }
 }
 
+/* ---------- Shop The Look ---------- */
+.shop-look { background: var(--bg); }
+.shop-look__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 96px 28px;
+}
+.shop-look__media {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--surface-2);
+}
+.shop-look__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shop-look__copy { max-width: 480px; }
+.shop-look__copy .section-title { margin: 10px 0 16px; }
+.shop-look__copy > p { color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+.shop-look__items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 32px;
+  border-top: 1px solid var(--line);
+}
+.shop-look__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s var(--ease-out);
+}
+.shop-look__item:hover { transform: translateX(6px); }
+.shop-look__item img {
+  width: 56px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+.shop-look__item-body { flex: 1; min-width: 0; }
+.shop-look__item-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.shop-look__item-price { font-size: 13px; color: var(--muted); }
+.shop-look__item-price strong { color: var(--ink); font-weight: 600; }
+.shop-look__item-arrow { color: var(--primary); font-size: 18px; flex-shrink: 0; }
+
+@media (max-width: 1080px) {
+  .shop-look__grid { grid-template-columns: 1fr; gap: 40px; padding: 64px 28px; }
+  .shop-look__media { aspect-ratio: 16/10; }
+  .shop-look__copy { max-width: none; }
+}
+
 /* ---------- Quick view modal ---------- */
 .qv-overlay {
   position: fixed;
@@ -3309,6 +3381,15 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   animation: fadeIn .2s ease;
 }
 .search-overlay.is-open { display: flex; }
+/* type="search" inputs render a native round "x" clear button in
+   Chrome/Edge/Safari. It sat right next to our own custom close
+   button, showing what looked like two overlapping close icons. */
+#searchPanelInput::-webkit-search-cancel-button,
+#searchPanelInput::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+#searchPanelInput::-ms-clear { display: none; width: 0; height: 0; }
 .search-panel {
   background: #fff;
   border-radius: var(--radius-xl);
