@@ -491,6 +491,7 @@ body[data-page="home"] .header:not(.is-scrolled) .nav-toggle span { background: 
   background-size: cover;
   background-position: center 22%;
   overflow: hidden;
+  background-image:url('assets/img/bb.jpg')
 }
 /* Pulls the photo up behind the transparent header (see HEADER rules
    above) so the nav reads as an overlay on the image, like the
@@ -1893,7 +1894,8 @@ img.img-fallback {
   /* The vertical social rail and scroll cue are a desktop/tablet flourish;
      on phones the bottom tab bar already owns that screen real estate,
      so both are dropped to avoid overlapping it. */
-  .hero { min-height: 100svh; }
+  .hero { min-height: 100svh;   background-image:url('assets/img/bb_2.jpg')
+}
   .hero__social,
   .hero__scroll { display: none; }
 }
