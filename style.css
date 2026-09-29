@@ -3794,23 +3794,16 @@ img.img-fallback {
 
 
 #newArrivalsGrid{
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 
 @media (max-width: 1080px) {
-  #newArrivalsGrid{grid-template-columns: repeat(3, 1fr); }
+  #newArrivalsGrid { grid-template-columns: repeat(3, 1fr); }
 }
-
-@media (max-width: 900px) {
-#newArrivalsGrid{
-  grid-template-columns: repeat(3, 1fr);
-}}
-
 @media (max-width: 600px) {
-#newArrivalsGrid{
-  grid-template-columns: repeat(2, 1fr);
-}}
+  #newArrivalsGrid { grid-template-columns: repeat(2, 1fr); }
+}
 
 @media (max-width: 380px) {
   #newArrivalsGrid{ grid-template-columns: 1fr; }

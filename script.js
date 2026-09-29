@@ -638,7 +638,7 @@ renderProducts('trendingGrid', [
 // Sportswear Collection: all tagged + sportswear category
 renderProducts('sportsGrid', CATALOG.filter((p) => p.tag === 'sportswear' || p.cat === 'Sportswear').slice(0, 5));
 // New Arrivals: latest 6 by reverse index
-renderProducts('newArrivalsGrid', CATALOG.slice(-6));
+renderProducts('newArrivalsGrid', CATALOG.slice(-5));
 // Featured Brand (Puma) — mixed sportswear + menswear picks
 renderProducts('featuredBrandGrid', [
   CATALOG.find((p) => p.id === 'jacket-black'),
