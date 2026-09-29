@@ -4039,3 +4039,32 @@ img.img-fallback {
     grid-template-columns:1fr;
   }
 }
+/* ---------- Showcase: mobile fixes ---------- */
+.showcase{overflow-x:clip}
+.showcase__grid > *{min-width:0}
+.showcase__body{min-width:0;max-width:100%}
+@media (max-width:1080px){
+  .showcase__grid{grid-template-columns:minmax(0,1fr)}
+  .showcase__text{max-width:none}
+}
+@media (max-width:560px){
+  .showcase__grid{gap:32px;padding-top:48px;padding-bottom:48px}
+  .showcase__media{max-width:min(320px,100%)}
+  .showcase__title{font-size:clamp(30px,9vw,38px);overflow-wrap:break-word}
+  .showcase__text{font-size:15px;line-height:1.7;margin-bottom:24px}
+  .showcase__cats{margin-bottom:26px}
+  .showcase__cat{min-height:108px;padding:14px 14px 12px;gap:12px}
+  /* name and Arabic label stacked so long words never wrap awkwardly */
+  .showcase__cat-top{flex-direction:column;align-items:flex-start;gap:4px}
+  .showcase__cat-name{font-size:18px;overflow-wrap:anywhere}
+  .showcase__cat-ar{font-size:13px;line-height:1.3;white-space:nowrap;align-self:flex-start;text-align:start}
+  .showcase__cat-meta{padding-right:32px;font-size:12px}
+  .showcase__cat-arrow{right:10px;bottom:10px;width:26px;height:26px}
+  .showcase__ctas{gap:16px 20px;margin-bottom:26px}
+  .showcase__ctas .btn--lg{flex:1 1 auto;justify-content:center;min-width:0}
+  .showcase__perks{padding:16px;gap:16px}
+  .showcase__perks li{min-width:0}
+}
+@media (max-width:360px){
+  .showcase__cats{grid-template-columns:1fr}
+}
