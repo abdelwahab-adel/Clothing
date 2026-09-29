@@ -22,7 +22,7 @@ const NAV = [
    policies page instead of nowhere. */
 const SOCIAL = {
   facebook: 'https://www.facebook.com/',
-  twitter: 'https://twitter.com/',
+  twitter: 'https://x.com/',
   instagram: 'https://www.instagram.com/',
   youtube: 'https://www.youtube.com/',
   linkedin: 'https://www.linkedin.com/',
@@ -75,9 +75,9 @@ const ICON = {
   clock:  '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   arrowUp:'<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
   arrowR: '<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
-  ig:     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>',
+  ig:     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>',
   fb:     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
-  tw:     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>',
+  tw:     '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z\" fill=\"currentColor\" stroke=\"none\"/></svg>',
   yt:     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>',
   bagHand:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
   check:  '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
@@ -154,13 +154,12 @@ function buildBottom() {
   <footer class="footer" id="footer">
     <div class="container footer__grid">
       <div class="footer__col footer__brand">
-        <a href="index.html" class="logo logo--light"><span class="logo__text">Zay<span class="logo__dot">.</span></span></a>
-        <p>A curated edit of modern fashion essentials — designed in our atelier, crafted for everyday confidence, delivered to your door.</p>
+        <a href="index.html" class="logo logo--light"><span class="logo__text">Zay<span class="logo__dot">.</span></span><span class="logo__tag">Store</span></a>
+        <p>Your online fashion store in Egypt — women's, men's and kids' clothing, sportswear, shoes and accessories from top brands, delivered to your door.</p>
         <div class="footer__social">
           <a href="${SOCIAL.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICON.fb}</a>
-          <a href="${SOCIAL.twitter}" target="_blank" rel="noopener" aria-label="Twitter">${ICON.tw}</a>
           <a href="${SOCIAL.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${ICON.ig}</a>
-          <a href="${SOCIAL.youtube}" target="_blank" rel="noopener" aria-label="YouTube">${ICON.yt}</a>
+          <a href="${SOCIAL.twitter}" target="_blank" rel="noopener" aria-label="X">${ICON.tw}</a>
         </div>
       </div>
       <div class="footer__col"><h4>Information</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="policies.html#terms">Terms &amp; Conditions</a></li><li><a href="policies.html#privacy">Privacy Policy</a></li></ul></div>
@@ -170,7 +169,7 @@ function buildBottom() {
     </div>
     <div class="footer__bar">
       <div class="container footer__bar-inner">
-        <p>&copy; 2026 Zay. — Crafted with care.</p>
+        <p>&copy; 2026 Zay. Store — All rights reserved.</p>
         <div class="footer__pay">
           <span class="footer__pay-badge">${ICON.truck} Cash on Delivery</span>
           <span class="footer__pay-badge">${ICON.pin} Pay on Pickup</span>
@@ -179,7 +178,7 @@ function buildBottom() {
           <span class="footer__pay-badge footer__pay-badge--logo"><img src="assets/img/payments/vodafone-cash.jpg" alt="Vodafone Cash" loading="lazy" /></span>
           <span class="footer__pay-badge footer__pay-badge--logo"><img src="assets/img/payments/fawry.jpg" alt="Fawry" loading="lazy" /></span>
         </div>
-        <p>Designed for fashion lovers.</p>
+        <p>Shop with confidence.</p>
       </div>
     </div>
   </footer>
@@ -639,12 +638,12 @@ renderProducts('trendingGrid', [
 renderProducts('sportsGrid', CATALOG.filter((p) => p.tag === 'sportswear' || p.cat === 'Sportswear').slice(0, 5));
 // New Arrivals: latest 6 by reverse index
 renderProducts('newArrivalsGrid', CATALOG.slice(-5));
-// Featured Brand (Puma) — mixed sportswear + menswear picks
+// Featured section: Summer picks
 renderProducts('featuredBrandGrid', [
-  CATALOG.find((p) => p.id === 'puma-black-hoodie'),
-  CATALOG.find((p) => p.id === 'puma-logo-tee'),
-  CATALOG.find((p) => p.id === 'puma-speedcat'),
-  CATALOG.find((p) => p.id === 'kids-puma-hoodie-set'),
+  CATALOG.find((p) => p.id === 'beige-dress'),
+  CATALOG.find((p) => p.id === 'linen-shorts'),
+  CATALOG.find((p) => p.id === 'polo-shirt'),
+  CATALOG.find((p) => p.id === 'aviator-sun'),
 ]);
 /* =========================================================
    Collection showcase (video + live category cards)
@@ -664,8 +663,11 @@ renderProducts('featuredBrandGrid', [
     if (!items.length) return '';
     const from = Math.min(...items.map((p) => p.now));
     return `<li><a class="showcase__cat" href="shop.html?cat=${c.key}">
-      <span class="showcase__cat-name">${c.key}<em dir="rtl" lang="ar">${c.ar}</em></span>
-      <span class="showcase__cat-meta">${items.length} pieces · from ${money(from)}</span>
+      <span class="showcase__cat-top">
+        <span class="showcase__cat-name">${c.key}</span>
+        <em class="showcase__cat-ar" dir="rtl" lang="ar">${c.ar}</em>
+      </span>
+      <span class="showcase__cat-meta"><b>${items.length} styles</b><span>from ${money(from)}</span></span>
       <span class="showcase__cat-arrow" aria-hidden="true">→</span>
     </a></li>`;
   }).join('');
@@ -771,7 +773,7 @@ renderProducts('featuredBrandGrid', [
   function hotsHTML(l) {
     return l.ids.filter((id) => l.spots[id] && byId(id)).map((id, n) => {
       const p = byId(id);
-      return `<a class="shop-look__hot" href="product.html?id=${p.id}" data-id="${p.id}" style="left:-99px;top:-99px" aria-label="${p.name} — ${money(p.now)}">
+      return `<a class="shop-look__hot"  data-id="${p.id}" style="left:-99px;top:-99px" aria-label="${p.name} — ${money(p.now)}">
         <span class="shop-look__hot-tip"><strong>${p.name}</strong><em>${money(p.now)}</em></span>
       </a>`;
     }).join('');
@@ -1122,7 +1124,7 @@ if (shopGrid) {
     return (state.cat === 'All' || p.cat === state.cat) &&
       (state.color === 'All' || p.color === state.color) &&
       (state.price === 'All' || PRICE_RANGES[state.price]?.test(p)) &&
-      (!state.q || p.name.toLowerCase().includes(state.q) || (p.nameAr && p.nameAr.includes(state.q)) || p.cat.toLowerCase().includes(state.q) || p.color.toLowerCase().includes(state.q));
+      (!state.q || p.name.toLowerCase().includes(state.q) || (p.nameAr && p.nameAr.includes(state.q)) || p.cat.toLowerCase().includes(state.q) || p.color.toLowerCase().includes(state.q) || (p.desc && p.desc.toLowerCase().includes(state.q)));
   }
 
   function apply(resetPage = true) {
@@ -1911,17 +1913,23 @@ if (contactForm) {
       firstInvalid.focus();
       return;
     }
-    statusEl.className = 'form-status form-status--loading';
-    statusEl.innerHTML = '<span class="spinner" aria-hidden="true"></span> Sending your message…';
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Sending…';
-    setTimeout(() => {
-      statusEl.className = 'form-status form-status--success';
-      statusEl.textContent = 'Message sent! Our team will get back to you within 24 hours. (Demo form — nothing was actually emailed.)';
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = submitLabel;
-      contactForm.reset();
-    }, 900);
+    // Build the WhatsApp message from the form fields and open the chat
+    const val = (id) => (document.getElementById(id)?.value || '').trim();
+    const lines = [
+      '*New message from the website*',
+      '',
+      `*Name:* ${val('cfName')}`,
+      `*Email:* ${val('cfEmail')}`,
+    ];
+    if (val('cfSubject')) lines.push(`*Subject:* ${val('cfSubject')}`);
+    lines.push('', val('cfMessage'));
+    const url = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`;
+    const win = window.open(url, '_blank');
+    if (win) win.opener = null;
+    else window.location.href = url; // popup blocked -> open in the same tab
+    statusEl.className = 'form-status form-status--success';
+    statusEl.textContent = 'Opening WhatsApp… just press Send there to deliver your message.';
+    contactForm.reset();
   });
 }
 
