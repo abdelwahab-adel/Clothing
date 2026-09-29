@@ -313,9 +313,9 @@ const CATALOG = [
   { id: 'toddler-nike-tee',   name: 'Toddler Nike Logo T-Shirt',    nameAr: 'تي شيرت نايك أطفال صغار', cat: 'Kids', color: 'Black', desc: 'A soft cotton tee with the classic Nike swoosh, sized just right for toddlers who are always on the move.', material: '100% Cotton', sizes: '1–2Y, 2–3Y, 3–4Y', img: 'assets/img/products/toddler-nike-tee.webp', now: 320, old: 420, rating: 4, badge: 'New' },
 
   /* Bags */
-  { id: 'white-leather-bag',  name: 'White Structured Handbag',     nameAr: 'شنطة يد جلد أبيض', cat: 'Women', color: 'White', desc: 'A clean, structured top-handle bag in white leather with a detachable strap — sharp enough for the office, versatile enough for a night out.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/white-leather-handbag.webp', now: 1750, old: 2300, rating: 5, badge: 'New' },
-  { id: 'black-structured-bag', name: 'Black Structured Satchel',   nameAr: 'شنطة يد جلد أسود', cat: 'Women', color: 'Black', desc: 'A polished black satchel with gold-tone hardware and a crossbody strap — roomy enough for a full workday, sharp enough for dinner after.', material: 'Vegan leather', sizes: 'One Size', img: 'assets/img/products/structured-black-handbag.webp', now: 1350, old: 1800, rating: 5, badge: '-25%' },
-  { id: 'black-gold-crossbody', name: 'Black Crossbody with Gold Clasp', nameAr: 'شنطة كروس أسود بمشبك ذهبي', cat: 'Women', color: 'Black', desc: 'A minimal black leather crossbody with a polished gold clasp — the everyday bag that goes from morning errands to evening plans.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/black-crossbody-gold-clasp.webp', now: 1550, old: 2050, rating: 5, badge: 'Hot' },
+  { id: 'white-leather-bag',  name: 'White Structured Handbag',     nameAr: 'شنطة يد جلد أبيض', cat: 'Accessories', color: 'White', desc: 'A clean, structured top-handle bag in white leather with a detachable strap — sharp enough for the office, versatile enough for a night out.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/white-leather-handbag.webp', now: 1750, old: 2300, rating: 5, badge: 'New' },
+  { id: 'black-structured-bag', name: 'Black Structured Satchel',   nameAr: 'شنطة يد جلد أسود', cat: 'Accessories', color: 'Black', desc: 'A polished black satchel with gold-tone hardware and a crossbody strap — roomy enough for a full workday, sharp enough for dinner after.', material: 'Vegan leather', sizes: 'One Size', img: 'assets/img/products/structured-black-handbag.webp', now: 1350, old: 1800, rating: 5, badge: '-25%' },
+  { id: 'black-gold-crossbody', name: 'Black Crossbody with Gold Clasp', nameAr: 'شنطة كروس أسود بمشبك ذهبي', cat: 'Accessories', color: 'Black', desc: 'A minimal black leather crossbody with a polished gold clasp — the everyday bag that goes from morning errands to evening plans.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/black-crossbody-gold-clasp.webp', now: 1550, old: 2050, rating: 5, badge: 'Hot' },
 
   /* Accessories: belts, hats, sunglasses, scarves, watches, hair */
   { id: 'leather-belt-buckle', name: 'Leather Belt, Statement Buckle', nameAr: 'حزام جلد بمشبك مميز', cat: 'Accessories', color: 'Tan', desc: 'A reversible tan leather belt with a polished statement buckle — a sharp finishing touch for tailored trousers or dark denim.', material: 'Genuine leather', sizes: '90, 100, 110, 120 (cm)', img: 'assets/img/products/leather-belt-buckle.webp', now: 850, old: 1150, rating: 4, badge: 'New' },
@@ -641,10 +641,10 @@ renderProducts('sportsGrid', CATALOG.filter((p) => p.tag === 'sportswear' || p.c
 renderProducts('newArrivalsGrid', CATALOG.slice(-5));
 // Featured Brand (Puma) — mixed sportswear + menswear picks
 renderProducts('featuredBrandGrid', [
-  CATALOG.find((p) => p.id === 'jacket-black'),
-  CATALOG.find((p) => p.id === 'track-pants'),
-  CATALOG.find((p) => p.id === 'running-sneakers'),
-  CATALOG.find((p) => p.id === 'yoga-tank'),
+  CATALOG.find((p) => p.id === 'puma-black-hoodie'),
+  CATALOG.find((p) => p.id === 'puma-logo-tee'),
+  CATALOG.find((p) => p.id === 'puma-speedcat'),
+  CATALOG.find((p) => p.id === 'kids-puma-hoodie-set'),
 ]);
 /* =========================================================
    Collection showcase (video + live category cards)
