@@ -787,7 +787,7 @@ renderProducts('featuredBrandGrid', [
   function hotsHTML(l) {
     return l.ids.filter((id) => l.spots[id] && byId(id)).map((id, n) => {
       const p = byId(id);
-      return `<a class="shop-look__hot" href="product.html?id=${esc(p.id)}" data-id="${esc(p.id)}" style="left:-99px;top:-99px" aria-label="${esc(p.name)} — ${money(p.now)}">
+      return `<a class="shop-look__hot" data-id="${esc(p.id)}" style="left:-99px;top:-99px" aria-label="${esc(p.name)} — ${money(p.now)}">
         <span class="shop-look__hot-tip"><strong>${esc(p.name)}</strong><em>${money(p.now)}</em></span>
       </a>`;
     }).join('');
