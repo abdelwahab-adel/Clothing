@@ -242,6 +242,10 @@ p { text-wrap: pretty; }
    box entirely, so the header's containing block becomes <body> (as
    tall as the whole page), letting it stay stuck for the full scroll. */
 #siteTop { display: contents; }
+/* Reserve the header's height until script.js injects it, so the page
+   content doesn't jump down by ~61px on load (layout shift). The
+   placeholder disappears when #siteTop is replaced by the real header. */
+#siteTop::before { content: ""; display: block; height: 61px; }
 
 /* =========================================================
    HEADER
@@ -2128,31 +2132,6 @@ img.img-fallback {
   font-family: var(--font-body);
 }
 .filter-list__btn.is-active .count { color: var(--accent); }
-
-.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
-.swatch {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--sw);
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 1px var(--line);
-  transition: var(--t-fast);
-  position: relative;
-}
-.swatch:hover { transform: scale(1.1); }
-.swatch.is-active { box-shadow: 0 0 0 2px var(--primary); }
-.swatch.is-active::after {
-  content: '✓';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,.3);
-}
 
 .side-promo {
   position: relative;

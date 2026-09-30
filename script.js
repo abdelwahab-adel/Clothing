@@ -34,6 +34,11 @@ const SOCIAL = {
    (e.g. Egyptian number 010 1234 5678 -> "201012345678").
    ⚠️ Replace this with the real store number before going live. */
 const STORE_WHATSAPP = '201068300432';
+const STORE_TEL = '+' + STORE_WHATSAPP;
+const STORE_TEL_DISPLAY = '+20 10 6830 0432';
+/* Real end date of the "Deals of the Day" offer (ISO, Cairo time). When it
+   passes, the countdown is removed instead of restarting on every visit. */
+const DEAL_ENDS_AT = '2026-10-15T23:59:59+03:00';
 
 /* ---------- Product image fallback ----------
    A handful of catalog entries (mainly ones added early on) point at
@@ -92,6 +97,7 @@ const ICON = {
 };
 
 const ACTIVE = document.body.dataset.page || 'home';
+const REDUCE_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 /* ---------- Build header + promo ---------- */
 function buildTop() {
@@ -165,7 +171,7 @@ function buildBottom() {
       <div class="footer__col"><h4>Information</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="policies.html#terms">Terms &amp; Conditions</a></li><li><a href="policies.html#privacy">Privacy Policy</a></li></ul></div>
       <div class="footer__col"><h4>Quick Links</h4><ul><li><a href="shop.html?cat=Women">Women</a></li><li><a href="shop.html?cat=Men">Men</a></li><li><a href="shop.html?cat=Accessories">Accessories</a></li><li><a href="shop.html?sort=newest">New Arrivals</a></li></ul></div>
       <div class="footer__col"><h4>Customer Service</h4><ul><li><a href="https://wa.me/${STORE_WHATSAPP}" target="_blank" rel="noopener">Track Your Order</a></li><li><a href="policies.html#returns">Returns</a></li><li><a href="policies.html#shipping">Shipping Info</a></li></ul></div>
-      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:+201068300432">+20 10 6830 0432</a></li><li>${ICON.mail} <a href="mailto:hello@zay.eg">hello@zay.eg</a></li></ul></div>
+      <div class="footer__col"><h4>Contact</h4><ul class="footer__contact"><li>${ICON.pin} 18 Talaat Harb St, Downtown, Cairo, Egypt</li><li>${ICON.phone} <a href="tel:${STORE_TEL}">${STORE_TEL_DISPLAY}</a></li><li>${ICON.mail} <a href="mailto:hello@zay.eg">hello@zay.eg</a></li></ul></div>
     </div>
     <div class="footer__bar">
       <div class="container footer__bar-inner">
@@ -275,7 +281,7 @@ const CATALOG = [
   { id: 'leggings-black',    name: 'Slate Blue Jogger Sweatpants', nameAr: 'بنطلون جوجر أزرق كحلي', cat: 'Sportswear', color: 'Slate Blue',    desc: 'Relaxed jogger sweatpants with an elastic waist and side pockets — as easy for a lounge day as it is for a walk to the corner shop.', material: 'Cotton fleece', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/leggings-black.webp', now: 480,  old: 720, rating: 5, badge: '-33%' },
   { id: 'running-sneakers',  name: 'Red Running Sneakers',   nameAr: 'جزمة جري حمراء', cat: 'Shoes', color: 'Red',    desc: 'Lightweight, breathable running sneakers in a bold red — built for Cairo\'s pavements, whether it\'s an early morning Corniche run or a gym session.', material: 'Mesh upper, rubber sole', sizes: '38, 39, 40, 41, 42, 43, 44 (EU)', img: 'assets/img/products/running-sneakers.webp', now: 1100,  old: 1500, rating: 5, badge: 'Hot' },
   { id: 'yoga-tank',         name: 'Colorblock Sports Bra',          nameAr: 'حمالة رياضية ملونة', cat: 'Sportswear', color: 'Multi',   desc: 'A supportive, breathable sports bra in an eye-catching colorblock finish — built to move with every rep, set and stretch.', material: 'Cotton-spandex blend', sizes: 'XS, S, M, L, XL', img: 'assets/img/products/yoga-tank.webp', now: 320,  old: 480, rating: 4, badge: '-33%' },
-  { id: 'track-pants',       name: 'Tapered Track Pants',            nameAr: 'بنطلون رياضي', cat: 'Sportswear', color: 'Charcoal', desc: 'Tapered track pants that go from the gym to running errands without missing a beat — soft, breathable, and easy to move in.', material: 'Polyester-spandex blend', sizes: 'S, M, L, XL', img: 'assets/img/products/track-pant.jpg', now: 580,  old: 850, rating: 5, badge: '-32%' },
+  { id: 'track-pants',       name: 'Tapered Track Pants',            nameAr: 'بنطلون رياضي', cat: 'Sportswear', color: 'Charcoal', desc: 'Tapered track pants that go from the gym to running errands without missing a beat — soft, breathable, and easy to move in.', material: 'Polyester-spandex blend', sizes: 'S, M, L, XL', img: 'assets/img/products/track-pant.webp', now: 580,  old: 850, rating: 5, badge: '-32%' },
 
   /* Accessories (4) */
   { id: 'crossbody-bag',     name: 'Floral Print Leather Handbag',      nameAr: 'شنطة يد جلد بطبعة ورد', cat: 'Accessories', color: 'Blush Floral',      desc: 'A structured top-handle bag in a striking botanical print — a statement piece that still goes with almost everything.', material: 'Genuine leather', sizes: 'One Size', img: 'assets/img/products/crossbody-bag.webp', now: 950,  old: 1350, rating: 5, badge: '-30%' },
@@ -353,12 +359,21 @@ const byId = (id) => CATALOG.find((p) => p.id === id);
    (piastras/decimals aren't used in everyday EGP retail pricing). */
 function money(n) { return 'EGP ' + Math.round(n).toLocaleString('en-US'); }
 
-/* Escapes free-typed text (search queries, account name/email typed into
-   the demo sign-in form) before it's inserted via innerHTML, so someone
+/* Escapes free-typed text (search queries, checkout/contact fields) before it's inserted via innerHTML, so someone
    typing HTML/script into a text field can't have it interpreted as
    markup — this data is echoed straight back to the same browser via
    localStorage/DOM with no server round-trip, but it should still never
    be treated as trusted markup. */
+const esc = (v) => escapeHTML(v);
+function cleanText(v, max = 200) { return String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max); }
+function cleanMultiline(v, max = 1000) { return String(v ?? '').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ').trim().slice(0, max); }
+/* Sizes come from the catalog text ("S, M, L (fit note)"); a single value
+   such as "One Size" or "650ml" means there is nothing to choose. */
+function parseSizes(s) {
+  const l = String(s || '').replace(/\([^)]*\)/g, '').split(',').map((x) => x.trim()).filter(Boolean);
+  return l.length > 1 ? l : [];
+}
+const needsSize = (p) => parseSizes(p.sizes).length > 0;
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -386,8 +401,7 @@ function careFor(material) {
   return 'Machine wash cold, tumble dry low';
 }
 
-/* Hex swatches for every color used across the catalog, so the shop's
-   color filter always covers every product (not just an original subset). */
+/* Hex swatches for every color used in the catalog (shown on the product page). */
 const COLOR_HEX = {
   Black: '#222', White: '#f3f0ea', Brown: '#a6783f', Beige: '#d8c3a5',
   Grey: '#9b9b9b', Blue: '#6c8ab0', Navy: '#2b3a55', Olive: '#6b6e3e',
@@ -565,16 +579,16 @@ function cardHTML(p) {
   return `
   <article class="card reveal">
     <div class="card__media">
-      <span class="${badgeClass(p.badge)}">${p.badge}</span>
-      <button class="card__wish" aria-label="Add ${p.name} to wishlist" data-wish="${p.id}">${ICON.heart}</button>
-      <a href="product.html?id=${p.id}" aria-label="View ${p.name}"><img class="card__img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="imgFallback(this)" /></a>
-      <button class="card__quick" data-quick="${p.id}" aria-label="Quick view ${p.name}">Quick View</button>
-      <button class="card__cart" data-add="${p.id}" aria-label="Add ${p.name} to cart">${ICON.bag} Add To Cart</button>
+      <span class="${badgeClass(p.badge)}">${esc(p.badge)}</span>
+      <button class="card__wish" aria-label="Add ${esc(p.name)} to wishlist" data-wish="${esc(p.id)}">${ICON.heart}</button>
+      <a href="product.html?id=${esc(p.id)}" aria-label="View ${esc(p.name)}"><img class="card__img" src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" /></a>
+      <button class="card__quick" data-quick="${esc(p.id)}" aria-label="Quick view ${esc(p.name)}">Quick View</button>
+      <button class="card__cart" data-add="${esc(p.id)}" aria-label="Add ${esc(p.name)} to cart">${ICON.bag} Add To Cart</button>
     </div>
     <div class="card__body">
-      <span class="card__cat">${p.cat}</span>
-      <h3 class="card__name"><a href="product.html?id=${p.id}">${p.name}</a></h3>
-      <span class="card__name-ar" dir="rtl" lang="ar">${p.nameAr}</span>
+      <span class="card__cat">${esc(p.cat)}</span>
+      <h3 class="card__name"><a href="product.html?id=${esc(p.id)}">${esc(p.name)}</a></h3>
+      <span class="card__name-ar" dir="rtl" lang="ar">${esc(p.nameAr)}</span>
       <span class="card__rating"><span class="card__stars">${STARS(p.rating)}</span> ${p.rating}.0</span>
       <div class="card__price"><span class="card__price-now">${money(p.now)}</span><span class="card__price-old">${money(p.old)}</span></div>
     </div>
@@ -754,10 +768,10 @@ renderProducts('featuredBrandGrid', [
   dots.innerHTML = LOOKS.map((l, i) => `<button type="button" class="shop-look__dot" data-i="${i}" aria-label="Look ${i + 1} of ${LOOKS.length}"></button>`).join('');
 
   const itemsHTML = (ids) => ids.map((id) => byId(id)).filter(Boolean).map((p) => `
-    <a class="shop-look__item" href="product.html?id=${p.id}" data-id="${p.id}">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="imgFallback(this)" />
+    <a class="shop-look__item" href="product.html?id=${esc(p.id)}" data-id="${esc(p.id)}">
+      <img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" />
       <div class="shop-look__item-body">
-        <div class="shop-look__item-name">${p.name}</div>
+        <div class="shop-look__item-name">${esc(p.name)}</div>
         <div class="shop-look__item-price"><strong>${money(p.now)}</strong>${p.old > p.now ? ` <span class="card__price-old">${money(p.old)}</span>` : ''}</div>
       </div>
       <span class="shop-look__item-arrow">→</span>
@@ -773,8 +787,8 @@ renderProducts('featuredBrandGrid', [
   function hotsHTML(l) {
     return l.ids.filter((id) => l.spots[id] && byId(id)).map((id, n) => {
       const p = byId(id);
-      return `<a class="shop-look__hot"  data-id="${p.id}" style="left:-99px;top:-99px" aria-label="${p.name} — ${money(p.now)}">
-        <span class="shop-look__hot-tip"><strong>${p.name}</strong><em>${money(p.now)}</em></span>
+      return `<a class="shop-look__hot" href="product.html?id=${esc(p.id)}" data-id="${esc(p.id)}" style="left:-99px;top:-99px" aria-label="${esc(p.name)} — ${money(p.now)}">
+        <span class="shop-look__hot-tip"><strong>${esc(p.name)}</strong><em>${money(p.now)}</em></span>
       </a>`;
     }).join('');
   }
@@ -804,19 +818,22 @@ renderProducts('featuredBrandGrid', [
     layer.querySelectorAll('.shop-look__hot').forEach((a) => a.classList.toggle('is-active', on && a.dataset.id === id));
     list.querySelectorAll('.shop-look__item').forEach((a) => a.classList.toggle('is-active', on && a.dataset.id === id));
   }
+  let armedHot = ''; // touch: hotspot whose label is showing (a 2nd tap opens it)
   [layer, list].forEach((root) => {
     root.addEventListener('mouseover', (e) => { const a = e.target.closest('[data-id]'); if (a) highlight(a.dataset.id, true); });
-    root.addEventListener('mouseout', (e) => { const a = e.target.closest('[data-id]'); if (a) highlight(a.dataset.id, false); });
+    root.addEventListener('mouseout', (e) => { if (coarse && armedHot) return; const a = e.target.closest('[data-id]'); if (a) highlight(a.dataset.id, false); });
     root.addEventListener('focusin', (e) => { const a = e.target.closest('[data-id]'); if (a) highlight(a.dataset.id, true); });
-    root.addEventListener('focusout', () => highlight('', false));
+    root.addEventListener('focusout', () => { if (coarse && armedHot) return; highlight('', false); });
   });
   // Touch: first tap shows the label, second tap opens the product.
+  // (Browsers fire mouseover before click on tap, so "is-active" can't tell a first tap from a
+  // second one — track the armed hotspot explicitly.)
   layer.addEventListener('click', (e) => {
     const a = e.target.closest('.shop-look__hot');
     if (!a || !coarse) return;
-    if (!a.classList.contains('is-active')) { e.preventDefault(); highlight(a.dataset.id, true); }
+    if (armedHot !== a.dataset.id) { e.preventDefault(); armedHot = a.dataset.id; highlight(a.dataset.id, true); }
   });
-  media.addEventListener('click', (e) => { if (!e.target.closest('.shop-look__hot')) highlight('', false); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.shop-look__hot')) { armedHot = ''; highlight('', false); } });
 
   img.addEventListener('load', placeHots);
   window.addEventListener('resize', placeHots);
@@ -831,7 +848,7 @@ renderProducts('featuredBrandGrid', [
     layer.innerHTML = hotsHTML(l);
     placeHots();
     cta.href = l.href;
-    cta.innerHTML = `${l.cta} <span class="btn__arrow">→</span>`;
+    cta.innerHTML = `${esc(l.cta)} <span class="btn__arrow">→</span>`;
     dots.querySelectorAll('.shop-look__dot').forEach((d, k) => {
       d.classList.toggle('is-active', k === i);
       d.setAttribute('aria-current', k === i ? 'true' : 'false');
@@ -902,35 +919,54 @@ renderProducts('featuredBrandGrid', [
    Cart (localStorage) + wishlist
    ========================================================= */
 const cartBadge = () => document.getElementById('cartBadge');
-function getCart() { try { return JSON.parse(localStorage.getItem('cl_cart') || '[]'); } catch { return []; } }
-function setCart(c) { localStorage.setItem('cl_cart', JSON.stringify(c)); paintCart(); }
+function getCart() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('cl_cart') || '[]');
+    if (!Array.isArray(raw)) return [];
+    const out = [];
+    raw.forEach((i) => {
+      const p = i && typeof i.id === 'string' ? byId(i.id) : null;
+      if (!p) return;
+      const sizes = parseSizes(p.sizes);
+      const size = sizes.length ? (sizes.includes(i.size) ? i.size : null) : '';
+      if (size === null) return;
+      const qty = Math.max(1, Math.min(99, parseInt(i.qty, 10) || 1));
+      const ex = out.find((o) => o.id === p.id && o.size === size);
+      if (ex) ex.qty = Math.min(99, ex.qty + qty); else out.push({ id: p.id, size, qty });
+    });
+    return out;
+  } catch { return []; }
+}
+function setCart(c) { try { localStorage.setItem('cl_cart', JSON.stringify(c)); } catch { toast('Could not save your cart (browser storage is blocked)'); } paintCart(); }
 function paintCart() {
   const n = getCart().reduce((s, i) => s + i.qty, 0);
   document.querySelectorAll('#cartBadge, #cartBadgeMobile').forEach((b) => {
     b.textContent = n; b.style.display = n ? 'grid' : 'none';
   });
 }
-function addToCart(id, qty = 1) {
-  // Clamp here too (not just in setCartQty) so a stray/uncapped quantity
-  // from the product page's stepper, or repeated Quick View adds, can
-  // never push a cart line past a sane 1–99 range.
+function addToCart(id, qty = 1, size = '') {
+  const p = byId(id);
+  if (!p) return false;
+  const sizes = parseSizes(p.sizes);
+  if (sizes.length && !sizes.includes(size)) { toast('Please choose a size first'); return false; }
+  if (!sizes.length) size = '';
   qty = Math.max(1, Math.min(99, parseInt(qty, 10) || 1));
   const c = getCart();
-  const ex = c.find((i) => i.id === id);
+  const ex = c.find((i) => i.id === id && i.size === size);
   if (ex) ex.qty = Math.max(1, Math.min(99, ex.qty + qty));
-  else c.push({ id, qty });
+  else c.push({ id, size, qty });
   setCart(c);
-  const p = byId(id);
-  toast(p ? `${p.name} added to cart` : 'Added to cart');
+  toast(`${p.name}${size ? ' (' + size + ')' : ''} added to cart`);
+  return true;
 }
-function removeFromCart(id) {
-  setCart(getCart().filter((i) => i.id !== id));
+function removeFromCart(id, size = '') {
+  setCart(getCart().filter((i) => !(i.id === id && i.size === size)));
 }
-function setCartQty(id, qty) {
+function setCartQty(id, size, qty) {
   const c = getCart();
-  const item = c.find((i) => i.id === id);
+  const item = c.find((i) => i.id === id && i.size === size);
   if (!item) return;
-  item.qty = Math.max(1, Math.min(99, qty | 0));
+  item.qty = Math.max(1, Math.min(99, parseInt(qty, 10) || 1));
   setCart(c);
 }
 const SHIP_THRESHOLD = 1000; // EGP — free shipping over EGP 1,000
@@ -949,8 +985,8 @@ function cartTotals() {
 }
 paintCart();
 
-function getWishlist() { try { return JSON.parse(localStorage.getItem('cl_wish') || '[]'); } catch { return []; } }
-function setWishlist(arr) { localStorage.setItem('cl_wish', JSON.stringify(arr)); paintWishlistBadge(); }
+function getWishlist() { try { const w = JSON.parse(localStorage.getItem('cl_wish') || '[]'); return Array.isArray(w) ? [...new Set(w.filter((id) => typeof id === 'string' && byId(id)))] : []; } catch { return []; } }
+function setWishlist(arr) { try { localStorage.setItem('cl_wish', JSON.stringify(arr)); } catch { toast('Could not save (browser storage is blocked)'); } paintWishlistBadge(); }
 function toggleWish(id) {
   const w = getWishlist();
   const i = w.indexOf(id);
@@ -988,9 +1024,22 @@ function toast(msg) {
 
 /* ---------- Global click delegation ---------- */
 document.addEventListener('click', (e) => {
+  const qsz = e.target.closest('[data-qv-size]');
+  if (qsz) {
+    const box = qsz.closest('.qv');
+    box.querySelectorAll('[data-qv-size]').forEach((x) => { x.classList.toggle('is-active', x === qsz); x.setAttribute('aria-pressed', String(x === qsz)); });
+    box.querySelector('[data-add]').dataset.size = qsz.dataset.qvSize;
+    box.querySelector('#qvSizeVal').textContent = ': ' + qsz.dataset.qvSize;
+  }
   const add = e.target.closest('[data-add]');
   if (add) {
-    addToCart(add.dataset.add, parseInt(add.dataset.qty || '1', 10));
+    const ap = byId(add.dataset.add);
+    if (ap && needsSize(ap) && !add.dataset.size) {
+      if (add.closest('.qv')) toast('Please choose a size first');
+      else { openQuickView(ap.id); toast('Choose your size'); }
+    } else {
+      addToCart(add.dataset.add, parseInt(add.dataset.qty || '1', 10), add.dataset.size || '');
+    }
     const b = cartBadge();
     b?.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.5)' }, { transform: 'scale(1)' }], { duration: 320, easing: 'cubic-bezier(.22,.61,.36,1)' });
   }
@@ -1039,22 +1088,23 @@ function openQuickView(id) {
     document.body.appendChild(qv);
   }
   qv.innerHTML = `
-    <div class="qv" role="dialog" aria-modal="true" aria-label="Quick view: ${p.name}">
+    <div class="qv" role="dialog" aria-modal="true" aria-label="Quick view: ${esc(p.name)}">
       <button class="qv__close" aria-label="Close quick view">×</button>
-      <img class="qv__img" src="${p.img}" alt="${p.name}" onerror="imgFallback(this)" />
+      <img class="qv__img" src="${esc(p.img)}" alt="${esc(p.name)}" />
       <div>
-        <span class="qv__cat">${p.cat}</span>
-        <h3 class="qv__name">${p.name}</h3>
-        <span class="qv__name-ar" dir="rtl" lang="ar">${p.nameAr}</span>
+        <span class="qv__cat">${esc(p.cat)}</span>
+        <h3 class="qv__name">${esc(p.name)}</h3>
+        <span class="qv__name-ar" dir="rtl" lang="ar">${esc(p.nameAr)}</span>
         <div class="qv__price">
           <span class="card__price-now">${money(p.now)}</span>
           <span class="card__price-old">${money(p.old)}</span>
         </div>
-        <div class="card__rating" style="margin-bottom:16px"><span class="card__stars">${STARS(p.rating)}</span> ${p.rating}.0 (${20 + p.rating} reviews)</div>
-        <p class="qv__desc">${p.desc}</p>
+        <div class="card__rating" style="margin-bottom:16px"><span class="card__stars">${STARS(p.rating)}</span> ${p.rating}.0</div>
+        ${parseSizes(p.sizes).length ? `<div class="pd__opt" style="margin-bottom:16px"><span class="pd__opt-label">Size<span class="pd__opt-value" id="qvSizeVal">: choose</span></span><div class="pd__opts" role="group" aria-label="Size">${parseSizes(p.sizes).map((z) => `<button type="button" class="opt" data-qv-size="${esc(z)}" aria-pressed="false">${esc(z)}</button>`).join('')}</div></div>` : ''}
+        <p class="qv__desc">${esc(p.desc)}</p>
         <div class="qv__actions">
-          <a href="product.html?id=${p.id}" class="btn btn--primary">View Full Details <span class="btn__arrow">→</span></a>
-          <button class="btn btn--ghost" data-add="${p.id}">${ICON.bag} Add To Cart</button>
+          <a href="product.html?id=${esc(p.id)}" class="btn btn--primary">View Full Details <span class="btn__arrow">→</span></a>
+          <button class="btn btn--ghost" data-add="${esc(p.id)}">${ICON.bag} Add To Cart</button>
         </div>
       </div>
     </div>`;
@@ -1080,7 +1130,8 @@ if (shopGrid) {
   const urlParams = new URLSearchParams(location.search);
   const urlCat = urlParams.get('cat');
   const initialCat = VALID_CATS.includes(urlCat) ? urlCat : 'All';
-  const initialQ = urlParams.get('q') || '';
+  const initialQRaw = (urlParams.get('q') || '').slice(0, 100);
+  const initialQ = initialQRaw.toLowerCase().trim();
   const initialSort = urlParams.get('sort') === 'newest' ? 'newest' : 'default';
   const PAGE_SIZE = 20;
   const PRICE_RANGES = {
@@ -1089,7 +1140,7 @@ if (shopGrid) {
     '900-1300':   { label: 'EGP 900 — 1,300',      test: (p) => p.now > 900 && p.now <= 1300 },
     'over-1300':  { label: 'Over EGP 1,300',       test: (p) => p.now > 1300 },
   };
-  const state = { cat: initialCat, color: 'All', price: 'All', sort: initialSort, q: initialQ, page: 1 };
+  const state = { cat: initialCat, price: 'All', sort: initialSort, q: initialQ, page: 1 };
   const countEl = document.getElementById('shopCount');
   const paginationNav = document.getElementById('shopPagination');
   const mobileFiltersBtn = document.getElementById('shopFiltersBtn');
@@ -1101,18 +1152,6 @@ if (shopGrid) {
   const mobileSortBtn = document.getElementById('shopSortBtn');
   const sortMenuEl = document.getElementById('shopSortMenu');
 
-  // Build the color swatches from every color actually present in the
-  // catalog (not a hand-picked subset), so filtering always covers 100%
-  // of products.
-  const swatchWrap = document.getElementById('shopSwatches');
-  if (swatchWrap) {
-    const colors = [...new Set(CATALOG.map((p) => p.color))].sort();
-    swatchWrap.innerHTML = [
-      `<button data-filter-color="All" class="swatch is-active" style="--sw:linear-gradient(135deg,#a6783f,#3a2a1c)" aria-label="All colors" title="All colors"></button>`,
-      ...colors.map((c) => `<button data-filter-color="${c}" class="swatch" style="--sw:${COLOR_HEX[c] || '#ccc'}" aria-label="${c}" title="${c}"></button>`),
-    ].join('');
-  }
-
   // Build the price buttons with a working toggle (click again to clear).
   const priceWrap = document.getElementById('shopPriceList');
   if (priceWrap) {
@@ -1122,7 +1161,6 @@ if (shopGrid) {
 
   function matches(p) {
     return (state.cat === 'All' || p.cat === state.cat) &&
-      (state.color === 'All' || p.color === state.color) &&
       (state.price === 'All' || PRICE_RANGES[state.price]?.test(p)) &&
       (!state.q || p.name.toLowerCase().includes(state.q) || (p.nameAr && p.nameAr.includes(state.q)) || p.cat.toLowerCase().includes(state.q) || p.color.toLowerCase().includes(state.q) || (p.desc && p.desc.toLowerCase().includes(state.q)));
   }
@@ -1158,7 +1196,7 @@ if (shopGrid) {
 
     if (sideApplyBtn) sideApplyBtn.textContent = `Show ${total} Result${total === 1 ? '' : 's'}`;
     if (filtersBadge) {
-      const activeCount = (state.cat !== 'All' ? 1 : 0) + (state.color !== 'All' ? 1 : 0) + (state.price !== 'All' ? 1 : 0);
+      const activeCount = (state.cat !== 'All' ? 1 : 0) + (state.price !== 'All' ? 1 : 0);
       filtersBadge.textContent = String(activeCount);
       filtersBadge.style.display = activeCount ? 'inline-flex' : 'none';
     }
@@ -1171,11 +1209,6 @@ if (shopGrid) {
     })
   );
   document.addEventListener('click', (e) => {
-    const sw = e.target.closest('[data-filter-color]');
-    if (sw) {
-      document.querySelectorAll('[data-filter-color]').forEach((x) => x.classList.remove('is-active'));
-      sw.classList.add('is-active'); state.color = sw.dataset.filterColor; apply();
-    }
     const pr = e.target.closest('[data-filter-price]');
     if (pr) {
       const already = pr.classList.contains('is-active');
@@ -1189,7 +1222,7 @@ if (shopGrid) {
   const shopSearchInput = document.getElementById('shopSearch');
   const shopSearchMobileInput = document.getElementById('shopSearchMobile');
   if (shopSearchInput) {
-    shopSearchInput.value = initialQ;
+    shopSearchInput.value = initialQRaw;
     shopSearchInput.addEventListener('input', (e) => {
       state.q = e.target.value.toLowerCase().trim();
       if (shopSearchMobileInput) shopSearchMobileInput.value = e.target.value;
@@ -1197,7 +1230,7 @@ if (shopGrid) {
     });
   }
   if (shopSearchMobileInput) {
-    shopSearchMobileInput.value = initialQ;
+    shopSearchMobileInput.value = initialQRaw;
     shopSearchMobileInput.addEventListener('input', (e) => {
       state.q = e.target.value.toLowerCase().trim();
       if (shopSearchInput) shopSearchInput.value = e.target.value;
@@ -1274,7 +1307,8 @@ if (shopGrid) {
    PRODUCT DETAILS page
    ========================================================= */
 const pdRoot = document.getElementById('pdRoot');
-if (pdRoot) {
+if (pdRoot && !byId(new URLSearchParams(location.search).get('id'))) location.replace('shop.html');
+else if (pdRoot) {
   const params = new URLSearchParams(location.search);
   const p = byId(params.get('id')) || CATALOG[0];
   // Only one real photo exists per product — showing unrelated stock
@@ -1290,7 +1324,7 @@ if (pdRoot) {
   if (gallery.length > 1) {
     pdThumbsEl.hidden = false;
     pdThumbsEl.innerHTML = gallery.map((g, i) =>
-      `<button class="pd__thumb${i === 0 ? ' is-active' : ''}" data-img="${g}" aria-label="View image ${i + 1}"><img src="${g}" alt="${p.name} view ${i + 1}" loading="lazy" onerror="imgFallback(this)"></button>`).join('');
+      `<button class="pd__thumb${i === 0 ? ' is-active' : ''}" data-img="${esc(g)}" aria-label="View image ${i + 1}"><img src="${g}" alt="${esc(p.name)} view ${i + 1}" loading="lazy"></button>`).join('');
   } else {
     pdThumbsEl.hidden = true;
   }
@@ -1302,7 +1336,14 @@ if (pdRoot) {
   document.getElementById('specSizes').textContent = p.sizes;
   document.getElementById('specColors').textContent = p.color;
   document.getElementById('specCare').textContent = careFor(p.material);
-  document.getElementById('pdStars').innerHTML = `<span class="card__stars">${STARS(p.rating)}</span> <span class="pd__rcount">(${20 + p.rating} reviews)</span>`;
+  const featEl = document.getElementById('pdFeatures');
+  if (featEl) {
+    const feats = [`Material: ${p.material}`, `Care: ${careFor(p.material)}`];
+    if (needsSize(p)) feats.push(`Available in: ${parseSizes(p.sizes).join(', ')}`);
+    feats.push(`Free shipping over ${money(SHIP_THRESHOLD)} · 30-day returns`);
+    featEl.innerHTML = feats.map((f) => `<li>${esc(f)}</li>`).join('');
+  }
+  document.getElementById('pdStars').innerHTML = `<span class="card__stars">${STARS(p.rating)}</span> <span class="pd__rcount">${p.rating}.0 / 5</span>`;
   const save = (p.old - p.now).toFixed(0);
   document.getElementById('pdPrice').innerHTML =
     `<span class="card__price-now">${money(p.now)}</span>
@@ -1330,18 +1371,31 @@ if (pdRoot) {
     if (e.target.closest('.qty__minus')) { const i = document.getElementById('pdQty'); i.value = Math.max(1, +i.value - 1); }
     if (e.target.closest('.qty__plus')) { const i = document.getElementById('pdQty'); i.value = Math.min(99, +i.value + 1); }
   });
-  pdRoot.querySelectorAll('[data-opt]').forEach((b) =>
-    b.addEventListener('click', () => {
-      b.parentElement.querySelectorAll('[data-opt]').forEach((x) => x.classList.remove('is-active'));
-      b.classList.add('is-active');
-      // Update label value if present
-      const label = b.parentElement.previousElementSibling;
-      if (label?.classList.contains('pd__opt-label')) {
-        const valEl = label.querySelector('.pd__opt-value');
-        if (valEl) valEl.textContent = ': ' + b.textContent.trim();
-      }
-    })
-  );
+  // Size / colour options come from the catalog entry (not hard-coded)
+  const sizeList = parseSizes(p.sizes);
+  let selectedSize = '';
+  const sizeWrap = document.getElementById('pdSizeWrap');
+  const sizeOpts = document.getElementById('pdSizeOpts');
+  if (sizeList.length && sizeWrap && sizeOpts) {
+    sizeWrap.hidden = false;
+    sizeOpts.innerHTML = sizeList.map((z) => `<button type="button" class="opt" data-size-opt="${esc(z)}" aria-pressed="false">${esc(z)}</button>`).join('');
+    sizeOpts.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-size-opt]');
+      if (!b) return;
+      selectedSize = b.dataset.sizeOpt;
+      sizeOpts.querySelectorAll('.opt').forEach((x) => { x.classList.toggle('is-active', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+      document.getElementById('pdSizeVal').textContent = ': ' + selectedSize;
+    });
+  }
+  const colorOpts = document.getElementById('pdColorOpts');
+  if (colorOpts) {
+    const sw = document.createElement('button');
+    sw.type = 'button'; sw.className = 'opt-color is-active'; sw.tabIndex = -1;
+    sw.setAttribute('aria-label', p.color); sw.setAttribute('aria-disabled', 'true');
+    sw.style.setProperty('--c', COLOR_HEX[p.color] || '#ccc');
+    colorOpts.appendChild(sw);
+    document.getElementById('pdColorVal').textContent = ': ' + p.color;
+  }
   document.getElementById('pdQty')?.addEventListener('change', (e) => {
     // Someone can still type a value directly (not just use +/-), so
     // clamp on change too — otherwise the field could visibly show e.g.
@@ -1349,9 +1403,9 @@ if (pdRoot) {
     // like a bug even though the cart total is correctly capped.
     e.target.value = Math.max(1, Math.min(99, parseInt(e.target.value, 10) || 1));
   });
-  document.getElementById('pdAdd')?.addEventListener('click', () =>
-    addToCart(p.id, parseInt(document.getElementById('pdQty').value, 10) || 1)
-  );
+  document.getElementById('pdAdd')?.addEventListener('click', () => {
+    if (!addToCart(p.id, parseInt(document.getElementById('pdQty').value, 10) || 1, selectedSize)) sizeOpts?.querySelector('.opt')?.focus();
+  });
   document.querySelectorAll('.tabs__btn').forEach((b) =>
     b.addEventListener('click', () => {
       document.querySelectorAll('.tabs__btn').forEach((x) => x.classList.remove('is-active'));
@@ -1399,10 +1453,10 @@ if (articleRoot) {
   // bookmarked/shared URL from before this page became data-driven).
   const reqTitle = params.get('t');
   const post = blogById(reqId) ||
-    (reqTitle && BLOG_POSTS.find((p) => p.title.toLowerCase() === decodeURIComponent(reqTitle).toLowerCase())) ||
+    (reqTitle && BLOG_POSTS.find((p) => p.title.toLowerCase() === reqTitle.toLowerCase())) ||
     BLOG_POSTS[0];
 
-  document.getElementById('blogTags').innerHTML = post.tags.map((t) => `<span>${t}</span>`).join('');
+  document.getElementById('blogTags').innerHTML = post.tags.map((t) => `<span>${esc(t)}</span>`).join('');
   document.getElementById('blogPostTitle').textContent = post.title;
   document.getElementById('blogCrumb').textContent = post.title;
   document.getElementById('blogMetaDate').textContent = post.date;
@@ -1424,12 +1478,12 @@ if (articleRoot) {
     ...BLOG_POSTS.filter((p) => p.id !== post.id && p.tag !== post.tag),
   ].slice(0, 3);
   document.getElementById('relatedArticles').innerHTML = related.map((p) => `
-    <a class="post" href="blog-details.html?id=${p.id}">
-      <div class="post__media"><img src="${p.img}" alt="${p.title}" loading="lazy" onerror="imgFallback(this)"><span class="post__tag">${p.tag}</span></div>
+    <a class="post" href="blog-details.html?id=${esc(p.id)}">
+      <div class="post__media"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"><span class="post__tag">${esc(p.tag)}</span></div>
       <div class="post__body">
-        <span class="post__date">${p.date}</span>
-        <h3 class="post__title">${p.title}</h3>
-        <p class="post__excerpt">${p.excerpt}</p>
+        <span class="post__date">${esc(p.date)}</span>
+        <h3 class="post__title">${esc(p.title)}</h3>
+        <p class="post__excerpt">${esc(p.excerpt)}</p>
         <span class="link-arrow">Read More <span>→</span></span>
       </div>
     </a>`).join('');
@@ -1564,8 +1618,8 @@ document.addEventListener("DOMContentLoaded", function () {
        ========================================================= */
 
     function startAutoPlay() {
-
         stopAutoPlay();
+        if (REDUCE_MOTION || document.hidden) return;
 
         autoPlay = setInterval(function () {
 
@@ -1660,7 +1714,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener(
         "keydown",
         function (event) {
-
+            if (event.target.closest && event.target.closest('input, textarea, select, [contenteditable]')) return;
+            if (document.querySelector('#searchOverlay.is-open, #quickView.is-open')) return;
             if (event.key === "ArrowLeft") {
 
                 goToSlide(currentIndex - 1);
@@ -1681,8 +1736,10 @@ document.addEventListener("DOMContentLoaded", function () {
        ========================================================= */
 
     goToSlide(0);
-
     startAutoPlay();
+    promoSlider.addEventListener("focusin", stopAutoPlay);
+    promoSlider.addEventListener("focusout", startAutoPlay);
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stopAutoPlay(); else startAutoPlay(); });
 
 });
 /* =========================================================
@@ -1691,26 +1748,27 @@ document.addEventListener("DOMContentLoaded", function () {
 const testiTrack = document.getElementById('testiTrack');
 if (testiTrack) {
   const testimonials = [
-    { quote: 'Absolutely love the quality and the fit. The fabric feels premium and the delivery was faster than expected. Will definitely shop here again.', name: 'Salma Hassan', role: 'Verified Buyer', rating: 5, avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80' },
-    { quote: 'Best fashion store I have come across this year. Customer support was helpful and the pieces are exactly as pictured. Highly recommended.', name: 'Ahmed Mostafa', role: 'Verified Buyer', rating: 5, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80' },
-    { quote: 'Stylish, affordable and well made. I have ordered three times now and every single order exceeded my expectations. A genuine five stars.', name: 'Nourhan Ibrahim', role: 'Verified Buyer', rating: 5, avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&q=80' },
+    { quote: 'Absolutely love the quality and the fit. The fabric feels premium and the delivery was faster than expected. Will definitely shop here again.', name: 'Salma Hassan', role: 'Customer', rating: 5, avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80' },
+    { quote: 'Best fashion store I have come across this year. Customer support was helpful and the pieces are exactly as pictured. Highly recommended.', name: 'Ahmed Mostafa', role: 'Customer', rating: 5, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80' },
+    { quote: 'Stylish, affordable and well made. I have ordered three times now and every single order exceeded my expectations. A genuine five stars.', name: 'Nourhan Ibrahim', role: 'Customer', rating: 5, avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&q=80' },
   ];
   testiTrack.innerHTML = `<div class="testi__track">${testimonials.map((t) => `
     <div class="testi__slide">
-      <p class="testi__quote">${t.quote}</p>
+      <p class="testi__quote">${esc(t.quote)}</p>
       <div class="testi__stars">${STARS(t.rating)}</div>
-      <img style="display: none;" class="testi__avatar" src="${t.avatar}" alt="${t.name}" loading="lazy" onerror="imgFallback(this)" />
-      <div class="testi__name">${t.name}</div>
-      <div class="testi__role">${t.role}</div>
+      <div class="testi__name">${esc(t.name)}</div>
+      <div class="testi__role">${esc(t.role)}</div>
     </div>`).join('')}</div>`;
   const track = testiTrack.querySelector('.testi__track');
   let idx = 0;
   const go = (n) => { idx = (n + testimonials.length) % testimonials.length; track.style.transform = `translateX(-${idx * 100}%)`; };
   document.getElementById('testiPrev')?.addEventListener('click', () => go(idx - 1));
   document.getElementById('testiNext')?.addEventListener('click', () => go(idx + 1));
-  let auto = setInterval(() => go(idx + 1), 6000);
-  testiTrack.addEventListener('mouseenter', () => clearInterval(auto));
-  testiTrack.addEventListener('mouseleave', () => { auto = setInterval(() => go(idx + 1), 6000); });
+  let auto = null;
+  const startAuto = () => { clearInterval(auto); if (!REDUCE_MOTION) auto = setInterval(() => go(idx + 1), 6000); };
+  startAuto();
+  ['mouseenter', 'focusin'].forEach((ev) => testiTrack.addEventListener(ev, () => clearInterval(auto)));
+  ['mouseleave', 'focusout'].forEach((ev) => testiTrack.addEventListener(ev, startAuto));
 }
 
 /* =========================================================
@@ -1718,16 +1776,18 @@ if (testiTrack) {
    ========================================================= */
 const cd = document.getElementById('countdown');
 if (cd) {
-  const end = Date.now() + 1000 * 60 * 60 * 26;
+  const end = Date.parse(DEAL_ENDS_AT);
+  if (!(end > Date.now())) cd.closest('.deals__timer')?.remove();
   const pad = (n) => String(n).padStart(2, '0');
   const tick = () => {
     let d = Math.max(0, end - Date.now());
+    const dd = Math.floor(d / 864e5); d -= dd * 864e5;
     const h = Math.floor(d / 3.6e6); d -= h * 3.6e6;
     const m = Math.floor(d / 6e4); d -= m * 6e4;
     const s = Math.floor(d / 1e3);
-    cd.innerHTML = `<span>${pad(h)}</span><span class="sep">:</span><span>${pad(m)}</span><span class="sep">:</span><span>${pad(s)}</span>`;
+    cd.innerHTML = `${dd ? `<span>${dd}d</span><span class="sep">:</span>` : ''}<span>${pad(h)}</span><span class="sep">:</span><span>${pad(m)}</span><span class="sep">:</span><span>${pad(s)}</span>`;
   };
-  tick(); setInterval(tick, 1000);
+  if (cd.isConnected) { tick(); setInterval(tick, 1000); }
 }
 
 /* =========================================================
@@ -1756,10 +1816,8 @@ const header = document.getElementById('header');
 const toTop = document.getElementById('toTop');
 
 function syncHeaderStackHeight() {
-  const promo = document.getElementById('promoBar');
-  const promoH = (promo && !promo.classList.contains('is-hidden')) ? promo.offsetHeight : 0;
   const headerH = header ? header.offsetHeight : 0;
-  document.documentElement.style.setProperty('--header-stack-h', (promoH + headerH) + 'px');
+  document.documentElement.style.setProperty('--header-stack-h', headerH + 'px');
 }
 window.addEventListener('resize', syncHeaderStackHeight, { passive: true });
 syncHeaderStackHeight();
@@ -1773,10 +1831,6 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-document.getElementById('promoClose')?.addEventListener('click', () => {
-  document.getElementById('promoBar')?.classList.add('is-hidden');
-  syncHeaderStackHeight();
-});
 
 /* =========================================================
    Site-wide search overlay (header search icon)
@@ -1812,9 +1866,9 @@ function renderSearchResults(raw) {
     return;
   }
   box.innerHTML = matches.map((p) => `
-    <a class="search-result" href="product.html?id=${p.id}">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="imgFallback(this)" />
-      <span><strong>${p.name}</strong><em dir="rtl" lang="ar">${p.nameAr}</em><em>${p.cat} · ${money(p.now)}</em></span>
+    <a class="search-result" href="product.html?id=${esc(p.id)}">
+      <img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" />
+      <span><strong>${esc(p.name)}</strong><em dir="rtl" lang="ar">${esc(p.nameAr)}</em><em>${esc(p.cat)} · ${money(p.now)}</em></span>
     </a>`).join('') + `<a class="search-panel__viewall link-arrow" href="shop.html?q=${encodeURIComponent(raw)}">View all results <span>→</span></a>`;
 }
 let lastFocused = null;
@@ -1872,8 +1926,6 @@ document.querySelectorAll('.js-fakeform').forEach((form) =>
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   const statusEl = document.getElementById('contactStatus');
-  const submitBtn = document.getElementById('contactSubmit');
-  const submitLabel = submitBtn.innerHTML;
   const rules = {
     cfName: (v) => v.trim().length >= 2 || 'Please enter your full name.',
     cfEmail: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Enter a valid email address.',
@@ -1914,7 +1966,7 @@ if (contactForm) {
       return;
     }
     // Build the WhatsApp message from the form fields and open the chat
-    const val = (id) => (document.getElementById(id)?.value || '').trim();
+    const val = (id) => (id === 'cfMessage' ? cleanMultiline(document.getElementById(id)?.value, 1000) : cleanText(document.getElementById(id)?.value, 120));
     const lines = [
       '*New message from the website*',
       '',
@@ -1957,21 +2009,21 @@ if (cartRoot) {
           ${lines.map((l) => `
             <div class="cart-item">
               <div class="cart-item__product">
-                <img class="cart-item__img" src="${l.product.img}" alt="${l.product.name}" loading="lazy" width="72" height="88" onerror="imgFallback(this)" />
+                <img class="cart-item__img" src="${esc(l.product.img)}" alt="${esc(l.product.name)}" loading="lazy" width="72" height="88" />
                 <div>
-                  <div class="cart-item__name"><a href="product.html?id=${l.id}">${l.product.name}</a></div>
-                  <div class="cart-item__name-ar" dir="rtl" lang="ar">${l.product.nameAr}</div>
-                  <div class="cart-item__meta">${l.product.cat} · ${l.product.color}</div>
+                  <div class="cart-item__name"><a href="product.html?id=${esc(l.id)}">${esc(l.product.name)}</a></div>
+                  <div class="cart-item__name-ar" dir="rtl" lang="ar">${esc(l.product.nameAr)}</div>
+                  <div class="cart-item__meta">${esc(l.product.cat)} · ${esc(l.product.color)}${l.size ? ' · Size ' + esc(l.size) : ''}</div>
                 </div>
               </div>
               <div class="cart-item__price">${money(l.product.now)}</div>
               <div class="cart-item__qty qty">
-                <button type="button" data-qty-down="${l.id}" aria-label="Decrease quantity of ${l.product.name}">−</button>
-                <input type="number" min="1" max="99" value="${l.qty}" data-qty-input="${l.id}" aria-label="Quantity for ${l.product.name}" inputmode="numeric" />
-                <button type="button" data-qty-up="${l.id}" aria-label="Increase quantity of ${l.product.name}">+</button>
+                <button type="button" data-qty-down="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Decrease quantity of ${esc(l.product.name)}">−</button>
+                <input type="number" min="1" max="99" value="${l.qty}" data-qty-input="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Quantity for ${esc(l.product.name)}" inputmode="numeric" />
+                <button type="button" data-qty-up="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Increase quantity of ${esc(l.product.name)}">+</button>
               </div>
               <div class="cart-item__linetotal">${money((l.product.now * l.qty))}</div>
-              <button type="button" class="cart-item__remove" data-remove="${l.id}" aria-label="Remove ${l.product.name} from cart">${ICON.trash}</button>
+              <button type="button" class="cart-item__remove" data-remove="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Remove ${esc(l.product.name)} from cart">${ICON.trash}</button>
             </div>`).join('')}
         </div>
         <aside class="cart-summary">
@@ -1987,15 +2039,15 @@ if (cartRoot) {
   }
   cartRoot.addEventListener('click', (e) => {
     const rm = e.target.closest('[data-remove]');
-    if (rm) { removeFromCart(rm.dataset.remove); renderCartPage(); return; }
+    if (rm) { removeFromCart(rm.dataset.remove, rm.dataset.size || ''); renderCartPage(); return; }
     const up = e.target.closest('[data-qty-up]');
-    if (up) { const id = up.dataset.qtyUp; setCartQty(id, (getCart().find((i) => i.id === id)?.qty || 0) + 1); renderCartPage(); return; }
+    if (up) { const id = up.dataset.qtyUp, sz = up.dataset.size || ''; setCartQty(id, sz, (getCart().find((i) => i.id === id && i.size === sz)?.qty || 0) + 1); renderCartPage(); return; }
     const down = e.target.closest('[data-qty-down]');
-    if (down) { const id = down.dataset.qtyDown; setCartQty(id, (getCart().find((i) => i.id === id)?.qty || 1) - 1); renderCartPage(); }
+    if (down) { const id = down.dataset.qtyDown, sz = down.dataset.size || ''; setCartQty(id, sz, (getCart().find((i) => i.id === id && i.size === sz)?.qty || 1) - 1); renderCartPage(); }
   });
   cartRoot.addEventListener('change', (e) => {
     const inp = e.target.closest('[data-qty-input]');
-    if (inp) { setCartQty(inp.dataset.qtyInput, parseInt(inp.value, 10) || 1); renderCartPage(); }
+    if (inp) { setCartQty(inp.dataset.qtyInput, inp.dataset.size || '', parseInt(inp.value, 10) || 1); renderCartPage(); }
   });
   renderCartPage();
 }
@@ -2027,8 +2079,9 @@ if (wishRoot) {
     paintWishlist();
     revealScan();
     document.getElementById('wishAddAll')?.addEventListener('click', () => {
-      items.forEach((p) => addToCart(p.id, 1));
-      toast('All wishlist items added to cart');
+      let skipped = 0;
+      items.forEach((p) => { if (needsSize(p)) skipped++; else addToCart(p.id, 1); });
+      toast(skipped ? `Added. ${skipped} item${skipped === 1 ? ' needs' : 's need'} a size - open ${skipped === 1 ? 'it' : 'them'} to choose.` : 'All wishlist items added to cart');
     });
   }
   document.addEventListener('click', (e) => {
@@ -2063,11 +2116,11 @@ if (checkoutRoot) {
               <h3><span class="checkout__step-num">1</span> Contact &amp; Shipping</h3>
               <p class="checkout__hint">Where should we send your order?</p>
               <div class="field-row">
-                <label class="field"><span>Full Name</span><input type="text" id="coName" required autocomplete="name" /></label>
-                <label class="field"><span>Email</span><input type="email" id="coEmail" required autocomplete="email" /></label>
+                <label class="field"><span>Full Name</span><input type="text" id="coName" required maxlength="80" autocomplete="name" /></label>
+                <label class="field"><span>Email (optional)</span><input type="email" id="coEmail" maxlength="120" autocomplete="email" /></label>
               </div>
               <div class="field-row">
-                <label class="field"><span>Phone</span><input type="tel" id="coPhone" required autocomplete="tel" placeholder="+20 100 123 4567" /></label>
+                <label class="field"><span>Phone</span><input type="tel" id="coPhone" required maxlength="25" autocomplete="tel" placeholder="+20 100 123 4567" /></label>
                 <label class="field"><span>Country</span>
                   <select id="coCountry">
                     <option selected>Egypt</option>
@@ -2076,10 +2129,10 @@ if (checkoutRoot) {
                   </select>
                 </label>
               </div>
-              <label class="field"><span>Street Address</span><input type="text" id="coAddress" required autocomplete="street-address" placeholder="e.g. 14 Abdel Khalek Tharwat St, Apt 5" /></label>
+              <label class="field"><span>Street Address</span><input type="text" id="coAddress" required maxlength="160" autocomplete="street-address" placeholder="e.g. 14 Abdel Khalek Tharwat St, Apt 5" /></label>
               <div class="field-row">
-                <label class="field"><span>City / Governorate</span><input type="text" id="coCity" required autocomplete="address-level2" placeholder="e.g. Cairo" /></label>
-                <label class="field"><span>Postal Code</span><input type="text" id="coZip" required autocomplete="postal-code" placeholder="e.g. 11511" /></label>
+                <label class="field"><span>City / Governorate</span><input type="text" id="coCity" required maxlength="60" autocomplete="address-level2" placeholder="e.g. Cairo" /></label>
+                <label class="field"><span>Postal Code</span><input type="text" id="coZip" required maxlength="12" autocomplete="postal-code" placeholder="e.g. 11511" /></label>
               </div>
             </div>
 
@@ -2138,8 +2191,8 @@ if (checkoutRoot) {
           <div class="checkout-summary__lines">
             ${lines.map((l) => `
               <div class="checkout-summary__line">
-                <img src="${l.product.img}" alt="${l.product.name}" loading="lazy" onerror="imgFallback(this)" />
-                <div class="checkout-summary__line-info"><strong>${l.product.name}</strong><span dir="rtl" lang="ar">${l.product.nameAr}</span><span>Qty ${l.qty} · ${l.product.color}</span></div>
+                <img src="${esc(l.product.img)}" alt="${esc(l.product.name)}" loading="lazy" />
+                <div class="checkout-summary__line-info"><strong>${esc(l.product.name)}</strong><span dir="rtl" lang="ar">${esc(l.product.nameAr)}</span><span>Qty ${l.qty} · ${esc(l.product.color)}${l.size ? ' · Size ' + esc(l.size) : ''}</span></div>
                 <div class="checkout-summary__line-price">${money((l.product.now * l.qty))}</div>
               </div>`).join('')}
           </div>
@@ -2151,41 +2204,34 @@ if (checkoutRoot) {
 
     const form = document.getElementById('checkoutForm');
     const statusEl = document.getElementById('checkoutStatus');
-    const submitBtn = document.getElementById('checkoutSubmit');
-    const submitLabel = submitBtn.innerHTML;
+    const fail = (msg) => { statusEl.className = 'form-status form-status--error'; statusEl.textContent = msg; };
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        statusEl.className = 'form-status form-status--error';
-        statusEl.textContent = 'Please complete all required shipping fields.';
-        return;
-      }
-      statusEl.className = 'form-status form-status--loading';
-      statusEl.innerHTML = '<span class="spinner" aria-hidden="true"></span> Preparing your WhatsApp order…';
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Preparing…';
-      const orderId = 'CL' + Date.now().toString().slice(-8);
+      const val = (id, max) => cleanText(document.getElementById(id)?.value, max);
+      const chosen = form.querySelector('input[name="payment"]:checked')?.value;
       const customer = {
-        name: document.getElementById('coName').value,
-        email: document.getElementById('coEmail').value,
-        phone: document.getElementById('coPhone').value,
-        country: document.getElementById('coCountry').value,
-        address: document.getElementById('coAddress').value,
-        city: document.getElementById('coCity').value,
-        zip: document.getElementById('coZip').value,
-        payment: form.querySelector('input[name="payment"]:checked')?.value || 'cod',
+        name: val('coName', 80), email: val('coEmail', 120), phone: val('coPhone', 25),
+        country: val('coCountry', 40), address: val('coAddress', 160), city: val('coCity', 60), zip: val('coZip', 12),
+        payment: PAYMENT_LABELS[chosen] ? chosen : 'cod',
       };
-      setTimeout(() => {
-        const waUrl = buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer);
-        setCart([]);
-        renderOrderSuccess(orderId, total, waUrl);
-        window.open(waUrl, '_blank', 'noopener');
-      }, 700);
+      const phoneOk = /^\+?[0-9][0-9\s\-()]{6,22}$/.test(customer.phone);
+      const emailOk = !customer.email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email);
+      if (!customer.name || !customer.address || !customer.city || !customer.zip) { form.reportValidity(); return fail('Please complete all required shipping fields.'); }
+      if (!phoneOk) return fail('Please enter a valid phone number.');
+      if (!emailOk) return fail('Please enter a valid email address.');
+      // Totals are always recomputed from the validated cart, never from page text.
+      const t = cartTotals();
+      if (!t.lines.length) return renderCheckoutForm();
+      const orderId = makeOrderId();
+      const waUrl = buildWhatsAppOrderUrl(orderId, t.lines, t.subtotal, t.shipping, t.total, customer);
+      // Opened synchronously inside the click so popup blockers allow it; the cart is only
+      // cleared once WhatsApp really opened (or the customer taps the fallback link).
+      const win = window.open(waUrl, '_blank');
+      if (win) { win.opener = null; setCart([]); }
+      renderOrderSuccess(orderId, t.total, waUrl, !!win);
     });
   }
 
-  /* Builds a wa.me link pre-filled with a formatted order message. */
   const PAYMENT_LABELS = {
     cod: 'Cash on Delivery',
     pickup: 'Pay on Pickup',
@@ -2194,9 +2240,15 @@ if (checkoutRoot) {
     'vodafone-cash': 'Vodafone Cash',
     fawry: 'Fawry',
   };
+  function makeOrderId() {
+    const r = new Uint8Array(3);
+    if (window.crypto?.getRandomValues) crypto.getRandomValues(r); else r.forEach((_, i) => { r[i] = Math.floor(Math.random() * 256); });
+    return 'CL' + Date.now().toString(36).toUpperCase().slice(-6) + Array.from(r, (b) => b.toString(36).toUpperCase().padStart(2, '0')).join('').slice(0, 4);
+  }
+  /* Builds a wa.me link pre-filled with a formatted order message. */
   function buildWhatsAppOrderUrl(orderId, lines, subtotal, shipping, total, customer) {
     const itemLines = lines.map((l, i) =>
-      `${i + 1}. ${l.product.name} (${l.product.nameAr}) — ${l.product.color}, Qty ${l.qty} — ${money(l.product.now * l.qty)}`
+      `${i + 1}. ${esc(l.product.name)} (${esc(l.product.nameAr)}) — ${esc(l.product.color)}${l.size ? ', Size ' + l.size : ''}, Qty ${l.qty} — ${money(l.product.now * l.qty)}`
     ).join('\n');
     const message = [
       `Hi Zay.! 👋 I'd like to confirm this order:`,
@@ -2211,24 +2263,26 @@ if (checkoutRoot) {
       `*Shipping Details*`,
       `Name: ${customer.name}`,
       `Phone: ${customer.phone}`,
+      ...(customer.email ? [`Email: ${customer.email}`] : []),
       `Address: ${customer.address}, ${customer.city}${customer.zip ? ' ' + customer.zip : ''}, ${customer.country}`,
-      `Payment: ${PAYMENT_LABELS[customer.payment] || customer.payment}`,
+      `Payment: ${PAYMENT_LABELS[customer.payment] || 'Cash on Delivery'}`,
     ].join('\n');
     return `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`;
   }
 
-  function renderOrderSuccess(orderId, total, waUrl) {
+  function renderOrderSuccess(orderId, total, waUrl, opened) {
     checkoutRoot.innerHTML = `
       <div class="order-success">
         <div class="order-success__icon order-success__icon--whatsapp">${ICON.whatsapp}</div>
         <h2>Almost there!</h2>
-        <p>We've opened WhatsApp with your order details filled in — just hit send to confirm with our team.</p>
-        <span class="order-success__id">Order #${orderId} · ${money(total)}</span>
+        <p>${opened ? "We've opened WhatsApp with your order details filled in — just hit send to confirm with our team." : 'Your browser blocked the WhatsApp window. Tap the button below to send your order — your cart is kept until then.'}</p>
+        <span class="order-success__id">Order #${esc(orderId)} · ${money(total)}</span>
         <div class="order-success__actions">
-          <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--whatsapp">${ICON.whatsapp} Open WhatsApp</a>
+          <a href="${esc(waUrl)}" target="_blank" rel="noopener" class="btn btn--whatsapp" data-wa-open>${ICON.whatsapp} Open WhatsApp</a>
           <a href="shop.html" class="btn btn--primary">Continue Shopping</a>
         </div>
       </div>`;
+    checkoutRoot.querySelector('[data-wa-open]')?.addEventListener('click', () => { if (getCart().length) setCart([]); });
   }
 
   renderCheckoutForm();
@@ -2284,3 +2338,45 @@ autoStagger(document.querySelector('.footer__grid'));
 autoStagger(document.querySelector('.page-head'));
 autoStagger(document.querySelector('.contact__grid'));
 autoStagger(document.querySelector('.contact__form'));
+
+/* =========================================================
+   Hardening + shared behaviours (no inline handlers needed)
+   ========================================================= */
+document.addEventListener('error', (e) => { if (e.target instanceof HTMLImageElement) imgFallback(e.target); }, true);
+document.querySelectorAll('img').forEach((im) => { if (im.src && im.complete && im.naturalWidth === 0 && !im.src.startsWith('data:')) imgFallback(im); });
+
+// Keep Tab focus inside the open Quick View / search dialog
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Tab') return;
+  const box = document.querySelector('#quickView.is-open .qv, #searchOverlay.is-open .search-panel');
+  if (!box) return;
+  const f = [...box.querySelectorAll('a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter((el) => el.offsetParent !== null);
+  if (!f.length) return;
+  if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+  else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+});
+
+/* Blog listing (moved out of blog.html so pages need no inline <script>) */
+const blogGridEl = document.getElementById('blogGrid');
+if (blogGridEl) {
+  const POSTS = BLOG_POSTS.filter((p) => p.id !== 'fall-fashion-frenzy');
+  const pager = document.getElementById('blogPagination');
+  const PER = 3;
+  let bpage = 1;
+  const renderBlogPage = () => {
+    const items = POSTS.slice((bpage - 1) * PER, bpage * PER);
+    blogGridEl.innerHTML = items.map((p) => `
+      <a class="post reveal" href="blog-details.html?id=${esc(p.id)}">
+        <div class="post__media"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"><span class="post__tag">${esc(p.tag)}</span></div>
+        <div class="post__body">
+          <span class="post__date">${esc(p.date)}</span>
+          <h3 class="post__title">${esc(p.title)}</h3>
+          <p class="post__excerpt">${esc(p.excerpt)}</p>
+          <span class="link-arrow">Read More <span>→</span></span>
+        </div>
+      </a>`).join('');
+    renderPagination(pager, POSTS.length, PER, bpage, (n) => { bpage = n; renderBlogPage(); });
+    revealScan();
+  };
+  renderBlogPage();
+}

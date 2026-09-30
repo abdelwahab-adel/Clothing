@@ -10,6 +10,8 @@
   <meta property="og:description" content="Quality-checked, free shipping over EGP 1,000, 30-day returns." />
   <meta property="og:image" content="" />
   <title>Product Details — Zay.</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; media-src 'self'; frame-src https://www.openstreetmap.org; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,19 +46,13 @@
         <div class="pd__price" id="pdPrice"></div>
         <p class="pd__desc" id="pdDesc">Carefully selected by our buying team for quality, comfort and style. Every item is checked before shipping and packed with care.</p>
 
-        <div class="pd__opt">
-          <span class="pd__opt-label">Size<span class="pd__opt-value">: S</span></span>
-          <div class="pd__opts">
-            <button class="opt is-active" data-opt>S</button><button class="opt" data-opt>M</button><button class="opt" data-opt>L</button><button class="opt" data-opt>XL</button>
-          </div>
+        <div class="pd__opt" id="pdSizeWrap" hidden>
+          <span class="pd__opt-label">Size<span class="pd__opt-value" id="pdSizeVal">: choose</span></span>
+          <div class="pd__opts" id="pdSizeOpts" role="group" aria-label="Size"></div>
         </div>
         <div class="pd__opt">
-          <span class="pd__opt-label">Color<span class="pd__opt-value">: Caramel</span></span>
-          <div class="pd__opts pd__opts--color">
-            <button class="opt-color is-active" data-opt style="--c:#a6783f" aria-label="Caramel"></button>
-            <button class="opt-color" data-opt style="--c:#222" aria-label="Black"></button>
-            <button class="opt-color" data-opt style="--c:#d8c3a5" aria-label="Beige"></button>
-          </div>
+          <span class="pd__opt-label">Color<span class="pd__opt-value" id="pdColorVal"></span></span>
+          <div class="pd__opts pd__opts--color" id="pdColorOpts"></div>
         </div>
 
         <div class="pd__buy">
@@ -68,7 +64,6 @@
         <ul class="pd__meta">
           <li><span>SKU:</span> <strong id="pdSku"></strong></li>
           <li><span>Category:</span> <strong id="pdCat"></strong></li>
-          <li><span>Tags:</span> Fashion, Trend, Summer</li>
           <li><span>Share:</span>
             <span class="pd__share-inline">
               <a href="https://www.facebook.com/sharer/sharer.php" data-share="facebook" aria-label="Share on Facebook">f</a>
@@ -86,13 +81,12 @@
       <div class="tabs">
         <button class="tabs__btn is-active" data-tab="tabDesc">Description</button>
         <button class="tabs__btn" data-tab="tabInfo">Additional Information</button>
-        <button class="tabs__btn" data-tab="tabRev">Reviews (3)</button>
       </div>
       <div class="tabs__panels">
         <div class="tabs__panel is-active" id="tabDesc">
           <p id="pdDescLong">Carefully selected by our buying team for quality, comfort and style. Every item is checked before shipping and packed with care.</p>
           <p>We choose pieces that balance current trends with everyday wearability — so they look great and feel just as good, season after season.</p>
-          <ul class="ticks"><li>Quality-checked before shipping</li><li>Breathable and skin-friendly</li><li>Easy machine wash</li><li>Available in multiple sizes</li><li>Free shipping over EGP 1,000 · 30-day returns</li></ul>
+          <ul class="ticks" id="pdFeatures"></ul>
         </div>
         <div class="tabs__panel" id="tabInfo">
           <table class="spec"><tbody>
@@ -102,50 +96,7 @@
             <tr><th>Care</th><td id="specCare">Machine wash cold, tumble dry low</td></tr>
             <tr><th>Origin</th><td>Shipped from Cairo · Delivered across Egypt</td></tr>
           </tbody></table>
-        </div>
-        <div class="tabs__panel" id="tabRev">
-          <div class="review">
-            <div class="review__avatar" aria-hidden="true">SB</div>
-            <div class="review__body">
-              <div class="review__head">
-                <span class="review__name">Salma Barakat</span>
-                <span class="card__stars">★★★★★</span>
-                <span class="review__date">2 weeks ago</span>
-              </div>
-              <p>Perfect fit and beautiful color. Exactly what I expected — the fabric quality is exceptional for the price. Will be back for more colors.</p>
-            </div>
-          </div>
-          <div class="review">
-            <div class="review__avatar" aria-hidden="true">AN</div>
-            <div class="review__body">
-              <div class="review__head">
-                <span class="review__name">Ahmed Nabil</span>
-                <span class="card__stars">★★★★★</span>
-                <span class="review__date">1 month ago</span>
-              </div>
-              <p>Great quality fabric, fast shipping. I am impressed by the attention to detail in the stitching and packaging. Recommended.</p>
-            </div>
-          </div>
-          <div class="review">
-            <div class="review__avatar" aria-hidden="true">MK</div>
-            <div class="review__body">
-              <div class="review__head">
-                <span class="review__name">Mona Khalil</span>
-                <span class="card__stars">★★★★☆</span>
-                <span class="review__date">1 month ago</span>
-              </div>
-              <p>Lovely piece. Runs slightly small — I would recommend sizing up if you are between sizes. Customer service was excellent.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RELATED -->
-    <section class="products">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">You may also like</span><h2 class="section-title">Related Products</h2></div>
-        <div class="products__grid" id="relatedGrid"></div>
+        </div></div>
       </div>
     </section>
   </main>
